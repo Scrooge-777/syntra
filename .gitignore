@@ -1,0 +1,102 @@
+# ==============================================================================
+# SYNTRA — Git Ignore Configuration
+# Optimized for .NET 8, WinUI 3 (Windows App SDK), SQLite, and Visual Studio / VS Code
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Build outputs (.NET / C#)
+# ------------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+Generated Files/
+GeneratedFiles/
+
+# ------------------------------------------------------------------------------
+# Windows App SDK / WinUI 3 / MSIX Packaging
+# ------------------------------------------------------------------------------
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.msix
+*.appx
+*.msixbundle
+*.appxbundle
+*.msixupload
+*.appxupload
+
+# ------------------------------------------------------------------------------
+# Visual Studio
+# ------------------------------------------------------------------------------
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+*.VisualState.xml
+
+# ------------------------------------------------------------------------------
+# Visual Studio Code & JetBrains Rider
+# ------------------------------------------------------------------------------
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sln.iml
+
+# ------------------------------------------------------------------------------
+# Local Databases & State (SQLite)
+# ------------------------------------------------------------------------------
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+*.localstorage
+
+# ------------------------------------------------------------------------------
+# Secrets, Environment & Local Configuration
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.secret
+*.key
+*.pem
+*.pfx
+*.cer
+appsettings.Local.json
+appsettings.Development.json
+secrets.json
+
+# ------------------------------------------------------------------------------
+# Test & Coverage Outputs
+# ------------------------------------------------------------------------------
+[Tt]est[Rr]esults/
+coverage/
+*.coverage
+*.coveragexml
+
+# ------------------------------------------------------------------------------
+# Crash Dumps & Diagnostics
+# ------------------------------------------------------------------------------
+*.dmp
+*.mdmp
+CrashDumps/
+
+# ------------------------------------------------------------------------------
+# OS-specific files
+# ------------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
