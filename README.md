@@ -18,13 +18,13 @@ Most study and productivity tools on Windows have two glaring problems:
 2. **Honor-system timers are easy to game:** Pomodoro timers and simple app blockers count down whether you actually studied or spent the hour staring at tabs.
 
 SYNTRA fixes both:
-- **It builds structured study plans:** You provide textbooks, slides, or notes (PDF, Markdown, text). Cloud AI breaks them into sequential topics with prerequisite ordering, time estimates, and scheduled reviews.
-- **It enforces focus on Windows 11 Home:** When a session starts, SYNTRA locks the desktop surface using native Win32 window management, a topmost borderless overlay, and low-level keyboard hooks (`WinKey`, `Alt+Tab`).
+- **Structured study planning:** You provide textbooks, slides, or notes (PDF, Markdown, text). Cloud AI breaks them into sequential topics with prerequisite ordering, time estimates, and scheduled reviews.
+- **Enforced focus on Windows 11 Home:** When a session starts, SYNTRA locks the desktop surface using native Win32 window management, a topmost borderless overlay, and low-level keyboard hooks (`WinKey`, `Alt+Tab`).
 - **Comprehension unlocks the app, not the clock:** When reading finishes, you take an active-recall quiz (multiple-choice and short-answer). Pass with 80% or higher, and the desktop unlocks. Fail, and you get targeted review notes with a mandatory cool-down before retrying.
 
 ---
 
-## How It Works
+## System Architecture
 
 ```mermaid
 graph TD
@@ -43,9 +43,9 @@ graph TD
 
 ---
 
-## Windows 11 Home & Security Limitations
+## Windows 11 Home & Security Boundaries
 
-SYNTRA runs as a standard user desktop application. It does not pretend to have operating system powers it cannot legally or technically possess:
+SYNTRA runs as a standard user desktop application without requiring administrative privileges:
 
 - **No Enterprise Kiosk Features:** Windows Assigned Access and Shell Launcher are not available on Windows 11 Home (they require Pro or Enterprise editions). SYNTRA relies on user-mode window overlays and keyboard hooks.
 - **No Kernel Rootkits or Drivers:** SYNTRA does not install kernel drivers, tamper with BIOS/UEFI, or intercept `Ctrl + Alt + Delete` (which is reserved by Windows Winlogon).
@@ -56,7 +56,7 @@ SYNTRA runs as a standard user desktop application. It does not pretend to have 
 
 ## Technical Specifications
 
-| Parameter | Target |
+| Parameter | Specification |
 |---|---|
 | **OS Target** | Windows 11 Home (64-bit x64 / ARM64), 22H2 or newer |
 | **Runtime** | .NET 8 LTS |
@@ -69,35 +69,35 @@ SYNTRA runs as a standard user desktop application. It does not pretend to have 
 
 ---
 
-## Documentation
+## Documentation Index
 
-### Core Specifications
-- [PROJECT_SPEC.md](PROJECT_SPEC.md) — Requirements, use cases, acceptance criteria, and non-goals.
-- [ARCHITECTURE.md](ARCHITECTURE.md) — System boundaries, data flow, state machine, and component design.
-- [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) — Phased milestones from planning to v1.0 release.
-- [WINDOWS_SECURITY.md](WINDOWS_SECURITY.md) — Windows 11 Home enforcement capabilities, Win32 hooks, and bypass analysis.
-- [AI_AND_VERIFICATION.md](AI_AND_VERIFICATION.md) — AI abstraction, prompt injection defenses, JSON schemas, and deterministic scoring.
-- [GITHUB_REUSE_AUDIT.md](GITHUB_REUSE_AUDIT.md) — Research notes on open-source projects, licenses, and architectural takeaways.
-- [DECISIONS.md](DECISIONS.md) — Architectural Decision Records (ADRs 001–009).
-- [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) — Contribution workflow and engineering standards.
+All technical specifications, design documents, and architecture records are consolidated under [`docs/`](docs/):
 
-### Engineering & Domain Guides (`docs/`)
-- [Product Requirements](docs/PRODUCT_REQUIREMENTS.md) — Detailed feature requirements and edge cases.
-- [User Flows](docs/USER_FLOWS.md) — End-to-end journey maps and state diagrams.
-- [UI/UX Guidelines](docs/UI_UX_GUIDELINES.md) — WinUI 3 layout, dark palette, typography, and motion.
-- [Database Schema](docs/DATABASE_SCHEMA.md) — Complete SQLite schema, indexes, and migration strategy.
-- [AI Provider Design](docs/AI_PROVIDER_DESIGN.md) — Provider setup, prompt templates, and retry middleware.
-- [Threat Model](docs/THREAT_MODEL.md) — STRIDE security assessment and attack surface mitigations.
-- [Privacy Policy Draft](docs/PRIVACY_POLICY_DRAFT.md) — Data transparency, local storage, and AI transmission boundaries.
-- [Testing Strategy](docs/TESTING_STRATEGY.md) — Unit, integration, schema, and performance test plans.
-- [Windows Compatibility](docs/WINDOWS_COMPATIBILITY.md) — Multi-monitor, DPI scaling, and OS version support.
-- [Error Handling](docs/ERROR_HANDLING.md) — Error taxonomy, backoff retry policies, and circuit breakers.
-- [Accessibility](docs/ACCESSIBILITY.md) — WCAG 2.1 AA compliance, keyboard navigation, and UI Automation.
-- [Release Plan](docs/RELEASE_PLAN.md) — MSIX packaging, code signing, and release milestones.
+### Core Architecture & Strategy
+- [Product Specification](docs/spec.md) — Product requirements, user stories, acceptance criteria, and non-goals.
+- [System Architecture](docs/architecture.md) — Component boundaries, Clean Architecture layers, data flow, and state machine.
+- [Windows Security & Enforcement](docs/security.md) — Windows 11 Home restriction model, Win32 hooks, and STRIDE threat model.
+- [AI & Verification Design](docs/ai.md) — `Microsoft.Extensions.AI` abstraction, prompt injection defenses, JSON schemas, and deterministic scoring.
+- [Implementation Roadmap](docs/roadmap.md) — Milestone breakdown (M0 through M8), packaging strategy, code signing, and release criteria.
+- [Architectural Decisions](docs/decisions.md) — Verified Architectural Decision Records (ADR-001 through ADR-009).
+- [Open-Source Research](docs/research.md) — Forensic audit of candidate repositories, license terms, and architectural lessons.
+
+### Engineering & Domain Specifications
+- [Database Schema](docs/database.md) — Relational SQLite schema, WAL pragmas, audit event logging, and migrations.
+- [UI/UX Guidelines](docs/ui-ux.md) — WinUI 3 Fluent Design, dark palette, typography scale, spacing, and motion rules.
+- [User Flows](docs/user-flows.md) — Visual sequence diagrams for onboarding, ingestion, study sessions, assessments, and recovery.
+- [Testing Strategy](docs/testing.md) — Unit testing pyramid, xUnit fixtures, contract testing, and hook latency benchmarks.
+- [Error Handling](docs/error-handling.md) — Error taxonomy, exponential backoff with jitter, and schema recovery policies.
+- [Accessibility](docs/accessibility.md) — WCAG 2.1 Level AA compliance, Microsoft UI Automation (UIA), and keyboard navigation.
+- [Privacy Policy](docs/privacy.md) — Local-first privacy guarantees, credential protection, and AI data boundary disclosures.
+- [Windows Compatibility](docs/windows-compatibility.md) — Multi-monitor topology, per-monitor DPI v2 scaling, and Windows build support.
+
+### Repository Guidelines
+- [Contributing Guidelines](.github/CONTRIBUTING.md) — Development workflow, commit conventions, and branch management.
 
 ---
 
-## Roadmap
+## Roadmap Overview
 
 ```mermaid
 flowchart LR
