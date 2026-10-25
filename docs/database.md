@@ -1,234 +1,234 @@
-—#— —S—Y—N—T—R—A— ——— —S—Q—L—i—t—e— —D—a—t—a—b—a—⚠—e— —S—c—h—e—m—a— —&— —P—e—r—⚠—i—⚠—t—e—n—c—e— —D—e—⚠—i—g—n—
-—
-—*—*—E—n—g—i—n—e—:—*—*— —S—Q—L—i—t—e— —3— —(—v—i—a— —`—M—i—c—r—o—⚠—o—f—t—.—D—a—t—a—.—S—q—l—i—t—e—`—)— — —
-—*—*—J—o—u—r—n—a—l— —M—o—d—e—:—*—*— —W—r—i—t—e—-—A—h—e—a—d— —L—o—g—g—i—n—g— —(—`—W—A—L—`—)— — —
-—*—*—I—n—t—e—g—r—i—t—y— —M—o—d—e—l—:—*—*— —I—m—m—e—d—i—a—t—e— —A—C—I—D— —T—r—a—n—⚠—a—c—t—i—o—n—a—l— —C—o—m—m—i—t— — —
-—
-—-—-—-—
-—
-—#—#— —1—.— —R—e—l—a—t—i—o—n—a—l— —E—n—t—i—t—y— —A—r—c—h—i—t—e—c—t—u—r—e—
-—
-—`—`—`—m—e—r—m—a—i—d—
-—e—r—D—i—a—g—r—a—m—
-— — — — —P—R—O—F—I—L—E—S— —|—|—-—-—o—{— —S—U—B—J—E—C—T—S— —:— —o—w—n—⚠—
-— — — — —S—U—B—J—E—C—T—S— —|—|—-—-—o—{— —M—A—T—E—R—I—A—L—S— —:— —c—o—n—t—a—i—n—⚠—
-— — — — —M—A—T—E—R—I—A—L—S— —|—|—-—-—o—{— —M—A—T—E—R—I—A—L—_—C—H—U—N—K—S— —:— —⚠—p—l—i—t—⚠—_—i—n—t—o—
-— — — — —S—U—B—J—E—C—T—S— —|—|—-—-—o—{— —S—T—U—D—Y—_—P—L—A—N—S— —:— —p—l—a—n—⚠—
-— — — — —S—T—U—D—Y—_—P—L—A—N—S— —|—|—-—-—o—{— —S—T—U—D—Y—_—T—A—S—K—S— —:— —c—o—n—t—a—i—n—⚠—
-— — — — —S—T—U—D—Y—_—T—A—S—K—S— —|—|—-—-—o—{— —S—T—U—D—Y—_—S—E—S—S—I—O—N—S— —:— —t—r—a—c—k—e—d—_—i—n—
-— — — — —S—T—U—D—Y—_—S—E—S—S—I—O—N—S— —|—|—-—-—o—{— —S—E—S—S—I—O—N—_—E—V—E—N—T—S— —:— —l—o—g—⚠—
-— — — — —S—T—U—D—Y—_—T—A—S—K—S— —|—|—-—-—o—{— —A—S—S—E—S—S—M—E—N—T—S— —:— —t—e—⚠—t—⚠—
-— — — — —A—S—S—E—S—S—M—E—N—T—S— —|—|—-—-—o—{— —A—S—S—E—S—S—M—E—N—T—_—A—T—T—E—M—P—T—S— —:— —r—e—c—o—r—d—⚠—
-—`—`—`—
-—
-—-—-—-—
-—
-—#—#— —2—.— —P—r—a—g—m—a—⚠— —&— —C—o—n—n—e—c—t—i—o—n— —C—o—n—f—i—g—u—r—a—t—i—o—n—
-—
-—E—v—e—r—y— —c—o—n—n—e—c—t—i—o—n— —i—n—i—t—i—a—l—i—z—e—d— —b—y— —`—S—y—n—t—r—a—.—D—a—t—a—`— —e—x—e—c—u—t—e—⚠— —t—h—e— —f—o—l—l—o—w—i—n—g— —i—n—i—t—i—a—l—i—z—a—t—i—o—n— —⚠—e—q—u—e—n—c—e—:—
-—
-—`—`—`—⚠—q—l—
-—P—R—A—G—M—A— —j—o—u—r—n—a—l—_—m—o—d—e— —=— —W—A—L—;—
-—P—R—A—G—M—A— —⚠—y—n—c—h—r—o—n—o—u—⚠— —=— —N—O—R—M—A—L—;—
-—P—R—A—G—M—A— —f—o—r—e—i—g—n—_—k—e—y—⚠— —=— —O—N—;—
-—P—R—A—G—M—A— —b—u—⚠—y—_—t—i—m—e—o—u—t— —=— —5—0—0—0—;—
-—P—R—A—G—M—A— —a—u—t—o—_—v—a—c—u—u—m— —=— —I—N—C—R—E—M—E—N—T—A—L—;—
-—`—`—`—
-—
-—-—-—-—
-—
-—#—#— —3—.— —D—a—t—a— —D—e—f—i—n—i—t—i—o—n— —L—a—n—g—u—a—g—e— —(—D—D—L—)—
-—
-—`—`—`—⚠—q—l—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —1—.— —P—r—o—f—i—l—e—⚠— —T—a—b—l—e—
-—-—-— —S—t—o—r—e—⚠— —u—⚠—e—r— —i—d—e—n—t—i—t—y—,— —⚠—e—⚠—⚠—i—o—n— —c—a—d—e—n—c—e—,— —a—n—d— —e—n—f—o—r—c—e—m—e—n—t— —p—r—e—f—e—r—e—n—c—e—⚠—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —p—r—o—f—i—l—e—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —d—i—⚠—p—l—a—y—_—n—a—m—e— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —d—e—f—a—u—l—t—_—⚠—t—u—d—y—_—m—i—n—u—t—e—⚠— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —4—5—,—
-— — — — —d—e—f—a—u—l—t—_—b—r—e—a—k—_—m—i—n—u—t—e—⚠— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —1—0—,—
-— — — — —e—n—f—o—r—c—e—m—e—n—t—_—m—o—d—e— —T—E—X—T— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —'—S—t—a—n—d—a—r—d—'—,— —-—-— —'—S—t—a—n—d—a—r—d—'—,— —'—S—t—r—i—c—t—'—
-— — — — —a—l—l—o—w—_—e—m—e—r—g—e—n—c—y—_—e—x—i—t— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —1—,—
-— — — — —d—a—i—l—y—_—g—o—a—l—_—m—i—n—u—t—e—⚠— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —1—8—0—,—
-— — — — —c—r—e—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —u—p—d—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —2—.— —S—u—b—j—e—c—t—⚠— —T—a—b—l—e—
-—-—-— —P—r—i—m—a—r—y— —d—o—m—a—i—n— —⚠—u—b—j—e—c—t—⚠— —(—e—.—g—.— ——D—i—⚠—t—r—i—b—u—t—e—d— —S—y—⚠—t—e—m—⚠——,— ——B—i—o—c—h—e—m—i—⚠—t—r—y——)—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —⚠—u—b—j—e—c—t—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —p—r—o—f—i—l—e—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —n—a—m—e— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —d—e—⚠—c—r—i—p—t—i—o—n— —T—E—X—T—,—
-— — — — —t—a—r—g—e—t—_—c—o—m—p—l—e—t—i—o—n—_—d—a—t—e— —T—E—X—T—,—
-— — — — —c—o—l—o—r—_—h—e—x— —T—E—X—T— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —'—#—3—8—8—B—F—D—'—,—
-— — — — —c—r—e—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—p—r—o—f—i—l—e—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —p—r—o—f—i—l—e—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —3—.— —M—a—t—e—r—i—a—l—⚠— —T—a—b—l—e—
-—-—-— —I—n—g—e—⚠—t—e—d— —f—i—l—e—⚠— —(—P—D—F—⚠—,— —M—a—r—k—d—o—w—n—,— —T—e—x—t—)—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —m—a—t—e—r—i—a—l—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—u—b—j—e—c—t—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —t—i—t—l—e— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —o—r—i—g—i—n—a—l—_—f—i—l—e—_—p—a—t—h— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —f—i—l—e—_—f—o—r—m—a—t— —T—E—X—T— —N—O—T— —N—U—L—L—,— —-—-— —'—p—d—f—'—,— —'—m—d—'—,— —'—t—x—t—'—
-— — — — —f—i—l—e—_—⚠—i—z—e—_—b—y—t—e—⚠— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —t—o—t—a—l—_—t—o—k—e—n—_—c—o—u—n—t— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —0—,—
-— — — — —i—n—g—e—⚠—t—i—o—n—_—⚠—t—a—t—u—⚠— —T—E—X—T— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —'—P—r—o—c—e—⚠—⚠—e—d—'—,— —-—-— —'—P—e—n—d—i—n—g—'—,— —'—P—r—o—c—e—⚠—⚠—e—d—'—,— —'—F—a—i—l—e—d—'—
-— — — — —⚠—h—a—2—5—6—_—h—a—⚠—h— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—r—e—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—⚠—u—b—j—e—c—t—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—u—b—j—e—c—t—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —4—.— —M—a—t—e—r—i—a—l— —C—h—u—n—k—⚠— —T—a—b—l—e—
-—-—-— —S—e—m—a—n—t—i—c— —t—e—x—t— —⚠—l—i—c—e—⚠— —(—1—,—5—0—0— —-— —2—,—5—0—0— —t—o—k—e—n—⚠—)— —w—i—t—h— —o—v—e—r—l—a—p—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —m—a—t—e—r—i—a—l—_—c—h—u—n—k—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —m—a—t—e—r—i—a—l—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—h—u—n—k—_—i—n—d—e—x— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—t—a—r—t—_—c—h—a—r—_—o—f—f—⚠—e—t— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —e—n—d—_—c—h—a—r—_—o—f—f—⚠—e—t— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —t—o—k—e—n—_—c—o—u—n—t— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —c—o—n—t—e—n—t—_—t—e—x—t— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—u—m—m—a—r—y—_—t—e—x—t— —T—E—X—T—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—m—a—t—e—r—i—a—l—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —m—a—t—e—r—i—a—l—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —5—.— —S—t—u—d—y— —P—l—a—n—⚠— —T—a—b—l—e—
-—-—-— —A—I—-—⚠—y—n—t—h—e—⚠—i—z—e—d— —c—u—r—r—i—c—u—l—u—m— —p—l—a—n—⚠—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —⚠—t—u—d—y—_—p—l—a—n—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—u—b—j—e—c—t—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —t—i—t—l—e— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —v—e—r—⚠—i—o—n— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —1—,—
-— — — — —i—⚠—_—a—c—t—i—v—e— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —1—,—
-— — — — —r—a—w—_—a—i—_—p—a—y—l—o—a—d—_—j—⚠—o—n— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—r—e—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—⚠—u—b—j—e—c—t—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—u—b—j—e—c—t—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —6—.— —S—t—u—d—y— —T—a—⚠—k—⚠— —T—a—b—l—e—
-—-—-— —D—i—⚠—c—r—e—t—e— —⚠—t—u—d—y— —u—n—i—t—⚠— —r—e—q—u—i—r—i—n—g— —r—e—a—d—i—n—g— —a—n—d— —a—⚠—⚠—e—⚠—⚠—m—e—n—t—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —⚠—t—u—d—y—_—t—a—⚠—k—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—t—u—d—y—_—p—l—a—n—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —t—o—p—i—c—_—n—a—m—e— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—u—b—t—o—p—i—c—_—n—a—m—e— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —t—a—⚠—k—_—o—r—d—e—r— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —e—⚠—t—i—m—a—t—e—d—_—m—i—n—u—t—e—⚠— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —l—e—a—r—n—i—n—g—_—o—b—j—e—c—t—i—v—e—⚠—_—j—⚠—o—n— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —p—r—e—r—e—q—u—i—⚠—i—t—e—_—t—a—⚠—k—_—i—d— —T—E—X—T—,—
-— — — — —i—⚠—_—c—o—m—p—l—e—t—e—d— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —0—,—
-— — — — —c—o—m—p—l—e—t—e—d—_—a—t—_—u—t—c— —T—E—X—T—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—⚠—t—u—d—y—_—p—l—a—n—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—t—u—d—y—_—p—l—a—n—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—p—r—e—r—e—q—u—i—⚠—i—t—e—_—t—a—⚠—k—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—t—u—d—y—_—t—a—⚠—k—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —S—E—T— —N—U—L—L—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —7—.— —S—t—u—d—y— —S—e—⚠—⚠—i—o—n—⚠— —T—a—b—l—e—
-—-—-— —R—e—a—l—-—t—i—m—e— —⚠—t—u—d—y— —⚠—e—⚠—⚠—i—o—n— —⚠—t—a—t—e— —t—r—a—c—k—i—n—g—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —⚠—e—⚠—⚠—i—o—n—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —t—a—⚠—k—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—u—r—r—e—n—t—_—⚠—t—a—t—e— —T—E—X—T— —N—O—T— —N—U—L—L—,— —-—-— —'—R—e—a—d—y—'—,— —'—A—c—t—i—v—e—'—,— —'—P—a—u—⚠—e—d—'—,— —'—T—a—⚠—k—A—⚠—⚠—e—⚠—⚠—m—e—n—t—'—,— —'—T—a—⚠—k—C—o—m—p—l—e—t—e—d—'—,— —'—S—e—⚠—⚠—i—o—n—C—o—m—p—l—e—t—e—d—'—,— —'—E—m—e—r—g—e—n—c—y—E—x—i—t—'—,— —'—R—e—c—o—v—e—r—y—R—e—q—u—i—r—e—d—'—
-— — — — —⚠—t—a—r—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—o—m—p—l—e—t—e—d—_—a—t—_—u—t—c— —T—E—X—T—,—
-— — — — —e—l—a—p—⚠—e—d—_—a—c—t—i—v—e—_—⚠—e—c—o—n—d—⚠— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —0—,—
-— — — — —p—a—u—⚠—e—_—c—o—u—n—t— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —0—,—
-— — — — —t—e—r—m—i—n—a—t—i—o—n—_—r—e—a—⚠—o—n— —T—E—X—T—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—t—a—⚠—k—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—t—u—d—y—_—t—a—⚠—k—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —8—.— —S—e—⚠—⚠—i—o—n— —E—v—e—n—t—⚠— —A—u—d—i—t— —T—a—b—l—e—
-—-—-— —I—m—m—u—t—a—b—l—e— —e—v—e—n—t— —l—e—d—g—e—r— —f—o—r— —c—r—a—⚠—h— —r—e—c—o—v—e—r—y— —a—n—d— —a—u—d—i—t— —t—r—a—i—l—⚠—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —⚠—e—⚠—⚠—i—o—n—_—e—v—e—n—t—⚠— —(—
-— — — — —i—d— —I—N—T—E—G—E—R— —P—R—I—M—A—R—Y— —K—E—Y— —A—U—T—O—I—N—C—R—E—M—E—N—T—,—
-— — — — —⚠—e—⚠—⚠—i—o—n—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —e—v—e—n—t—_—t—y—p—e— —T—E—X—T— —N—O—T— —N—U—L—L—,— —-—-— —'—S—t—a—t—e—T—r—a—n—⚠—i—t—i—o—n—'—,— —'—B—r—e—a—c—h—A—t—t—e—m—p—t—'—,— —'—E—m—e—r—g—e—n—c—y—E—x—i—t—'—,— —'—C—r—a—⚠—h—R—e—c—o—v—e—r—y—'—
-— — — — —f—r—o—m—_—⚠—t—a—t—e— —T—E—X—T—,—
-— — — — —t—o—_—⚠—t—a—t—e— —T—E—X—T—,—
-— — — — —d—e—t—a—i—l—⚠—_—j—⚠—o—n— —T—E—X—T—,—
-— — — — —t—i—m—e—⚠—t—a—m—p—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—⚠—e—⚠—⚠—i—o—n—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—e—⚠—⚠—i—o—n—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —9—.— —A—⚠—⚠—e—⚠—⚠—m—e—n—t—⚠— —T—a—b—l—e—
-—-—-— —A—I—-—g—e—n—e—r—a—t—e—d— —a—⚠—⚠—e—⚠—⚠—m—e—n—t— —⚠—c—h—e—m—a—⚠— —a—t—t—a—c—h—e—d— —t—o— —t—a—⚠—k—⚠—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —a—⚠—⚠—e—⚠—⚠—m—e—n—t—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —t—a—⚠—k—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —p—a—⚠—⚠—i—n—g—_—⚠—c—o—r—e—_—p—e—r—c—e—n—t—a—g—e— —R—E—A—L— —N—O—T— —N—U—L—L— —D—E—F—A—U—L—T— —8—0—.—0—,—
-— — — — —q—u—e—⚠—t—i—o—n—⚠—_—⚠—c—h—e—m—a—_—j—⚠—o—n— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—r—e—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—t—a—⚠—k—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—t—u—d—y—_—t—a—⚠—k—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—-—-— —1—0—.— —A—⚠—⚠—e—⚠—⚠—m—e—n—t— —A—t—t—e—m—p—t—⚠— —T—a—b—l—e—
-—-—-— —E—v—e—r—y— —q—u—i—z— —⚠—u—b—m—i—⚠—⚠—i—o—n—,— —⚠—c—o—r—e— —b—r—e—a—k—d—o—w—n—,— —a—n—d— —c—r—y—p—t—o—g—r—a—p—h—i—c— —p—r—o—o—f— —h—a—⚠—h—.—
-—-—-— —-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—-—
-—C—R—E—A—T—E— —T—A—B—L—E— —I—F— —N—O—T— —E—X—I—S—T—S— —a—⚠—⚠—e—⚠—⚠—m—e—n—t—_—a—t—t—e—m—p—t—⚠— —(—
-— — — — —i—d— —T—E—X—T— —P—R—I—M—A—R—Y— —K—E—Y— —N—O—T— —N—U—L—L—,—
-— — — — —a—⚠—⚠—e—⚠—⚠—m—e—n—t—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—e—⚠—⚠—i—o—n—_—i—d— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —a—t—t—e—m—p—t—_—n—u—m—b—e—r— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,—
-— — — — —m—c—q—_—⚠—c—o—r—e—_—p—e—r—c—e—n—t—a—g—e— —R—E—A—L— —N—O—T— —N—U—L—L—,—
-— — — — —⚠—h—o—r—t—_—a—n—⚠—w—e—r—_—⚠—c—o—r—e—_—p—e—r—c—e—n—t—a—g—e— —R—E—A—L— —N—O—T— —N—U—L—L—,—
-— — — — —c—o—m—p—o—⚠—i—t—e—_—⚠—c—o—r—e—_—p—e—r—c—e—n—t—a—g—e— —R—E—A—L— —N—O—T— —N—U—L—L—,—
-— — — — —i—⚠—_—p—a—⚠—⚠—e—d— —I—N—T—E—G—E—R— —N—O—T— —N—U—L—L—,— —-—-— —1— —i—f— —c—o—m—p—o—⚠—i—t—e— —>—=— —8—0—.—0—,— —e—l—⚠—e— —0—
-— — — — —⚠—u—b—m—i—t—t—e—d—_—a—n—⚠—w—e—r—⚠—_—j—⚠—o—n— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —a—i—_—f—e—e—d—b—a—c—k—_—j—⚠—o—n— —T—E—X—T—,—
-— — — — —e—v—i—d—e—n—c—e—_—h—m—a—c—_—h—a—⚠—h— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —c—r—e—a—t—e—d—_—a—t—_—u—t—c— —T—E—X—T— —N—O—T— —N—U—L—L—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—a—⚠—⚠—e—⚠—⚠—m—e—n—t—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —a—⚠—⚠—e—⚠—⚠—m—e—n—t—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—,—
-— — — — —F—O—R—E—I—G—N— —K—E—Y— —(—⚠—e—⚠—⚠—i—o—n—_—i—d—)— —R—E—F—E—R—E—N—C—E—S— —⚠—e—⚠—⚠—i—o—n—⚠—(—i—d—)— —O—N— —D—E—L—E—T—E— —C—A—S—C—A—D—E—
-—)—;—
-—`—`—`—
-—
-—-—-—-—
-—
-—#—#— —4—.— —P—e—r—f—o—r—m—a—n—c—e— —I—n—d—e—x—e—⚠—
-—
-—`—`—`—⚠—q—l—
-—C—R—E—A—T—E— —I—N—D—E—X— —I—F— —N—O—T— —E—X—I—S—T—S— —i—d—x—_—m—a—t—e—r—i—a—l—⚠—_—⚠—u—b—j—e—c—t— —O—N— —m—a—t—e—r—i—a—l—⚠—(—⚠—u—b—j—e—c—t—_—i—d—)—;—
-—C—R—E—A—T—E— —I—N—D—E—X— —I—F— —N—O—T— —E—X—I—S—T—S— —i—d—x—_—m—a—t—e—r—i—a—l—_—c—h—u—n—k—⚠—_—m—a—t—e—r—i—a—l— —O—N— —m—a—t—e—r—i—a—l—_—c—h—u—n—k—⚠—(—m—a—t—e—r—i—a—l—_—i—d—)—;—
-—C—R—E—A—T—E— —I—N—D—E—X— —I—F— —N—O—T— —E—X—I—S—T—S— —i—d—x—_—⚠—t—u—d—y—_—t—a—⚠—k—⚠—_—p—l—a—n— —O—N— —⚠—t—u—d—y—_—t—a—⚠—k—⚠—(—⚠—t—u—d—y—_—p—l—a—n—_—i—d—,— —t—a—⚠—k—_—o—r—d—e—r—)—;—
-—C—R—E—A—T—E— —I—N—D—E—X— —I—F— —N—O—T— —E—X—I—S—T—S— —i—d—x—_—⚠—e—⚠—⚠—i—o—n—⚠—_—a—c—t—i—v—e— —O—N— —⚠—e—⚠—⚠—i—o—n—⚠—(—c—u—r—r—e—n—t—_—⚠—t—a—t—e—)— —W—H—E—R—E— —c—u—r—r—e—n—t—_—⚠—t—a—t—e— —I—N— —(—'—A—c—t—i—v—e—'—,— —'—T—a—⚠—k—A—⚠—⚠—e—⚠—⚠—m—e—n—t—'—,— —'—P—a—u—⚠—e—d—'—)—;—
-—C—R—E—A—T—E— —I—N—D—E—X— —I—F— —N—O—T— —E—X—I—S—T—S— —i—d—x—_—⚠—e—⚠—⚠—i—o—n—_—e—v—e—n—t—⚠—_—⚠—e—⚠—⚠—i—o—n— —O—N— —⚠—e—⚠—⚠—i—o—n—_—e—v—e—n—t—⚠—(—⚠—e—⚠—⚠—i—o—n—_—i—d—,— —t—i—m—e—⚠—t—a—m—p—_—u—t—c—)—;—
-—C—R—E—A—T—E— —I—N—D—E—X— —I—F— —N—O—T— —E—X—I—S—T—S— —i—d—x—_—a—⚠—⚠—e—⚠—⚠—m—e—n—t—_—a—t—t—e—m—p—t—⚠—_—a—⚠—⚠—e—⚠—⚠—m—e—n—t— —O—N— —a—⚠—⚠—e—⚠—⚠—m—e—n—t—_—a—t—t—e—m—p—t—⚠—(—a—⚠—⚠—e—⚠—⚠—m—e—n—t—_—i—d—,— —i—⚠—_—p—a—⚠—⚠—e—d—)—;—
-—`—`—`—
-—
-—-—-—-—
-—
-—#—#— —5—.— —S—c—h—e—m—a— —M—i—g—r—a—t—i—o—n— —&— —V—e—r—⚠—i—o—n—i—n—g— —S—t—r—a—t—e—g—y—
-—
-—D—a—t—a—b—a—⚠—e— —v—e—r—⚠—i—o—n—i—n—g— —i—⚠— —t—r—a—c—k—e—d— —v—i—a— —S—Q—L—i—t—e—'—⚠— —n—a—t—i—v—e— —P—R—A—G—M—A—:—
-—`—`—`—⚠—q—l—
-—P—R—A—G—M—A— —u—⚠—e—r—_—v—e—r—⚠—i—o—n—;—
-—`—`—`—
-—W—h—e—n— —`—S—y—n—t—r—a—.—D—a—t—a—`— —b—o—o—t—⚠—:—
-—1—.— —Q—u—e—r—i—e—⚠— —`—P—R—A—G—M—A— —u—⚠—e—r—_—v—e—r—⚠—i—o—n—;—`—.—
-—2—.— —C—o—m—p—a—r—e—⚠— —a—g—a—i—n—⚠—t— —`—T—a—r—g—e—t—S—c—h—e—m—a—V—e—r—⚠—i—o—n—`— —(—v—1—)—.—
-—3—.— —I—f— —`—u—⚠—e—r—_—v—e—r—⚠—i—o—n— —<— —1—`—,— —e—x—e—c—u—t—e—⚠— —D—D—L— —m—i—g—r—a—t—i—o—n— —⚠—c—r—i—p—t—⚠— —i—n—⚠—i—d—e— —a—n— —a—t—o—m—i—c— —t—r—a—n—⚠—a—c—t—i—o—n—.—
-—4—.— —U—p—d—a—t—e—⚠— —`—P—R—A—G—M—A— —u—⚠—e—r—_—v—e—r—⚠—i—o—n— —=— —1—;—`—.—
-—
+# SYNTRA — SQLite Database Schema & Persistence Design
+
+**Engine:** SQLite 3 (via `Microsoft.Data.Sqlite`)  
+**Journal Mode:** Write-Ahead Logging (`WAL`)  
+**Integrity Model:** Immediate ACID Transactional Commit  
+
+---
+
+## 1. Relational Entity Architecture
+
+```mermaid
+erDiagram
+    PROFILES ||--o{ SUBJECTS : owns
+    SUBJECTS ||--o{ MATERIALS : contains
+    MATERIALS ||--o{ MATERIAL_CHUNKS : splits_into
+    SUBJECTS ||--o{ STUDY_PLANS : plans
+    STUDY_PLANS ||--o{ STUDY_TASKS : contains
+    STUDY_TASKS ||--o{ STUDY_SESSIONS : tracked_in
+    STUDY_SESSIONS ||--o{ SESSION_EVENTS : logs
+    STUDY_TASKS ||--o{ ASSESSMENTS : tests
+    ASSESSMENTS ||--o{ ASSESSMENT_ATTEMPTS : records
+```
+
+---
+
+## 2. Pragmas & Connection Configuration
+
+Every connection initialized by `Syntra.Data` executes the following initialization sequence:
+
+```sql
+PRAGMA journal_mode = WAL;
+PRAGMA synchronous = NORMAL;
+PRAGMA foreign_keys = ON;
+PRAGMA busy_timeout = 5000;
+PRAGMA auto_vacuum = INCREMENTAL;
+```
+
+---
+
+## 3. Data Definition Language (DDL)
+
+```sql
+-- -----------------------------------------------------------------------------
+-- 1. Profiles Table
+-- Stores user identity, session cadence, and enforcement preferences.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS profiles (
+    id TEXT PRIMARY KEY NOT NULL,
+    display_name TEXT NOT NULL,
+    default_study_minutes INTEGER NOT NULL DEFAULT 45,
+    default_break_minutes INTEGER NOT NULL DEFAULT 10,
+    enforcement_mode TEXT NOT NULL DEFAULT 'Standard', -- 'Standard', 'Strict'
+    allow_emergency_exit INTEGER NOT NULL DEFAULT 1,
+    daily_goal_minutes INTEGER NOT NULL DEFAULT 180,
+    created_at_utc TEXT NOT NULL,
+    updated_at_utc TEXT NOT NULL
+);
+
+-- -----------------------------------------------------------------------------
+-- 2. Subjects Table
+-- Primary domain subjects (e.g. "Distributed Systems", "Biochemistry").
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS subjects (
+    id TEXT PRIMARY KEY NOT NULL,
+    profile_id TEXT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    target_completion_date TEXT,
+    color_hex TEXT NOT NULL DEFAULT '#388BFD',
+    created_at_utc TEXT NOT NULL,
+    FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 3. Materials Table
+-- Ingested files (PDFs, Markdown, Text).
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS materials (
+    id TEXT PRIMARY KEY NOT NULL,
+    subject_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    original_file_path TEXT NOT NULL,
+    file_format TEXT NOT NULL, -- 'pdf', 'md', 'txt'
+    file_size_bytes INTEGER NOT NULL,
+    total_token_count INTEGER NOT NULL DEFAULT 0,
+    ingestion_status TEXT NOT NULL DEFAULT 'Processed', -- 'Pending', 'Processed', 'Failed'
+    sha256_hash TEXT NOT NULL,
+    created_at_utc TEXT NOT NULL,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 4. Material Chunks Table
+-- Semantic text slices (1,500 - 2,500 tokens) with overlap.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS material_chunks (
+    id TEXT PRIMARY KEY NOT NULL,
+    material_id TEXT NOT NULL,
+    chunk_index INTEGER NOT NULL,
+    start_char_offset INTEGER NOT NULL,
+    end_char_offset INTEGER NOT NULL,
+    token_count INTEGER NOT NULL,
+    content_text TEXT NOT NULL,
+    summary_text TEXT,
+    FOREIGN KEY (material_id) REFERENCES materials(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 5. Study Plans Table
+-- AI-synthesized curriculum plans.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS study_plans (
+    id TEXT PRIMARY KEY NOT NULL,
+    subject_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    version INTEGER NOT NULL DEFAULT 1,
+    is_active INTEGER NOT NULL DEFAULT 1,
+    raw_ai_payload_json TEXT NOT NULL,
+    created_at_utc TEXT NOT NULL,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 6. Study Tasks Table
+-- Discrete study units requiring reading and assessment.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS study_tasks (
+    id TEXT PRIMARY KEY NOT NULL,
+    study_plan_id TEXT NOT NULL,
+    topic_name TEXT NOT NULL,
+    subtopic_name TEXT NOT NULL,
+    task_order INTEGER NOT NULL,
+    estimated_minutes INTEGER NOT NULL,
+    learning_objectives_json TEXT NOT NULL,
+    prerequisite_task_id TEXT,
+    is_completed INTEGER NOT NULL DEFAULT 0,
+    completed_at_utc TEXT,
+    FOREIGN KEY (study_plan_id) REFERENCES study_plans(id) ON DELETE CASCADE,
+    FOREIGN KEY (prerequisite_task_id) REFERENCES study_tasks(id) ON DELETE SET NULL
+);
+
+-- -----------------------------------------------------------------------------
+-- 7. Study Sessions Table
+-- Real-time study session state tracking.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS sessions (
+    id TEXT PRIMARY KEY NOT NULL,
+    task_id TEXT NOT NULL,
+    current_state TEXT NOT NULL, -- 'Ready', 'Active', 'Paused', 'TaskAssessment', 'TaskCompleted', 'SessionCompleted', 'EmergencyExit', 'RecoveryRequired'
+    started_at_utc TEXT NOT NULL,
+    completed_at_utc TEXT,
+    elapsed_active_seconds INTEGER NOT NULL DEFAULT 0,
+    pause_count INTEGER NOT NULL DEFAULT 0,
+    termination_reason TEXT,
+    FOREIGN KEY (task_id) REFERENCES study_tasks(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 8. Session Events Audit Table
+-- Immutable event ledger for crash recovery and audit trails.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS session_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id TEXT NOT NULL,
+    event_type TEXT NOT NULL, -- 'StateTransition', 'BreachAttempt', 'EmergencyExit', 'CrashRecovery'
+    from_state TEXT,
+    to_state TEXT,
+    details_json TEXT,
+    timestamp_utc TEXT NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 9. Assessments Table
+-- AI-generated assessment schemas attached to tasks.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS assessments (
+    id TEXT PRIMARY KEY NOT NULL,
+    task_id TEXT NOT NULL,
+    passing_score_percentage REAL NOT NULL DEFAULT 80.0,
+    questions_schema_json TEXT NOT NULL,
+    created_at_utc TEXT NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES study_tasks(id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------------------------------
+-- 10. Assessment Attempts Table
+-- Every quiz submission, score breakdown, and cryptographic proof hash.
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS assessment_attempts (
+    id TEXT PRIMARY KEY NOT NULL,
+    assessment_id TEXT NOT NULL,
+    session_id TEXT NOT NULL,
+    attempt_number INTEGER NOT NULL,
+    mcq_score_percentage REAL NOT NULL,
+    short_answer_score_percentage REAL NOT NULL,
+    composite_score_percentage REAL NOT NULL,
+    is_passed INTEGER NOT NULL, -- 1 if composite >= 80.0, else 0
+    attempt_status TEXT NOT NULL DEFAULT 'Completed', -- 'Completed', 'Interrupted', 'Invalidated'
+    submitted_answers_json TEXT NOT NULL,
+    ai_feedback_json TEXT,
+    evidence_hmac_hash TEXT NOT NULL,
+    created_at_utc TEXT NOT NULL,
+    FOREIGN KEY (assessment_id) REFERENCES assessments(id) ON DELETE CASCADE,
+    FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
+);
+```
+
+---
+
+## 4. Performance Indexes
+
+```sql
+CREATE INDEX IF NOT EXISTS idx_materials_subject ON materials(subject_id);
+CREATE INDEX IF NOT EXISTS idx_material_chunks_material ON material_chunks(material_id);
+CREATE INDEX IF NOT EXISTS idx_study_tasks_plan ON study_tasks(study_plan_id, task_order);
+CREATE INDEX IF NOT EXISTS idx_sessions_active ON sessions(current_state) WHERE current_state IN ('Active', 'TaskAssessment', 'Paused');
+CREATE INDEX IF NOT EXISTS idx_session_events_session ON session_events(session_id, timestamp_utc);
+CREATE INDEX IF NOT EXISTS idx_assessment_attempts_assessment ON assessment_attempts(assessment_id, is_passed);
+```
+
+---
+
+## 5. Schema Migration & Versioning Strategy
+
+Database versioning is tracked via SQLite's native PRAGMA:
+```sql
+PRAGMA user_version;
+```
+When `Syntra.Data` boots:
+1. Queries `PRAGMA user_version;`.
+2. Compares against `TargetSchemaVersion` (v1).
+3. If `user_version < 1`, executes DDL migration scripts inside an atomic transaction.
+4. Updates `PRAGMA user_version = 1;`.

@@ -81,6 +81,7 @@ All technical specifications, design documents, and architecture records are con
 - [Implementation Roadmap](docs/roadmap.md) — Milestone breakdown (M0 through M8), packaging strategy, code signing, and release criteria.
 - [Architectural Decisions](docs/decisions.md) — Verified Architectural Decision Records (ADR-001 through ADR-009).
 - [Open-Source Research](docs/research.md) — Forensic audit of candidate repositories, license terms, and architectural lessons.
+- [Milestone 0 Audit Report](docs/audit-milestone-0.md) — Comprehensive technical audit, verified sources, and findings matrix.
 
 ### Engineering & Domain Specifications
 - [Database Schema](docs/database.md) — Relational SQLite schema, WAL pragmas, audit event logging, and migrations.

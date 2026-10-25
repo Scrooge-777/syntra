@@ -19,7 +19,7 @@ What specific technical question or uncertainty is being investigated?
 - [ ] AI Provider API Documentation:
 
 **Potential Impact on Existing Architecture**
-Does this affect `ARCHITECTURE.md` or require a new Architectural Decision Record in `DECISIONS.md`?
+Does this affect `docs/architecture.md` or require a new Architectural Decision Record in `docs/decisions.md`?
 
 **Verification Plan**
 How will the research findings be empirically verified?

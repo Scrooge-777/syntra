@@ -25,7 +25,7 @@ All contributions must preserve the core architectural pillars:
 
 ## 3. Contribution Workflow
 
-1. **Check Existing Milestones:** Review `IMPLEMENTATION_PLAN.md` before proposing new features.
+1. **Check Existing Milestones:** Review [docs/roadmap.md](docs/roadmap.md) before proposing new features.
 2. **Create an Issue:** Use the appropriate issue template (`bug_report.md`, `feature_request.md`, or `technical_research.md`).
 3. **Branch Naming:**
    - Features: `feature/milestone-<id>-<description>`
@@ -39,4 +39,4 @@ All contributions must preserve the core architectural pillars:
 
 - Follow standard Microsoft C# coding conventions and .NET design guidelines.
 - Markdown documents must use standard GitHub Flavored Markdown (GFM).
-- Every architectural modification must be accompanied by an Architectural Decision Record in `DECISIONS.md`.
+- Every architectural modification must be accompanied by an Architectural Decision Record in [docs/decisions.md](docs/decisions.md).
