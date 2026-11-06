@@ -6,6 +6,7 @@ namespace Syntra.Data;
 
 /// <summary>
 /// SQLite implementation of the IStudyRepository port using Entity Framework Core.
+/// Handles entity graph persistence, detached update reconciliation, and child collection tracking.
 /// </summary>
 public class SqliteStudyRepository : IStudyRepository
 {
@@ -27,14 +28,18 @@ public class SqliteStudyRepository : IStudyRepository
     {
         ArgumentNullException.ThrowIfNull(profile);
 
-        var existing = await _context.Profiles.FindAsync(new object[] { profile.Id }, cancellationToken);
-        if (existing == null)
+        var entry = _context.Entry(profile);
+        if (entry.State == EntityState.Detached)
         {
-            await _context.Profiles.AddAsync(profile, cancellationToken);
-        }
-        else
-        {
-            _context.Entry(existing).CurrentValues.SetValues(profile);
+            var existing = await _context.Profiles.FindAsync(new object[] { profile.Id }, cancellationToken);
+            if (existing == null)
+            {
+                await _context.Profiles.AddAsync(profile, cancellationToken);
+            }
+            else
+            {
+                _context.Entry(existing).CurrentValues.SetValues(profile);
+            }
         }
 
         await _context.SaveChangesAsync(cancellationToken);
@@ -60,14 +65,26 @@ public class SqliteStudyRepository : IStudyRepository
     {
         ArgumentNullException.ThrowIfNull(plan);
 
-        var existing = await _context.Plans.FindAsync(new object[] { plan.Id }, cancellationToken);
-        if (existing == null)
+        var entry = _context.Entry(plan);
+        if (entry.State == EntityState.Detached)
         {
-            await _context.Plans.AddAsync(plan, cancellationToken);
+            var existing = await _context.Plans.FindAsync(new object[] { plan.Id }, cancellationToken);
+            if (existing == null)
+            {
+                await _context.Plans.AddAsync(plan, cancellationToken);
+            }
+            else
+            {
+                _context.Entry(existing).CurrentValues.SetValues(plan);
+            }
         }
-        else
+
+        foreach (var task in plan.Tasks)
         {
-            _context.Entry(existing).CurrentValues.SetValues(plan);
+            if (_context.Entry(task).State == EntityState.Detached)
+            {
+                await _context.Tasks.AddAsync(task, cancellationToken);
+            }
         }
 
         await _context.SaveChangesAsync(cancellationToken);
@@ -83,14 +100,18 @@ public class SqliteStudyRepository : IStudyRepository
     {
         ArgumentNullException.ThrowIfNull(session);
 
-        var existing = await _context.Sessions.FindAsync(new object[] { session.Id }, cancellationToken);
-        if (existing == null)
+        var entry = _context.Entry(session);
+        if (entry.State == EntityState.Detached)
         {
-            await _context.Sessions.AddAsync(session, cancellationToken);
-        }
-        else
-        {
-            _context.Entry(existing).CurrentValues.SetValues(session);
+            var existing = await _context.Sessions.FindAsync(new object[] { session.Id }, cancellationToken);
+            if (existing == null)
+            {
+                await _context.Sessions.AddAsync(session, cancellationToken);
+            }
+            else
+            {
+                _context.Entry(existing).CurrentValues.SetValues(session);
+            }
         }
 
         await _context.SaveChangesAsync(cancellationToken);
@@ -106,14 +127,43 @@ public class SqliteStudyRepository : IStudyRepository
     {
         ArgumentNullException.ThrowIfNull(assessment);
 
-        var existing = await _context.Assessments.FindAsync(new object[] { assessment.Id }, cancellationToken);
-        if (existing == null)
+        var entry = _context.Entry(assessment);
+        if (entry.State == EntityState.Detached)
         {
-            await _context.Assessments.AddAsync(assessment, cancellationToken);
+            var existing = await _context.Assessments.FindAsync(new object[] { assessment.Id }, cancellationToken);
+            if (existing == null)
+            {
+                await _context.Assessments.AddAsync(assessment, cancellationToken);
+            }
+            else
+            {
+                _context.Entry(existing).CurrentValues.SetValues(assessment);
+            }
         }
-        else
+
+        foreach (var question in assessment.Questions)
         {
-            _context.Entry(existing).CurrentValues.SetValues(assessment);
+            if (_context.Entry(question).State == EntityState.Detached)
+            {
+                await _context.AssessmentQuestions.AddAsync(question, cancellationToken);
+            }
+        }
+
+        foreach (var attempt in assessment.Attempts)
+        {
+            var attemptEntry = _context.Entry(attempt);
+            if (attemptEntry.State == EntityState.Detached)
+            {
+                await _context.AssessmentAttempts.AddAsync(attempt, cancellationToken);
+            }
+            else if (attemptEntry.State == EntityState.Modified)
+            {
+                var exists = await _context.AssessmentAttempts.AnyAsync(a => a.Id == attempt.Id, cancellationToken);
+                if (!exists)
+                {
+                    attemptEntry.State = EntityState.Added;
+                }
+            }
         }
 
         await _context.SaveChangesAsync(cancellationToken);

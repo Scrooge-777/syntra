@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Syntra.App</RootNamespace>
+    <AssemblyName>Syntra.App</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Syntra.Core\Syntra.Core.csproj" />
+    <ProjectReference Include="..\Syntra.Data\Syntra.Data.csproj" />
+    <ProjectReference Include="..\Syntra.AI\Syntra.AI.csproj" />
+    <ProjectReference Include="..\Syntra.Windows\Syntra.Windows.csproj" />
+  </ItemGroup>
+
+</Project>
