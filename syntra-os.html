@@ -3,66 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SYNTRA Study OS</title>
+  <title>SYNTRA 2.0 Study OS</title>
   <style>
+    /* ==========================================================================
+       SYNTRA 2.0 - NEXT-GEN STUDY OPERATING SYSTEM DESIGN TOKENS
+       Themes: Obsidian Amethyst (Dark) / Academic Pearl Lavender (Light)
+       ========================================================================== */
     :root {
-      /* Dark Mode: Deep Purple Gradient Palette */
-      --bg-gradient: radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.22) 0%, transparent 45%),
-                     radial-gradient(circle at 88% 82%, rgba(216, 180, 254, 0.14) 0%, transparent 50%),
-                     radial-gradient(circle at 50% 50%, rgba(126, 34, 206, 0.12) 0%, transparent 60%),
-                     #0a0714;
-      --bg-base: #0a0714;
-      --bg-surface: rgba(21, 16, 38, 0.88);
-      --bg-surface-elevated: rgba(29, 22, 52, 0.94);
-      --bg-card: rgba(26, 20, 46, 0.75);
-      --border-subtle: rgba(192, 132, 252, 0.14);
-      --border-strong: rgba(192, 132, 252, 0.32);
-      --accent-primary: #a855f7;
-      --accent-primary-hover: #9333ea;
-      --accent-glow: rgba(168, 85, 247, 0.35);
-      --accent-cyan: #38bdf8;
-      --accent-emerald: #10b981;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
-      --text-main: #f8fafc;
-      --text-muted: #d8b4fe;
-      --text-dim: #94a3b8;
-      --topbar-bg: rgba(14, 10, 26, 0.90);
-      --dock-bg: rgba(15, 11, 28, 0.92);
-      --input-bg: rgba(255, 255, 255, 0.05);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
-      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
-      --font-mono: "Cascadia Code", "Fira Code", Consolas, Menlo, monospace;
-      --transition-standard: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      /* Dark Theme: Obsidian Amethyst (WCAG AAA/AA Compliant) */
+      --bg-void: #0B0A10;
+      --bg-surface: #12111A;
+      --bg-card: #181624;
+      --bg-overlay: #201D30;
+      --bg-recessed: #0E0D16;
+
+      --glass-surface: rgba(24, 22, 36, 0.76);
+      --glass-dock: rgba(20, 18, 32, 0.88);
+      --glass-hud: rgba(18, 17, 26, 0.85);
+      --glass-blur: blur(20px) saturate(190%) contrast(105%);
+
+      --text-primary: #F4F3F8;
+      --text-secondary: #A5A3B8;
+      --text-muted: #82809C;
+      --text-on-accent: #FFFFFF;
+
+      --accent-primary: #8B5CF6;
+      --accent-hover: #9D76F8;
+      --accent-active: #7C4DF2;
+      --accent-glow: rgba(139, 92, 246, 0.16);
+
+      --border-hairline: rgba(255, 255, 255, 0.08);
+      --border-interactive: #5F5985;
+      --border-focus: #A78BFA;
+      --border-specular: rgba(255, 255, 255, 0.14);
+
+      --glow-ambient: radial-gradient(1200px circle at 50% -20%, rgba(139, 92, 246, 0.06) 0%, rgba(99, 68, 223, 0.02) 45%, transparent 75%);
+
+      --status-success: #34D399;
+      --status-warning: #FBBF24;
+      --status-danger: #F87171;
+      --status-info: #60A5FA;
+
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable", "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      --font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, monospace;
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+
+      --radius-badge: 4px;
+      --radius-control: 8px;
+      --radius-card: 14px;
+      --radius-window: 16px;
+      --radius-dock: 22px;
+
+      --shadow-low: 0 2px 8px -2px rgba(0, 0, 0, 0.40);
+      --shadow-medium: 0 8px 24px -4px rgba(0, 0, 0, 0.50), 0 2px 6px -2px rgba(0, 0, 0, 0.30);
+      --shadow-high: 0 16px 48px -6px rgba(0, 0, 0, 0.65), 0 4px 12px -2px rgba(0, 0, 0, 0.40);
+      --shadow-card-rim: inset 0 1px 0 0 var(--border-specular), 0 4px 16px -2px rgba(0, 0, 0, 0.45);
+
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-instant: 120ms;
+      --duration-fast: 160ms;
+      --duration-normal: 240ms;
+
+      --taskbar-height: 52px;
     }
 
     [data-theme="light"] {
-      /* Light Mode: Academic Lilac & Pearl Palette */
-      --bg-gradient: radial-gradient(circle at 10% 15%, rgba(192, 132, 252, 0.25) 0%, transparent 45%),
-                     radial-gradient(circle at 85% 85%, rgba(147, 51, 234, 0.12) 0%, transparent 50%),
-                     #f8f7ff;
-      --bg-base: #f8f7ff;
-      --bg-surface: rgba(255, 255, 255, 0.92);
-      --bg-surface-elevated: rgba(255, 255, 255, 0.98);
-      --bg-card: rgba(246, 244, 255, 0.90);
-      --border-subtle: rgba(147, 51, 234, 0.18);
-      --border-strong: rgba(147, 51, 234, 0.38);
-      --accent-primary: #7c3aed;
-      --accent-primary-hover: #6d28d9;
-      --accent-glow: rgba(124, 58, 237, 0.25);
-      --accent-cyan: #0284c7;
-      --accent-emerald: #059669;
-      --accent-amber: #d97706;
-      --accent-rose: #e11d48;
-      --text-main: #1e1035;
-      --text-muted: #6b21a8;
-      --text-dim: #64748b;
-      --topbar-bg: rgba(248, 246, 255, 0.94);
-      --dock-bg: rgba(248, 246, 255, 0.96);
-      --input-bg: rgba(255, 255, 255, 0.95);
+      /* Light Theme: Academic Pearl / Lavender */
+      --bg-void: #F9F8FC;
+      --bg-surface: #F1EFF7;
+      --bg-card: #FFFFFF;
+      --bg-overlay: #FFFFFF;
+      --bg-recessed: #ECEAF2;
+
+      --glass-surface: rgba(255, 255, 255, 0.84);
+      --glass-dock: rgba(255, 255, 255, 0.90);
+      --glass-hud: rgba(249, 248, 252, 0.88);
+      --glass-blur: blur(20px) saturate(180%);
+
+      --text-primary: #151324;
+      --text-secondary: #49465E;
+      --text-muted: #6A6782;
+      --text-on-accent: #FFFFFF;
+
+      --accent-primary: #6344DF;
+      --accent-hover: #5234CB;
+      --accent-active: #4528BA;
+      --accent-glow: rgba(99, 68, 223, 0.10);
+
+      --border-hairline: rgba(30, 27, 46, 0.08);
+      --border-interactive: #8E8AAB;
+      --border-focus: #6344DF;
+      --border-specular: rgba(255, 255, 255, 0.95);
+
+      --glow-ambient: radial-gradient(1200px circle at 50% -20%, rgba(99, 68, 223, 0.04) 0%, rgba(139, 92, 246, 0.01) 40%, transparent 70%);
+
+      --status-success: #059669;
+      --status-warning: #D97706;
+      --status-danger: #DC2626;
+      --status-info: #2563EB;
+
+      --shadow-low: 0 1px 4px rgba(35, 25, 60, 0.03), 0 2px 8px rgba(35, 25, 60, 0.04);
+      --shadow-medium: 0 4px 16px -2px rgba(35, 25, 60, 0.06), 0 2px 6px -1px rgba(35, 25, 60, 0.03);
+      --shadow-high: 0 16px 40px -4px rgba(35, 25, 60, 0.08), 0 4px 12px -2px rgba(35, 25, 60, 0.04);
+      --shadow-card-rim: inset 0 1px 0 0 var(--border-specular), 0 2px 8px -2px rgba(35, 25, 60, 0.04);
     }
 
     * {
@@ -74,1244 +123,1890 @@
     }
 
     body {
-      background-color: var(--bg-base);
-      background-image: var(--bg-gradient);
-      font-family: var(--font-stack);
-      color: var(--text-main);
+      background-color: var(--bg-void);
+      background-image: var(--glow-ambient);
+      background-attachment: fixed;
+      font-family: var(--font-sans);
+      color: var(--text-primary);
       height: 100vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       position: relative;
-      transition: var(--transition-standard);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Minimal, Flat Tactile Interaction */
+    .tabular-nums {
+      font-family: var(--font-mono);
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum" 1;
+    }
+
+    /* Flat Tactile Micro-Interactions (Emil Kowalski Physics) */
     .pressable {
       cursor: pointer;
       will-change: transform;
-      transition: transform 0.1s ease, background-color 0.15s ease, border-color 0.15s ease;
+      transform: scale(1);
+      transition: transform var(--duration-fast) var(--ease-spring),
+                  background-color var(--duration-fast) var(--ease-spring),
+                  border-color var(--duration-fast) var(--ease-spring);
     }
     .pressable:active {
-      transform: scale(0.97);
+      transform: scale(0.975);
+      transition-duration: var(--duration-instant);
     }
 
-    /* Top Shell Status Bar */
-    header.os-topbar {
-      height: 40px;
-      background: var(--topbar-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-subtle);
+    /* ==========================================================================
+       TOP STATUS HUD CAPSULE (macOS / OMEN Ergonomics)
+       ========================================================================== */
+    header.status-hud {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 38px;
+      width: calc(100% - 32px);
+      max-width: 1540px;
+      padding: 0 var(--space-4);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      font-size: 12px;
+      background: var(--glass-hud);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-window);
+      box-shadow: var(--shadow-card-rim);
       z-index: 10000;
-      transition: var(--transition-standard);
     }
-    .topbar-left, .topbar-center, .topbar-right {
+
+    .hud-left, .hud-center, .hud-right {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
-    .os-badge {
+
+    .brand-pill {
       display: flex;
       align-items: center;
       gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-control);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      font-size: 12px;
+      letter-spacing: 0.5px;
     }
-    .os-badge-pill {
-      background: linear-gradient(135deg, var(--accent-primary), #d8b4fe);
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--accent-primary);
-    }
-    .evaluation-tag {
-      background: rgba(168, 85, 247, 0.12);
-      color: var(--accent-primary);
-      border: 1px solid var(--border-subtle);
-      padding: 2px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .session-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-dim);
-      font-size: 12px;
-    }
-    .session-dot {
+
+    .pulse-orb {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 8px var(--accent-emerald);
+      background: var(--status-success);
+      box-shadow: 0 0 8px var(--status-success);
+      animation: pulse-ring 2.4s infinite ease-in-out;
     }
 
-    /* Theme Toggle Switch */
-    .theme-toggle-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-main);
+    @keyframes pulse-ring {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .hud-task-pill {
       display: flex;
       align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: var(--transition-standard);
-    }
-    .theme-toggle-btn:hover {
-      border-color: var(--border-strong);
-      background: rgba(168, 85, 247, 0.15);
-    }
-
-    /* Desktop Surface */
-    main.os-desktop {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      padding: 24px;
-    }
-
-    /* Desktop Icon Grid */
-    .desktop-icons {
-      display: grid;
-      grid-template-columns: repeat(1, 96px);
-      gap: 16px;
-      position: absolute;
-      top: 24px;
-      left: 24px;
-      z-index: 10;
-    }
-    .desktop-icon {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px;
-      border-radius: var(--radius-md);
-      color: var(--text-main);
+      gap: 10px;
+      padding: 4px 14px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-control);
       font-size: 12px;
       font-weight: 500;
-      text-align: center;
-      transition: background 0.15s ease;
+      color: var(--text-secondary);
+    }
+    .hud-task-pill strong {
+      color: var(--text-primary);
+    }
+
+    .hud-timer-badge {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      padding: 2px 8px;
+      background: var(--accent-glow);
+      border-radius: var(--radius-badge);
+    }
+
+    .hud-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: var(--radius-control);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn-command-palette {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+      height: 28px;
+      border-radius: var(--radius-control);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-secondary);
+      font-size: 12px;
       cursor: pointer;
     }
-    .desktop-icon:hover {
-      background: rgba(168, 85, 247, 0.12);
+    .btn-command-palette:hover {
+      border-color: var(--border-interactive);
+      color: var(--text-primary);
     }
-    .desktop-icon-img {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
-      background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-subtle);
+
+    .theme-toggle-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-control);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-      color: var(--accent-primary);
+      cursor: pointer;
     }
-    .desktop-icon span {
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-      white-space: nowrap;
+    .theme-toggle-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-interactive);
     }
 
-    /* Clean Minimal Floating Windows */
-    .os-window {
+    /* ==========================================================================
+       DESKTOP WORKSPACE & WINDOW MANAGER
+       ========================================================================== */
+    #desktop {
       position: absolute;
-      background: var(--bg-surface);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--border-subtle);
-      display: flex;
-      flex-direction: column;
-      min-width: 360px;
-      min-height: 240px;
+      top: 56px;
+      left: 0;
+      right: 0;
+      bottom: var(--taskbar-height);
       overflow: hidden;
+    }
+
+    /* Snap Ghost Indicator */
+    .snap-ghost {
+      position: absolute;
+      pointer-events: none;
+      border-radius: var(--radius-window);
+      background: var(--accent-glow);
+      border: 2px dashed var(--accent-primary);
       opacity: 0;
       transform: scale(0.98);
-      transition: opacity 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+      transition: opacity 120ms ease, transform 120ms var(--ease-spring),
+                  top 150ms var(--ease-spring), left 150ms var(--ease-spring),
+                  width 150ms var(--ease-spring), height 150ms var(--ease-spring);
+      z-index: 999;
     }
-    .os-window.active-window {
+    .snap-ghost.visible {
       opacity: 1;
       transform: scale(1);
-      border-color: var(--accent-primary);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 25px var(--accent-glow);
-    }
-    .os-window.minimized {
-      display: none;
     }
 
-    .window-header {
-      height: 42px;
-      background: var(--bg-surface-elevated);
-      border-bottom: 1px solid var(--border-subtle);
+    /* Window Container */
+    .os-window {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      background: var(--glass-surface);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-window);
+      box-shadow: var(--shadow-card-rim);
+      overflow: hidden;
+      will-change: transform, width, height;
+    }
+
+    .os-window.active {
+      box-shadow: inset 0 1px 0 0 var(--border-specular), 0 20px 48px rgba(0, 0, 0, 0.65), 0 0 0 1px var(--border-focus);
+    }
+
+    .os-window.maximized {
+      border-radius: 0;
+      border: none;
+    }
+
+    .os-window.minimized {
+      display: none !important;
+    }
+
+    .os-window.snapping-animate {
+      transition: transform 200ms var(--ease-spring),
+                  width 200ms var(--ease-spring),
+                  height 200ms var(--ease-spring);
+    }
+
+    .window-titlebar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      height: 40px;
+      padding: 0 14px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-hairline);
       cursor: grab;
+      touch-action: none;
     }
-    .window-header:active {
+    .window-titlebar:active {
       cursor: grabbing;
     }
-    .window-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
+
+    .window-title-group {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      pointer-events: none;
     }
+
     .window-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .win-btn {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
+
+    .window-ctrl-btn {
+      width: 24px;
+      height: 24px;
       border: none;
+      background: transparent;
+      border-radius: var(--radius-control);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: bold;
       cursor: pointer;
-      transition: transform 0.12s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 100ms ease, color 100ms ease;
     }
-    .win-btn:hover {
-      transform: scale(1.15);
+    .window-ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
     }
-    .win-btn-close { background: var(--accent-rose); }
-    .win-btn-min { background: var(--accent-amber); }
-    .win-btn-max { background: var(--accent-emerald); }
+    .window-ctrl-btn.close:hover {
+      background: var(--status-danger);
+      color: #fff;
+    }
 
     .window-body {
       flex: 1;
-      padding: 20px;
       overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* Cards & Components */
-    .card {
+      padding: var(--space-4);
       background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      transition: var(--transition-standard);
+      gap: var(--space-3);
     }
 
-    /* Focus Studio Window */
-    .timer-circle-wrap {
+    /* ==========================================================================
+       APP SPECIFIC COMPONENTS & VIEWS
+       ========================================================================== */
+
+    /* 1. FOCUS STUDIO (FLOWMODORO & POMODORO) */
+    .timer-hero-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 0 16px;
       position: relative;
-      width: 170px;
-      height: 170px;
-      margin: 0 auto;
     }
-    .timer-svg {
+
+    .timer-ring-wrapper {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timer-ring-svg {
       transform: rotate(-90deg);
-      width: 170px;
-      height: 170px;
+      width: 210px;
+      height: 210px;
     }
-    .timer-bg {
+
+    .timer-ring-bg {
       fill: none;
-      stroke: var(--border-subtle);
-      stroke-width: 9;
+      stroke: var(--border-hairline);
+      stroke-width: 8;
     }
-    .timer-bar {
+
+    .timer-ring-progress {
       fill: none;
       stroke: var(--accent-primary);
-      stroke-width: 9;
+      stroke-width: 8;
       stroke-linecap: round;
-      stroke-dasharray: 440;
-      stroke-dashoffset: 75;
-      transition: stroke-dashoffset 0.5s ease;
+      stroke-dasharray: 565.48;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.8s ease, stroke 0.3s ease;
     }
-    .timer-text-wrap {
+
+    .timer-display-inner {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
     }
+
     .timer-digits {
-      font-size: 32px;
+      font-size: 44px;
       font-weight: 700;
-      font-family: var(--font-mono);
-      color: var(--text-main);
-    }
-    .timer-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 2px;
+      letter-spacing: -1px;
+      color: var(--text-primary);
     }
 
-    .btn-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-    }
-    .btn {
-      flex: 1;
-      padding: 11px 16px;
-      border-radius: var(--radius-md);
+    .timer-mode-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       font-weight: 600;
-      font-size: 13px;
-      border: 1px solid transparent;
-      outline: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      color: var(--accent-primary);
+      margin-top: -2px;
     }
-    .btn-primary {
+
+    .earned-break-pill {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--status-success);
+      margin-top: 6px;
+      background: rgba(52, 211, 153, 0.12);
+      padding: 2px 10px;
+      border-radius: var(--radius-badge);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+
+    .timer-control-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .btn-timer {
+      padding: 9px 20px;
+      border-radius: var(--radius-control);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+    .btn-timer.primary {
       background: var(--accent-primary);
-      color: #fff;
+      border-color: var(--accent-hover);
+      color: var(--text-on-accent);
       box-shadow: 0 4px 14px var(--accent-glow);
     }
-    .btn-primary:hover {
-      background: var(--accent-primary-hover);
-    }
-    .btn-secondary {
-      background: var(--bg-card);
-      border-color: var(--border-subtle);
-      color: var(--text-main);
-    }
-    .btn-secondary:hover {
-      border-color: var(--border-strong);
+    .btn-timer.primary:hover {
+      background: var(--accent-hover);
     }
 
-    /* Active Quiz Gatekeeper */
-    .threshold-banner {
-      background: rgba(168, 85, 247, 0.10);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 12px 16px;
+    .timer-mode-switcher {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-    }
-    .threshold-bar-wrap {
-      width: 140px;
-      height: 8px;
-      background: rgba(0, 0, 0, 0.15);
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-    }
-    .threshold-bar-fill {
-      width: 80%;
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-emerald));
-      border-radius: 999px;
-    }
-
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .quiz-option {
-      padding: 10px 14px;
-      border-radius: var(--radius-sm);
+      gap: 6px;
       background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      font-size: 13px;
-      cursor: pointer;
-      transition: var(--transition-standard);
-      color: var(--text-main);
-    }
-    .quiz-option:hover {
-      border-color: var(--accent-primary);
-      background: rgba(168, 85, 247, 0.12);
-    }
-    .quiz-option.selected {
-      background: rgba(168, 85, 247, 0.22);
-      border-color: var(--accent-primary);
-      font-weight: 600;
+      padding: 4px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--border-hairline);
+      margin-bottom: 8px;
     }
 
-    .input-field {
-      background: var(--input-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      color: var(--text-main);
-      font-family: var(--font-mono);
-      font-size: 13px;
-      outline: none;
-      width: 100%;
-      transition: border-color 0.15s ease;
-    }
-    .input-field:focus {
-      border-color: var(--accent-primary);
-    }
-
-    /* Flashcard App (Anki / FSRS Spaced Repetition) */
-    .flashcard-box {
-      perspective: 1000px;
-      min-height: 160px;
-      cursor: pointer;
-    }
-    .flashcard-inner {
-      width: 100%;
-      height: 100%;
-      min-height: 160px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 12px;
-      transition: background 0.2s ease;
-    }
-    .flashcard-prompt {
-      font-size: 15px;
+    .timer-mode-btn {
+      flex: 1;
+      padding: 6px 12px;
+      font-size: 12px;
       font-weight: 600;
-      color: var(--text-main);
-    }
-    .flashcard-answer {
-      font-size: 13px;
+      border-radius: var(--radius-badge);
+      background: transparent;
+      border: none;
       color: var(--text-muted);
-      display: none;
-      line-height: 1.5;
-    }
-    .flashcard-box.flipped .flashcard-answer {
-      display: block;
-    }
-    .rating-row {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-    }
-    .btn-rating {
-      flex: 1;
-      padding: 8px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-surface);
-      color: var(--text-main);
       cursor: pointer;
     }
-
-    /* Terminal & Code Aperture */
-    .code-editor-box {
-      background: #0d0a17;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: #e2e8f0;
-      line-height: 1.6;
-      flex: 1;
-      overflow-y: auto;
+    .timer-mode-btn.active {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-low);
     }
 
-    /* Task Tree */
-    .task-tree {
+    .ambient-sound-hub {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 14px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .task-item {
+
+    .ambient-buttons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .btn-sound {
+      padding: 8px 6px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--border-hairline);
       background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .task-item.active-task-item {
-      border-color: var(--accent-primary);
-      background: rgba(168, 85, 247, 0.10);
-    }
-    .task-status-tag {
+      color: var(--text-secondary);
       font-size: 11px;
       font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 999px;
+      text-align: center;
     }
-    .tag-active {
-      background: rgba(168, 85, 247, 0.18);
+    .btn-sound.active {
+      background: var(--accent-glow);
+      border-color: var(--accent-primary);
       color: var(--accent-primary);
-      border: 1px solid var(--border-strong);
-    }
-    .tag-pending {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--text-dim);
     }
 
-    /* Bottom Taskbar / Dock */
-    footer.os-dock {
-      height: 52px;
-      background: var(--dock-bg);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-top: 1px solid var(--border-subtle);
+    /* 2. ACTIVE RECALL GATEKEEPER */
+    .quiz-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quiz-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: var(--radius-badge);
+      background: var(--accent-glow);
+      color: var(--accent-primary);
+    }
+
+    .quiz-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-option-item {
+      padding: 12px 14px;
+      border-radius: var(--radius-control);
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.4;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .quiz-option-item:hover {
+      border-color: var(--border-interactive);
+      color: var(--text-primary);
+    }
+    .quiz-option-item.selected {
+      border-color: var(--accent-primary);
+      background: var(--accent-glow);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .quiz-input-field {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: var(--radius-control);
+      background: var(--bg-card);
+      border: 1px solid var(--border-hairline);
+      color: var(--text-primary);
+      font-size: 13px;
+      outline: none;
+      font-family: var(--font-sans);
+    }
+    .quiz-input-field:focus {
+      border-color: var(--border-focus);
+    }
+
+    .quiz-result-banner {
+      padding: 14px;
+      border-radius: var(--radius-card);
+      font-size: 13px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    /* 3. SPACED REPETITION FLASHCARDS (FSRS ENGINE) */
+    .fsrs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-hairline);
+    }
+
+    .fsrs-deck-stats {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .flashcard-surface {
+      min-height: 180px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-interactive);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .flashcard-hint {
+      position: absolute;
+      bottom: 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .fsrs-button-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .btn-fsrs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 4px;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--border-hairline);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .btn-fsrs .interval-subtext {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-family: var(--font-mono);
+    }
+    .btn-fsrs.again:hover { border-color: var(--status-danger); color: var(--status-danger); }
+    .btn-fsrs.hard:hover { border-color: var(--status-warning); color: var(--status-warning); }
+    .btn-fsrs.good:hover { border-color: var(--status-info); color: var(--status-info); }
+    .btn-fsrs.easy:hover { border-color: var(--status-success); color: var(--status-success); }
+
+    /* 4. CURRICULUM TREE & SYLLABUS */
+    .task-tree-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .task-tree-node {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      z-index: 10000;
-      transition: var(--transition-standard);
     }
-    .dock-start {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .start-menu-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      padding: 8px 14px;
-      border-radius: var(--radius-md);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-    .start-menu-btn:hover {
-      border-color: var(--border-strong);
-      background: rgba(168, 85, 247, 0.15);
-    }
-    .dock-apps {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .dock-app-tab {
-      height: 36px;
-      padding: 0 14px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--text-dim);
-      cursor: pointer;
-    }
-    .dock-app-tab.active-tab {
+    .task-tree-node.active-task {
       border-color: var(--accent-primary);
-      color: var(--text-main);
-      font-weight: 600;
-      background: rgba(168, 85, 247, 0.16);
-    }
-    .dock-app-tab.active-tab::after {
-      content: "";
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: var(--accent-primary);
-      margin-left: 2px;
+      background: var(--accent-glow);
     }
 
-    .dock-tray {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 12px;
-      color: var(--text-dim);
+    .task-status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-badge);
     }
-    .tray-clock {
+    .task-status-pill.done { background: rgba(52, 211, 153, 0.15); color: var(--status-success); }
+    .task-status-pill.in-progress { background: rgba(139, 92, 246, 0.2); color: var(--accent-primary); }
+    .task-status-pill.locked { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
+
+    /* 5. CODE & TERMINAL SANDBOX */
+    .code-editor-box {
+      width: 100%;
+      height: 220px;
+      background: var(--bg-void);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-control);
+      padding: 12px;
       font-family: var(--font-mono);
-      color: var(--text-main);
-      font-weight: 600;
+      font-size: 12px;
+      color: #38bdf8;
+      resize: none;
+      outline: none;
+      line-height: 1.5;
     }
 
-    /* Start Menu Drawer */
-    .start-drawer {
-      position: absolute;
-      bottom: 60px;
-      left: 16px;
-      width: 320px;
-      background: var(--bg-surface-elevated);
-      backdrop-filter: blur(32px);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-lg);
-      padding: 16px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      display: none;
+    .terminal-output {
+      height: 100px;
+      background: var(--bg-recessed);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-control);
+      padding: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--status-success);
+      overflow-y: auto;
+    }
+
+    /* 6. NOTES & SCRATCHPAD */
+    .notes-textarea {
+      width: 100%;
+      height: 320px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-control);
+      padding: 14px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--text-primary);
+      resize: none;
+      outline: none;
+      line-height: 1.6;
+    }
+    .notes-textarea:focus {
+      border-color: var(--border-focus);
+    }
+
+    /* 7. SETTINGS & LOCKDOWN */
+    .settings-group {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-card);
+      padding: 14px;
+      display: flex;
       flex-direction: column;
       gap: 12px;
-      z-index: 20000;
     }
-    .start-drawer.open {
-      display: flex;
-    }
-    .drawer-header {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .drawer-item {
+
+    .settings-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 8px 10px;
-      border-radius: var(--radius-sm);
+      justify-content: space-between;
       font-size: 13px;
-      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       BOTTOM TASKBAR DOCK (FLOATING CAPSULE)
+       ========================================================================== */
+    footer.dock-capsule {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 48px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--glass-dock);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--border-hairline);
+      border-radius: var(--radius-dock);
+      box-shadow: inset 0 1px 0 0 var(--border-specular), var(--shadow-high);
+      z-index: 10000;
+    }
+
+    .dock-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 12px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-control);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 120ms ease;
+    }
+    .dock-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+    }
+    .dock-btn.active {
+      background: var(--accent-glow);
+      color: var(--text-primary);
+      border-color: rgba(139, 92, 246, 0.25);
+    }
+    .dock-btn.active::after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--accent-primary);
+    }
+
+    .dock-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border-hairline);
+      margin: 0 4px;
+    }
+
+    .dock-tray-btn {
+      height: 32px;
+      padding: 0 10px;
+      border-radius: var(--radius-control);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      color: var(--status-danger);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       cursor: pointer;
     }
-    .drawer-item:hover {
-      background: rgba(168, 85, 247, 0.12);
+
+    /* ==========================================================================
+       UNIVERSAL COMMAND PALETTE (CTRL+K) MODAL
+       ========================================================================== */
+    .palette-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12vh;
+      z-index: 20000;
+      opacity: 1;
+      transition: opacity 150ms ease;
     }
-    .drawer-item-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 6px;
-      background: rgba(168, 85, 247, 0.15);
-      color: var(--accent-primary);
+    .palette-backdrop.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .palette-panel {
+      width: 620px;
+      max-width: 90vw;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-interactive);
+      border-radius: var(--radius-card);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), inset 0 1px 0 0 var(--border-specular);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .palette-input-wrap {
       display: flex;
       align-items: center;
-      justify-content: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-hairline);
+      gap: 12px;
+    }
+
+    .palette-input-wrap input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-family: var(--font-sans);
+    }
+
+    .palette-results {
+      max-height: 360px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .palette-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-control);
+      cursor: pointer;
+      color: var(--text-secondary);
       font-size: 13px;
+    }
+    .palette-item.selected, .palette-item:hover {
+      background: var(--accent-primary);
+      color: #fff;
+    }
+    .palette-item.selected .palette-category-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .palette-category-badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--bg-card);
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
       font-weight: 600;
+    }
+
+    .palette-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-hairline);
+      font-size: 11px;
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <header class="os-topbar">
-    <div class="topbar-left">
-      <div class="os-badge">
-        <div class="os-badge-pill"></div>
-        <span>SYNTRA OS</span>
+  <!-- Top Status HUD Capsule -->
+  <header class="status-hud">
+    <div class="hud-left">
+      <div class="brand-pill">
+        <span class="pulse-orb"></span>
+        <span>SYNTRA 2.0</span>
       </div>
-      <span class="evaluation-tag">EVALUATION MODE &mdash; LOCK DISENGAGED</span>
-    </div>
-
-    <div class="topbar-center">
-      <div class="session-indicator">
-        <div class="session-dot"></div>
-        <span>Topic: OS Concurrency &amp; Memory</span>
+      <div class="hud-task-pill">
+        <span>Task 1:</span>
+        <strong id="hud-task-title">Concurrency &amp; Mutex Synchronization</strong>
       </div>
     </div>
 
-    <div class="topbar-right">
-      <button class="theme-toggle-btn pressable" onclick="toggleTheme()">
-        <span id="theme-btn-label">Switch to Light Mode</span>
+    <div class="hud-center">
+      <div class="hud-timer-badge tabular-nums" id="hud-timer-display">25:00</div>
+    </div>
+
+    <div class="hud-right">
+      <div class="hud-badge tabular-nums">
+        <span>RAM: 42MB</span>
+        <span>&bull;</span>
+        <span>0 warnings</span>
+      </div>
+      <button class="btn-command-palette pressable" onclick="window.palette.toggle()" title="Command Palette (Ctrl+K)">
+        <span>Search actions</span>
+        <kbd class="tabular-nums" style="font-size: 10px; opacity: 0.7;">Ctrl+K</kbd>
       </button>
-      <button class="pressable btn-secondary" style="padding: 4px 10px; font-size: 11px; border-radius: 6px;" onclick="toggleFullscreen()">
-        Fullscreen (F11)
+      <button class="theme-toggle-btn pressable" onclick="toggleTheme()" title="Toggle Theme (Alt+T)">
+        <span id="theme-icon">LIGHT</span>
       </button>
-      <div class="tray-clock" id="topbar-clock">12:00:00 PM</div>
     </div>
   </header>
 
-  <!-- Desktop Surface -->
-  <main class="os-desktop" id="desktop">
+  <!-- Desktop Canvas -->
+  <main id="desktop">
+    <div id="snap-ghost" class="snap-ghost"></div>
 
-    <!-- Desktop Icons -->
-    <div class="desktop-icons">
-      <div class="desktop-icon pressable" onclick="openWindow('win-timer')">
-        <div class="desktop-icon-img">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <span>Focus Studio</span>
-      </div>
-
-      <div class="desktop-icon pressable" onclick="openWindow('win-quiz')">
-        <div class="desktop-icon-img">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        </div>
-        <span>Active Quiz</span>
-      </div>
-
-      <div class="desktop-icon pressable" onclick="openWindow('win-curriculum')">
-        <div class="desktop-icon-img">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </div>
-        <span>Curriculum</span>
-      </div>
-
-      <div class="desktop-icon pressable" onclick="openWindow('win-flashcards')">
-        <div class="desktop-icon-img">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <span>Flashcards</span>
-      </div>
-
-      <div class="desktop-icon pressable" onclick="openWindow('win-terminal')">
-        <div class="desktop-icon-img">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-        </div>
-        <span>Code Shell</span>
-      </div>
-
-      <div class="desktop-icon pressable" onclick="openWindow('win-settings')">
-        <div class="desktop-icon-img">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </div>
-        <span>Settings</span>
-      </div>
-    </div>
-
-    <!-- Window 1: Focus Studio -->
-    <div class="os-window active-window" id="win-timer" style="top: 30px; left: 160px; width: 440px; z-index: 100;">
-      <div class="window-header" onmousedown="startDrag(event, 'win-timer')">
-        <div class="window-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Focus Studio &mdash; Active Interval
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-timer')"></button>
-          <button class="win-btn win-btn-close" onclick="closeWindow('win-timer')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <div class="card" style="align-items: center; text-align: center;">
-          <div class="timer-circle-wrap">
-            <svg class="timer-svg" viewBox="0 0 170 170">
-              <circle class="timer-bg" cx="85" cy="85" r="70"/>
-              <circle class="timer-bar" id="timer-progress-bar" cx="85" cy="85" r="70"/>
-            </svg>
-            <div class="timer-text-wrap">
-              <div class="timer-digits" id="timer-text">24:59</div>
-              <div class="timer-label">Focus Sprint</div>
-            </div>
-          </div>
-          <div>
-            <h3 style="font-size: 15px; font-weight: 600;">Task 1: Kernel Synchronization Primitives</h3>
-            <p style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">Objectives: Mutexes, Spinlocks, Priority Inversion</p>
-          </div>
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-primary pressable" id="timer-toggle-btn" onclick="toggleTimer()">
-            Pause Focus
-          </button>
-          <button class="btn btn-secondary pressable" onclick="completeFocusAndQuiz()">
-            Trigger Assessment
-          </button>
-        </div>
-
-        <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 11px; color: var(--text-dim); display: flex; align-items: center; justify-content: space-between;">
-          <span>Study Lock Status:</span>
-          <span style="color: var(--accent-emerald); font-weight: 600;">Disengaged (Evaluation Mode)</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Window 2: Active Comprehension Gatekeeper -->
-    <div class="os-window" id="win-quiz" style="top: 50px; left: 630px; width: 540px; z-index: 101;">
-      <div class="window-header" onmousedown="startDrag(event, 'win-quiz')">
-        <div class="window-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          Active Comprehension Gatekeeper
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-quiz')"></button>
-          <button class="win-btn win-btn-close" onclick="closeWindow('win-quiz')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <div class="threshold-banner">
-          <div>
-            <div style="font-weight: 600; color: var(--text-main);">Passing Threshold: 80.0% Required</div>
-            <div style="color: var(--text-dim); font-size: 11px;">Timer expiration alone never marks completion</div>
-          </div>
-          <div class="threshold-bar-wrap">
-            <div class="threshold-bar-fill"></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div style="font-size: 13px; font-weight: 600; color: var(--text-main); line-height: 1.4;">
-            1. Which synchronization primitive busy-waits on CPU cores rather than putting the calling thread to sleep?
-          </div>
-          <div class="quiz-options">
-            <div class="quiz-option pressable" onclick="selectOption(this, 0)">A) Mutex (Mutual Exclusion Lock)</div>
-            <div class="quiz-option pressable selected" onclick="selectOption(this, 1)">B) Spinlock</div>
-            <div class="quiz-option pressable" onclick="selectOption(this, 2)">C) Counting Semaphore</div>
-            <div class="quiz-option pressable" onclick="selectOption(this, 3)">D) Condition Variable</div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div style="font-size: 13px; font-weight: 600; color: var(--text-main); line-height: 1.4;">
-            2. The protocol where a high-priority thread donates its priority to a lower-priority mutex owner is called:
-          </div>
-          <input type="text" class="input-field" id="quiz-blank-input" value="priority inheritance">
-        </div>
-
-        <div class="btn-row">
-          <button class="btn btn-primary pressable" onclick="submitQuizEvaluation()">
-            Submit Assessment for Scoring
-          </button>
-        </div>
-
-        <div id="quiz-result-box" style="display: none; padding: 14px; border-radius: var(--radius-md); font-size: 12px; font-weight: 500;"></div>
-      </div>
-    </div>
-
-    <!-- Window 3: AI Curriculum Architect -->
-    <div class="os-window" id="win-curriculum" style="top: 220px; left: 190px; width: 500px; z-index: 90;">
-      <div class="window-header" onmousedown="startDrag(event, 'win-curriculum')">
-        <div class="window-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          AI Curriculum Plan
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-curriculum')"></button>
-          <button class="win-btn win-btn-close" onclick="closeWindow('win-curriculum')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <div class="task-tree">
-          <div class="task-item active-task-item">
-            <div>
-              <h4 style="font-size: 13px; font-weight: 600;">Task 1: Kernel Synchronization Primitives</h4>
-              <p style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">25 min &bull; Mutexes, Spinlocks, Priority Inversion</p>
-            </div>
-            <span class="task-status-tag tag-active">In Progress</span>
-          </div>
-
-          <div class="task-item">
-            <div>
-              <h4 style="font-size: 13px; font-weight: 600;">Task 2: Deadlocks &amp; Banker's Algorithm</h4>
-              <p style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">25 min &bull; Coffman Conditions, Resource Graphs</p>
-            </div>
-            <span class="task-status-tag tag-pending">Pending</span>
-          </div>
-
-          <div class="task-item">
-            <div>
-              <h4 style="font-size: 13px; font-weight: 600;">Task 3: Virtual Memory &amp; Paging</h4>
-              <p style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">30 min &bull; TLB, Page Faults, Clock Algorithm</p>
-            </div>
-            <span class="task-status-tag tag-pending">Pending</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Window 4: Flashcards (Anki / Spaced Repetition) -->
-    <div class="os-window" id="win-flashcards" style="top: 100px; left: 520px; width: 460px; z-index: 95;">
-      <div class="window-header" onmousedown="startDrag(event, 'win-flashcards')">
-        <div class="window-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          Active Recall Flashcards
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-flashcards')"></button>
-          <button class="win-btn win-btn-close" onclick="closeWindow('win-flashcards')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <div class="flashcard-box pressable" onclick="flipFlashcard(this)">
-          <div class="flashcard-inner">
-            <div class="flashcard-prompt" id="fc-prompt">What are the four Coffman conditions required for a deadlock to occur?</div>
-            <div class="flashcard-answer" id="fc-answer">
-              1. Mutual Exclusion<br>
-              2. Hold and Wait<br>
-              3. No Preemption<br>
-              4. Circular Wait
-            </div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 8px;">(Click card to reveal answer)</div>
-          </div>
-        </div>
-
-        <div class="rating-row">
-          <button class="btn-rating pressable" onclick="nextFlashcard('Again')">Again (1m)</button>
-          <button class="btn-rating pressable" onclick="nextFlashcard('Hard')">Hard (10m)</button>
-          <button class="btn-rating pressable" onclick="nextFlashcard('Good')">Good (1d)</button>
-          <button class="btn-rating pressable" onclick="nextFlashcard('Easy')">Easy (4d)</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Window 5: Code & Terminal Aperture -->
-    <div class="os-window" id="win-terminal" style="top: 180px; left: 320px; width: 560px; z-index: 92;">
-      <div class="window-header" onmousedown="startDrag(event, 'win-terminal')">
-        <div class="window-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          Code Sandbox &amp; Terminal Aperture
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-terminal')"></button>
-          <button class="win-btn win-btn-close" onclick="closeWindow('win-terminal')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <div class="code-editor-box">
-          <span style="color: #64748b;">// C# 12 Mutex vs Spinlock demonstration</span><br>
-          <span style="color: #c084fc;">using</span> System.Threading;<br><br>
-          <span style="color: #c084fc;">var</span> spinlock = <span style="color: #c084fc;">new</span> SpinLock(enableThreadOwnerTracking: <span style="color: #f43f5e;">false</span>);<br>
-          <span style="color: #c084fc;">bool</span> lockTaken = <span style="color: #f43f5e;">false</span>;<br><br>
-          <span style="color: #c084fc;">try</span> {<br>
-          &nbsp;&nbsp;spinlock.Enter(<span style="color: #c084fc;">ref</span> lockTaken);<br>
-          &nbsp;&nbsp;<span style="color: #64748b;">// Critical section: atomic increment</span><br>
-          } <span style="color: #c084fc;">finally</span> {<br>
-          &nbsp;&nbsp;<span style="color: #c084fc;">if</span> (lockTaken) spinlock.Exit();<br>
-          }<br>
-          <span style="color: #10b981;">[Execution Output] Completed in 0.42 microseconds.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Window 6: System Settings & Recovery Hub -->
-    <div class="os-window" id="win-settings" style="top: 130px; left: 240px; width: 480px; z-index: 94;">
-      <div class="window-header" onmousedown="startDrag(event, 'win-settings')">
-        <div class="window-title">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          System Settings &amp; Security Hub
-        </div>
-        <div class="window-controls">
-          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-settings')"></button>
-          <button class="win-btn win-btn-close" onclick="closeWindow('win-settings')"></button>
-        </div>
-      </div>
-      <div class="window-body">
-        <div class="card">
-          <div style="font-size: 13px; font-weight: 600;">Theme Appearance</div>
-          <p style="font-size: 12px; color: var(--text-dim);">Toggle between Light Lavender and Deep Purple Gradient Dark Mode.</p>
-          <div class="btn-row">
-            <button class="btn btn-secondary pressable" onclick="setTheme('dark')">Dark (Purple Gradient)</button>
-            <button class="btn btn-secondary pressable" onclick="setTheme('light')">Light (Lavender Pearl)</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div style="font-size: 13px; font-weight: 600;">Emergency Recovery Passphrase</div>
-          <p style="font-size: 12px; color: var(--text-dim);">Pre-configured phrase for immediate lockdown escape.</p>
-          <input type="password" class="input-field" value="I promise to return to deep work after this emergency" readonly>
-        </div>
-
-        <div class="card">
-          <div style="font-size: 13px; font-weight: 600;">Minimum Comprehension Passing Ratio</div>
-          <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-dim);">
-            <span>Strictness:</span>
-            <span style="font-weight: 700; color: var(--accent-primary);">80.0%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- Start Menu Drawer -->
-  <div class="start-drawer" id="start-drawer">
-    <div class="drawer-header">SYNTRA Apps</div>
-    <div class="drawer-item pressable" onclick="openWindow('win-timer'); toggleStartMenu();">
-      <div class="drawer-item-icon">1</div>
-      <div>
-        <div style="font-weight: 600;">Focus Studio</div>
-        <div style="font-size: 11px; color: var(--text-dim);">Pomodoro &amp; study interval</div>
-      </div>
-    </div>
-    <div class="drawer-item pressable" onclick="openWindow('win-quiz'); toggleStartMenu();">
-      <div class="drawer-item-icon">2</div>
-      <div>
-        <div style="font-weight: 600;">Active Quiz Gatekeeper</div>
-        <div style="font-size: 11px; color: var(--text-dim);">80% passing verification</div>
-      </div>
-    </div>
-    <div class="drawer-item pressable" onclick="openWindow('win-curriculum'); toggleStartMenu();">
-      <div class="drawer-item-icon">3</div>
-      <div>
-        <div style="font-weight: 600;">Curriculum Tree</div>
-        <div style="font-size: 11px; color: var(--text-dim);">Syllabus objectives</div>
-      </div>
-    </div>
-    <div class="drawer-item pressable" onclick="openWindow('win-flashcards'); toggleStartMenu();">
-      <div class="drawer-item-icon">4</div>
-      <div>
-        <div style="font-weight: 600;">Flashcard Deck</div>
-        <div style="font-size: 11px; color: var(--text-dim);">Spaced repetition recall</div>
-      </div>
-    </div>
-    <div class="drawer-item pressable" onclick="openWindow('win-terminal'); toggleStartMenu();">
-      <div class="drawer-item-icon">5</div>
-      <div>
-        <div style="font-weight: 600;">Code Shell</div>
-        <div style="font-size: 11px; color: var(--text-dim);">STEM sandbox aperture</div>
-      </div>
-    </div>
-    <div class="drawer-item pressable" onclick="openWindow('win-settings'); toggleStartMenu();">
-      <div class="drawer-item-icon">6</div>
-      <div>
-        <div style="font-weight: 600;">Settings</div>
-        <div style="font-size: 11px; color: var(--text-dim);">Theme &amp; security recovery</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bottom Taskbar -->
-  <footer class="os-dock">
-    <div class="dock-start">
-      <button class="start-menu-btn pressable" onclick="toggleStartMenu()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Launcher</span>
-      </button>
-
-      <div class="dock-apps">
-        <div class="dock-app-tab active-tab pressable" id="tab-win-timer" onclick="toggleTab('win-timer')">
+    <!-- 1. Window: Focus Studio -->
+    <article id="win-focus" class="os-window active" style="top: 20px; left: 40px; width: 440px; height: 560px;">
+      <header class="window-titlebar" data-window-id="focus">
+        <div class="window-title-group">
           <span>Focus Studio</span>
         </div>
-        <div class="dock-app-tab pressable" id="tab-win-quiz" onclick="toggleTab('win-quiz')">
-          <span>Active Quiz</span>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('focus')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('focus')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('focus')">X</button>
         </div>
-        <div class="dock-app-tab pressable" id="tab-win-curriculum" onclick="toggleTab('win-curriculum')">
-          <span>Curriculum</span>
+      </header>
+      <div class="window-body">
+        <div class="timer-mode-switcher">
+          <button class="timer-mode-btn active" id="btn-mode-pomodoro" onclick="setTimerMode('pomodoro')">Pomodoro (25m)</button>
+          <button class="timer-mode-btn" id="btn-mode-flowmodoro" onclick="setTimerMode('flowmodoro')">Flowmodoro (Count-Up)</button>
         </div>
-        <div class="dock-app-tab pressable" id="tab-win-flashcards" onclick="toggleTab('win-flashcards')">
-          <span>Flashcards</span>
+
+        <div class="timer-hero-container">
+          <div class="timer-ring-wrapper">
+            <svg class="timer-ring-svg">
+              <circle class="timer-ring-bg" cx="105" cy="105" r="90"></circle>
+              <circle class="timer-ring-progress" id="timer-progress-circle" cx="105" cy="105" r="90"></circle>
+            </svg>
+            <div class="timer-display-inner">
+              <span class="timer-digits tabular-nums" id="timer-digits">25:00</span>
+              <span class="timer-mode-tag" id="timer-mode-tag">Focus Block</span>
+              <span class="earned-break-pill tabular-nums" id="earned-break-pill" style="display: none;">Break: +00:00</span>
+            </div>
+          </div>
         </div>
-        <div class="dock-app-tab pressable" id="tab-win-terminal" onclick="toggleTab('win-terminal')">
-          <span>Terminal</span>
+
+        <div class="timer-control-row">
+          <button class="btn-timer primary pressable" id="timer-toggle-btn" onclick="toggleFocusTimer()">Pause Focus</button>
+          <button class="btn-timer pressable" onclick="resetFocusTimer()">Reset</button>
+        </div>
+
+        <div class="ambient-sound-hub">
+          <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Acoustic Focus Soundscape (Web Audio)</span>
+          <div class="ambient-buttons-grid">
+            <button class="btn-sound active pressable" id="snd-none" onclick="setAmbientSound('none')">Off</button>
+            <button class="btn-sound pressable" id="snd-binaural" onclick="setAmbientSound('binaural')">40Hz Gamma</button>
+            <button class="btn-sound pressable" id="snd-brown" onclick="setAmbientSound('brown')">Brown Noise</button>
+            <button class="btn-sound pressable" id="snd-rain" onclick="setAmbientSound('rain')">Rain &amp; Drone</button>
+          </div>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="dock-tray">
-      <span>Volume: 100%</span>
-      <span>Battery: 98%</span>
-      <span class="tray-clock" id="dock-clock">12:00:00 PM</span>
+    <!-- 2. Window: Active Quiz Gatekeeper -->
+    <article id="win-quiz" class="os-window" style="top: 20px; left: 510px; width: 560px; height: 560px;">
+      <header class="window-titlebar" data-window-id="quiz">
+        <div class="window-title-group">
+          <span>Active Quiz Gatekeeper (80% Required)</span>
+        </div>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('quiz')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('quiz')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('quiz')">X</button>
+        </div>
+      </header>
+      <div class="window-body">
+        <div class="quiz-card">
+          <span class="quiz-badge">Question 1 &bull; Conceptual Synthesis</span>
+          <p style="font-size: 13px; line-height: 1.5;">When multiple threads compete for a non-reentrant mutex with high lock contention and tiny critical sections, which primitive avoids thread context-switch penalty?</p>
+          <div class="quiz-options-list">
+            <div class="quiz-option-item pressable" onclick="selectQuizOption(this, 0)">A. Counting Semaphore with sleep queue</div>
+            <div class="quiz-option-item selected pressable" onclick="selectQuizOption(this, 1)">B. Spinlock with atomic test-and-set instruction</div>
+            <div class="quiz-option-item pressable" onclick="selectQuizOption(this, 2)">C. Kernel event wait handle</div>
+            <div class="quiz-option-item pressable" onclick="selectQuizOption(this, 3)">D. Thread abort interrupt signal</div>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <span class="quiz-badge">Question 2 &bull; Two-Tier Mechanism</span>
+          <p style="font-size: 13px; line-height: 1.5;">Fill in the blank: To eliminate unbounded priority inversion in real-time kernel scheduling, the protocol temporarily promotes a lower priority thread holding a needed lock to the priority of the highest blocked thread: <br><strong>Protocol name:</strong></p>
+          <input type="text" class="quiz-input-field" id="quiz-blank-input" value="priority inheritance" placeholder="Type answer...">
+        </div>
+
+        <button class="btn-timer primary pressable" style="width: 100%; margin-top: 4px;" onclick="submitQuizEvaluation()">Submit for Verification</button>
+        <div class="quiz-result-banner" id="quiz-result-box"></div>
+      </div>
+    </article>
+
+    <!-- 3. Window: Spaced Repetition Flashcards (FSRS Engine) -->
+    <article id="win-flashcards" class="os-window" style="top: 60px; left: 180px; width: 520px; height: 440px;">
+      <header class="window-titlebar" data-window-id="flashcards">
+        <div class="window-title-group">
+          <span>Spaced Repetition Flashcards (FSRS Engine)</span>
+        </div>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('flashcards')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('flashcards')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('flashcards')">X</button>
+        </div>
+      </header>
+      <div class="window-body">
+        <div class="fsrs-header">
+          <span style="font-size: 12px; font-weight: 600;">Deck: OS Concurrency &amp; Memory</span>
+          <span class="fsrs-deck-stats tabular-nums">Due: 3 &bull; Retrievability: 91%</span>
+        </div>
+
+        <div class="flashcard-surface pressable" onclick="toggleCardAnswer()">
+          <h4 id="fc-prompt" style="font-size: 15px; font-weight: 600;">What are the four Coffman conditions for deadlocks?</h4>
+          <div id="fc-answer" style="display: none; margin-top: 14px; font-size: 13px; color: var(--accent-primary); line-height: 1.6;">
+            1. Mutual Exclusion<br>
+            2. Hold and Wait<br>
+            3. No Preemption<br>
+            4. Circular Wait
+          </div>
+          <span class="flashcard-hint" id="fc-hint">Click card or press Space to reveal answer</span>
+        </div>
+
+        <div class="fsrs-button-row">
+          <button class="btn-fsrs again pressable" onclick="rateCard(1)">
+            <span>Again</span>
+            <span class="interval-subtext">&lt;10m</span>
+          </button>
+          <button class="btn-fsrs hard pressable" onclick="rateCard(2)">
+            <span>Hard</span>
+            <span class="interval-subtext">1.2d</span>
+          </button>
+          <button class="btn-fsrs good pressable" onclick="rateCard(3)">
+            <span>Good</span>
+            <span class="interval-subtext">4.1d</span>
+          </button>
+          <button class="btn-fsrs easy pressable" onclick="rateCard(4)">
+            <span>Easy</span>
+            <span class="interval-subtext">11.5d</span>
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. Window: Curriculum Tree & Syllabus -->
+    <article id="win-curriculum" class="os-window" style="top: 80px; left: 320px; width: 480px; height: 420px;">
+      <header class="window-titlebar" data-window-id="curriculum">
+        <div class="window-title-group">
+          <span>Curriculum Tree &amp; Syllabus</span>
+        </div>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('curriculum')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('curriculum')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('curriculum')">X</button>
+        </div>
+      </header>
+      <div class="window-body">
+        <div class="task-tree-list">
+          <div class="task-tree-node active-task">
+            <div>
+              <strong style="font-size: 13px;">Task 1: Concurrency &amp; Deadlocks</strong>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">25 mins &bull; 3 Objectives</div>
+            </div>
+            <span class="task-status-pill in-progress">In Progress</span>
+          </div>
+
+          <div class="task-tree-node">
+            <div>
+              <strong style="font-size: 13px;">Task 2: Memory Paging &amp; TLB Invalidation</strong>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">25 mins &bull; 4 Objectives</div>
+            </div>
+            <span class="task-status-pill locked">Locked</span>
+          </div>
+
+          <div class="task-tree-node">
+            <div>
+              <strong style="font-size: 13px;">Task 3: Virtual Memory &amp; Page Fault Handlers</strong>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">25 mins &bull; 3 Objectives</div>
+            </div>
+            <span class="task-status-pill locked">Locked</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5. Window: Code & STEM Terminal -->
+    <article id="win-terminal" class="os-window" style="top: 100px; left: 420px; width: 540px; height: 440px;">
+      <header class="window-titlebar" data-window-id="terminal">
+        <div class="window-title-group">
+          <span>Code &amp; STEM Terminal</span>
+        </div>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('terminal')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('terminal')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('terminal')">X</button>
+        </div>
+      </header>
+      <div class="window-body">
+        <textarea class="code-editor-box" spellcheck="false">// Verification: Deadlock Prevention Algorithm (Rust / C#)
+void AcquireInOrder(ref Mutex m1, ref Mutex m2) {
+    if (m1.Id < m2.Id) {
+        lock(m1) { lock(m2) { ExecuteWork(); } }
+    } else {
+        lock(m2) { lock(m1) { ExecuteWork(); } }
+    }
+}</textarea>
+        <button class="btn-timer primary pressable" style="align-self: flex-start;" onclick="runCodeVerification()">Verify Syntax &amp; Execution</button>
+        <div class="terminal-output" id="term-output">> Compilation verified: Zero race conditions identified in hierarchy ordering.</div>
+      </div>
+    </article>
+
+    <!-- 6. Window: Notes Scratchpad -->
+    <article id="win-notes" class="os-window" style="top: 120px; left: 240px; width: 480px; height: 420px;">
+      <header class="window-titlebar" data-window-id="notes">
+        <div class="window-title-group">
+          <span>Notes &amp; Markdown Scratchpad</span>
+        </div>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('notes')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('notes')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('notes')">X</button>
+        </div>
+      </header>
+      <div class="window-body">
+        <textarea class="notes-textarea" id="notes-content" placeholder="Jot concepts, invariants, and definitions here... Auto-saved locally.">## Key Takeaways: Concurrency Invariants
+- Mutual exclusion requires hardware atomic test-and-set or compare-and-swap (CAS).
+- Priority inversion solved via priority ceiling protocol or priority inheritance.
+- FSRS retention target: 90% optimal review scheduling.</textarea>
+      </div>
+    </article>
+
+    <!-- 7. Window: Settings & Lockdown Hub -->
+    <article id="win-settings" class="os-window" style="top: 140px; left: 360px; width: 460px; height: 400px;">
+      <header class="window-titlebar" data-window-id="settings">
+        <div class="window-title-group">
+          <span>Settings &amp; Security Hub</span>
+        </div>
+        <div class="window-controls">
+          <button class="window-ctrl-btn" onclick="wm.minimizeWindow('settings')">_</button>
+          <button class="window-ctrl-btn" onclick="wm.toggleMaximize('settings')">[ ]</button>
+          <button class="window-ctrl-btn close" onclick="wm.closeWindow('settings')">X</button>
+        </div>
+      </header>
+      <div class="window-body">
+        <div class="settings-group">
+          <div class="settings-row">
+            <div>
+              <strong>Evaluation Mode</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Disengages aggressive Win32 system lockdown hooks</div>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: var(--status-success);">ENGAGED</span>
+          </div>
+
+          <div class="settings-row">
+            <div>
+              <strong>Emergency Exit Cooldown</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Mandatory delay if passphrase forgotten</div>
+            </div>
+            <span class="tabular-nums" style="font-size: 12px; font-weight: 600;">180 seconds</span>
+          </div>
+
+          <div class="settings-row">
+            <div>
+              <strong>Emergency Override Tokens</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">Non-punitive intent unlocks per 24 hours</div>
+            </div>
+            <span class="tabular-nums" style="font-size: 12px; font-weight: 600; color: var(--accent-primary);">2 Available</span>
+          </div>
+        </div>
+
+        <button class="dock-tray-btn pressable" style="width: 100%; height: 38px;" onclick="triggerLockdownAlert()">Test Emergency Lockdown Intent Gate</button>
+      </div>
+    </article>
+  </main>
+
+  <!-- Universal Command Palette Modal (Ctrl+K) -->
+  <section id="modal-layer">
+    <div id="palette-backdrop" class="palette-backdrop hidden">
+      <div class="palette-panel" role="combobox" aria-expanded="false">
+        <div class="palette-input-wrap">
+          <span style="font-size: 13px; font-weight: 700; color: var(--accent-primary);">CMD</span>
+          <input id="palette-input" type="text" placeholder="Type a command or search study apps..." autocomplete="off" spellcheck="false" />
+          <kbd class="tabular-nums" style="font-size: 10px; background: var(--bg-card); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-hairline);">ESC</kbd>
+        </div>
+        <div id="palette-results" class="palette-results" role="listbox"></div>
+        <footer class="palette-footer">
+          <span>&uarr;&darr; Navigate</span>
+          <span>Enter to select</span>
+          <span>Ctrl+K to toggle</span>
+        </footer>
+      </div>
     </div>
+  </section>
+
+  <!-- Bottom Floating Dock Capsule -->
+  <footer class="dock-capsule">
+    <button class="dock-btn active pressable" id="dock-btn-focus" onclick="wm.toggleApp('focus')">Focus Studio</button>
+    <button class="dock-btn pressable" id="dock-btn-quiz" onclick="wm.toggleApp('quiz')">Active Quiz</button>
+    <button class="dock-btn pressable" id="dock-btn-flashcards" onclick="wm.toggleApp('flashcards')">Flashcards</button>
+    <button class="dock-btn pressable" id="dock-btn-curriculum" onclick="wm.toggleApp('curriculum')">Curriculum</button>
+    <button class="dock-btn pressable" id="dock-btn-terminal" onclick="wm.toggleApp('terminal')">Code Terminal</button>
+    <button class="dock-btn pressable" id="dock-btn-notes" onclick="wm.toggleApp('notes')">Notes</button>
+    <button class="dock-btn pressable" id="dock-btn-settings" onclick="wm.toggleApp('settings')">Settings</button>
+    <div class="dock-divider"></div>
+    <button class="dock-tray-btn pressable" onclick="triggerLockdownAlert()">LOCKDOWN</button>
   </footer>
 
+  <!-- ==========================================================================
+       PURE JAVASCRIPT SYSTEM ENGINE (WEB AUDIO, WINDOWS, PALETTE, SHORTCUTS)
+       ========================================================================== -->
   <script>
-    // --- Theme Engine (Light / Dark with Purple Gradient) ---
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      const label = document.getElementById('theme-btn-label');
-      if (theme === 'light') {
-        label.textContent = 'Switch to Dark Mode';
-      } else {
-        label.textContent = 'Switch to Light Mode';
+    // --- 1. PURE WEB AUDIO API ENGINE ---
+    class SyntraAudioSystem {
+      constructor() {
+        this.AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        this.ctx = null;
+        this.masterGain = null;
+        this.ambientGain = null;
+        this.sfxGain = null;
+        this.limiter = null;
+        this.activeEngines = { binaural: null, noise: null, rain: null, drone: null };
+        this.noiseBuffers = { pink: null, brown: null, white: null };
+      }
+
+      async ensureContext() {
+        if (!this.ctx) {
+          this.ctx = new this.AudioContextClass();
+          this.limiter = this.ctx.createDynamicsCompressor();
+          this.limiter.threshold.setValueAtTime(-2.0, this.ctx.currentTime);
+          this.limiter.knee.setValueAtTime(6.0, this.ctx.currentTime);
+          this.limiter.ratio.setValueAtTime(12.0, this.ctx.currentTime);
+          this.limiter.attack.setValueAtTime(0.003, this.ctx.currentTime);
+          this.limiter.release.setValueAtTime(0.15, this.ctx.currentTime);
+
+          this.masterGain = this.ctx.createGain();
+          this.masterGain.gain.setValueAtTime(0.85, this.ctx.currentTime);
+          this.limiter.connect(this.masterGain);
+          this.masterGain.connect(this.ctx.destination);
+
+          this.ambientGain = this.ctx.createGain();
+          this.ambientGain.gain.setValueAtTime(0.70, this.ctx.currentTime);
+          this.ambientGain.connect(this.limiter);
+
+          this.sfxGain = this.ctx.createGain();
+          this.sfxGain.gain.setValueAtTime(0.80, this.ctx.currentTime);
+          this.sfxGain.connect(this.limiter);
+
+          this._generateNoiseBuffers();
+        }
+        if (this.ctx.state === 'suspended') {
+          await this.ctx.resume();
+        }
+      }
+
+      _generateNoiseBuffers() {
+        const sampleRate = this.ctx.sampleRate;
+        const loopSamples = Math.floor(sampleRate * 4.0);
+        const fadeSamples = Math.floor(sampleRate * 0.2);
+        const totalSamples = loopSamples + fadeSamples;
+
+        // Brown Noise
+        const brownRaw = new Float32Array(totalSamples);
+        let last = 0.0;
+        for (let i = 0; i < totalSamples; i++) {
+          const white = Math.random() * 2 - 1;
+          last = (last + 0.02 * white) / 1.02;
+          brownRaw[i] = last * 3.5;
+        }
+        this.noiseBuffers.brown = this._createSeamlessBuffer(brownRaw, loopSamples, fadeSamples);
+
+        // White Noise
+        const whiteRaw = new Float32Array(totalSamples);
+        for (let i = 0; i < totalSamples; i++) {
+          whiteRaw[i] = (Math.random() * 2 - 1) * 0.35;
+        }
+        this.noiseBuffers.white = this._createSeamlessBuffer(whiteRaw, loopSamples, fadeSamples);
+      }
+
+      _createSeamlessBuffer(raw, loopLen, fadeLen) {
+        const buffer = this.ctx.createBuffer(1, loopLen, this.ctx.sampleRate);
+        const out = buffer.getChannelData(0);
+        for (let i = 0; i < loopLen; i++) {
+          if (i < fadeLen) {
+            const p = i / fadeLen;
+            const a = 0.5 * (1 - Math.cos(Math.PI * p));
+            out[i] = raw[i] * a + raw[loopLen + i] * (1 - a);
+          } else {
+            out[i] = raw[i];
+          }
+        }
+        return buffer;
+      }
+
+      async playKeyClick() {
+        await this.ensureContext();
+        const t = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const filter = this.ctx.createBiquadFilter();
+        const gain = this.ctx.createGain();
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, t);
+        osc.frequency.exponentialRampToValueAtTime(850, t + 0.009);
+
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1050, t);
+        filter.Q.setValueAtTime(2.0, t);
+
+        gain.gain.setValueAtTime(0.035, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.010);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.sfxGain);
+
+        osc.start(t);
+        osc.stop(t + 0.012);
+      }
+
+      async playQuizSuccess() {
+        await this.ensureContext();
+        const now = this.ctx.currentTime;
+        const chord = [
+          { f: 523.25, dt: 0.00, g: 0.08, d: 0.9 },
+          { f: 659.25, dt: 0.035, g: 0.075, d: 0.95 },
+          { f: 783.99, dt: 0.07, g: 0.07, d: 1.05 },
+          { f: 1046.50, dt: 0.105, g: 0.045, d: 1.15 }
+        ];
+        chord.forEach(n => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const t0 = now + n.dt;
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(n.f, t0);
+          gain.gain.setValueAtTime(0.0001, t0);
+          gain.gain.linearRampToValueAtTime(n.g, t0 + 0.015);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t0 + n.d);
+          osc.connect(gain);
+          gain.connect(this.sfxGain);
+          osc.start(t0);
+          osc.stop(t0 + n.d + 0.05);
+        });
+      }
+
+      async playQuizFail() {
+        await this.ensureContext();
+        const now = this.ctx.currentTime;
+        const notes = [146.83, 174.61, 220.00];
+        const filter = this.ctx.createBiquadFilter();
+        const gain = this.ctx.createGain();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(420, now);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.06, now + 0.035);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.65);
+
+        notes.forEach(f => {
+          const osc = this.ctx.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(f, now);
+          osc.connect(filter);
+          osc.start(now);
+          osc.stop(now + 0.7);
+        });
+        filter.connect(gain);
+        gain.connect(this.sfxGain);
+      }
+
+      async startBinauralBeats() {
+        await this.ensureContext();
+        this.stopAllAmbient();
+        const now = this.ctx.currentTime;
+        const oscL = this.ctx.createOscillator();
+        const oscR = this.ctx.createOscillator();
+        const merger = this.ctx.createChannelMerger(2);
+        const g = this.ctx.createGain();
+
+        oscL.type = 'sine';
+        oscL.frequency.setValueAtTime(200, now);
+        oscR.type = 'sine';
+        oscR.frequency.setValueAtTime(240, now); // 40Hz beat
+
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.linearRampToValueAtTime(0.16, now + 1.2);
+
+        oscL.connect(merger, 0, 0);
+        oscR.connect(merger, 0, 1);
+        merger.connect(g);
+        g.connect(this.ambientGain);
+
+        oscL.start(now);
+        oscR.start(now);
+
+        this.activeEngines.binaural = {
+          stop: () => {
+            const t = this.ctx.currentTime;
+            g.gain.linearRampToValueAtTime(0.0001, t + 0.5);
+            setTimeout(() => { try { oscL.stop(); oscR.stop(); } catch(e){} }, 550);
+          }
+        };
+      }
+
+      async startBrownNoise() {
+        await this.ensureContext();
+        this.stopAllAmbient();
+        const now = this.ctx.currentTime;
+        const src = this.ctx.createBufferSource();
+        src.buffer = this.noiseBuffers.brown;
+        src.loop = true;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(650, now);
+
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.linearRampToValueAtTime(0.20, now + 1.0);
+
+        src.connect(filter);
+        filter.connect(g);
+        g.connect(this.ambientGain);
+        src.start(now);
+
+        this.activeEngines.noise = {
+          stop: () => {
+            const t = this.ctx.currentTime;
+            g.gain.linearRampToValueAtTime(0.0001, t + 0.5);
+            setTimeout(() => { try { src.stop(); } catch(e){} }, 550);
+          }
+        };
+      }
+
+      async startRainDrone() {
+        await this.ensureContext();
+        this.stopAllAmbient();
+        const now = this.ctx.currentTime;
+        const src = this.ctx.createBufferSource();
+        src.buffer = this.noiseBuffers.white;
+        src.loop = true;
+
+        const bp = this.ctx.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.setValueAtTime(1100, now);
+        bp.Q.setValueAtTime(1.2, now);
+
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.linearRampToValueAtTime(0.18, now + 1.2);
+
+        src.connect(bp);
+        bp.connect(g);
+        g.connect(this.ambientGain);
+        src.start(now);
+
+        this.activeEngines.rain = {
+          stop: () => {
+            const t = this.ctx.currentTime;
+            g.gain.linearRampToValueAtTime(0.0001, t + 0.6);
+            setTimeout(() => { try { src.stop(); } catch(e){} }, 650);
+          }
+        };
+      }
+
+      stopAllAmbient() {
+        Object.keys(this.activeEngines).forEach(k => {
+          if (this.activeEngines[k]) {
+            this.activeEngines[k].stop();
+            this.activeEngines[k] = null;
+          }
+        });
       }
     }
 
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme');
-      setTheme(current === 'light' ? 'dark' : 'light');
-    }
+    window.syntraAudio = new SyntraAudioSystem();
 
-    // --- Web Audio Tactile Micro-Feedback ---
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    let audioCtx = null;
-
-    function playTactileClick(freq = 1200, duration = 0.01) {
-      try {
-        if (!audioCtx) audioCtx = new AudioContextClass();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.035, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-      } catch (e) {}
-    }
-
-    document.querySelectorAll('.pressable').forEach(el => {
-      el.addEventListener('click', () => playTactileClick(1200, 0.01));
+    // Tactile Click Binding
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.pressable') || e.target.closest('button')) {
+        window.syntraAudio.playKeyClick();
+      }
     });
 
-    // --- Live Clock ---
-    function updateClock() {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString();
-      document.getElementById('topbar-clock').textContent = timeStr;
-      document.getElementById('dock-clock').textContent = timeStr;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+    // --- 2. WINDOW MANAGER ---
+    class WindowManager {
+      constructor() {
+        this.windows = new Map();
+        this.baseZ = 100;
+        this.init();
+      }
 
-    // --- Minimal Window Manager (Drag, Z-Index, Min/Max/Close) ---
-    let topZ = 200;
-    let dragTarget = null;
-    let dragOffset = { x: 0, y: 0 };
+      init() {
+        document.querySelectorAll('.os-window').forEach(el => {
+          const id = el.id.replace('win-', '');
+          const rect = el.getBoundingClientRect();
+          this.windows.set(id, {
+            id,
+            el,
+            isMaximized: false,
+            isMinimized: false,
+            origBounds: { left: rect.left, top: rect.top, width: rect.width, height: rect.height }
+          });
+          this.bindDrag(el, id);
+        });
+      }
 
-    function bringToFront(winId) {
-      topZ += 1;
-      const win = document.getElementById(winId);
-      if (win) {
-        win.style.zIndex = topZ;
-        document.querySelectorAll('.os-window').forEach(w => w.classList.remove('active-window'));
-        win.classList.add('active-window');
+      focusWindow(id) {
+        const win = this.windows.get(id);
+        if (!win) return;
+        this.baseZ += 2;
+        win.el.style.zIndex = this.baseZ;
+        document.querySelectorAll('.os-window').forEach(w => w.classList.remove('active'));
+        win.el.classList.add('active');
+        win.isMinimized = false;
+        win.el.classList.remove('minimized');
+        this.updateDockState();
+      }
 
-        document.querySelectorAll('.dock-app-tab').forEach(t => t.classList.remove('active-tab'));
-        const tab = document.getElementById('tab-' + winId);
-        if (tab) tab.classList.add('active-tab');
+      toggleApp(id) {
+        const win = this.windows.get(id);
+        if (!win) return;
+        if (win.isMinimized || !win.el.classList.contains('active')) {
+          this.focusWindow(id);
+        } else {
+          this.minimizeWindow(id);
+        }
+      }
+
+      minimizeWindow(id) {
+        const win = this.windows.get(id);
+        if (!win) return;
+        win.isMinimized = true;
+        win.el.classList.add('minimized');
+        win.el.classList.remove('active');
+        this.updateDockState();
+      }
+
+      toggleMaximize(id) {
+        const win = this.windows.get(id);
+        if (!win) return;
+        if (!win.isMaximized) {
+          const rect = win.el.getBoundingClientRect();
+          win.origBounds = { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+          win.el.style.left = '0px';
+          win.el.style.top = '0px';
+          win.el.style.width = '100vw';
+          win.el.style.height = 'calc(100vh - 52px)';
+          win.isMaximized = true;
+          win.el.classList.add('maximized');
+        } else {
+          win.el.style.left = `${win.origBounds.left}px`;
+          win.el.style.top = `${win.origBounds.top}px`;
+          win.el.style.width = `${win.origBounds.width}px`;
+          win.el.style.height = `${win.origBounds.height}px`;
+          win.isMaximized = false;
+          win.el.classList.remove('maximized');
+        }
+        this.focusWindow(id);
+      }
+
+      closeWindow(id) {
+        this.minimizeWindow(id);
+      }
+
+      bindDrag(el, id) {
+        const titlebar = el.querySelector('.window-titlebar');
+        if (!titlebar) return;
+
+        titlebar.addEventListener('pointerdown', (e) => {
+          if (e.target.closest('.window-ctrl-btn')) return;
+          this.focusWindow(id);
+          titlebar.setPointerCapture(e.pointerId);
+
+          const startX = e.clientX;
+          const startY = e.clientY;
+          const rect = el.getBoundingClientRect();
+          const initialLeft = rect.left;
+          const initialTop = rect.top;
+
+          const onPointerMove = (me) => {
+            const dx = me.clientX - startX;
+            const dy = me.clientY - startY;
+            el.style.left = `${Math.max(0, initialLeft + dx)}px`;
+            el.style.top = `${Math.max(0, initialTop + dy)}px`;
+          };
+
+          const onPointerUp = (ue) => {
+            titlebar.releasePointerCapture(ue.pointerId);
+            titlebar.removeEventListener('pointermove', onPointerMove);
+            titlebar.removeEventListener('pointerup', onPointerUp);
+          };
+
+          titlebar.addEventListener('pointermove', onPointerMove);
+          titlebar.addEventListener('pointerup', onPointerUp);
+        });
+
+        el.addEventListener('pointerdown', () => this.focusWindow(id));
+      }
+
+      updateDockState() {
+        this.windows.forEach(win => {
+          const btn = document.getElementById(`dock-btn-${win.id}`);
+          if (btn) {
+            const isActive = win.el.classList.contains('active') && !win.isMinimized;
+            btn.classList.toggle('active', isActive);
+          }
+        });
       }
     }
 
-    document.querySelectorAll('.os-window').forEach(win => {
-      win.addEventListener('mousedown', () => bringToFront(win.id));
+    const wm = new WindowManager();
+    window.wm = wm;
+
+    // --- 3. UNIVERSAL COMMAND PALETTE (CTRL+K) ---
+    class CommandPalette {
+      constructor() {
+        this.backdrop = document.getElementById('palette-backdrop');
+        this.input = document.getElementById('palette-input');
+        this.results = document.getElementById('palette-results');
+        this.isOpen = false;
+        this.selectedIndex = 0;
+        this.actions = [
+          { title: "Focus Studio: Play/Pause Timer", category: "Timer", shortcut: "Space", run: () => toggleFocusTimer() },
+          { title: "Switch Timer Mode: Flowmodoro (Count-Up)", category: "Timer", shortcut: "Alt+F", run: () => setTimerMode('flowmodoro') },
+          { title: "Switch Timer Mode: Pomodoro (25m)", category: "Timer", shortcut: "Alt+P", run: () => setTimerMode('pomodoro') },
+          { title: "Toggle Light/Dark Amethyst Theme", category: "System", shortcut: "Alt+T", run: () => toggleTheme() },
+          { title: "Open Active Quiz Gatekeeper", category: "Apps", shortcut: "Ctrl+2", run: () => wm.focusWindow('quiz') },
+          { title: "Review Spaced Flashcards (FSRS)", category: "Apps", shortcut: "Ctrl+3", run: () => wm.focusWindow('flashcards') },
+          { title: "Curriculum Syllabus & Progress Tree", category: "Apps", shortcut: "Ctrl+4", run: () => wm.focusWindow('curriculum') },
+          { title: "Code & STEM Sandbox Terminal", category: "Apps", shortcut: "Ctrl+5", run: () => wm.focusWindow('terminal') },
+          { title: "Markdown Notes Scratchpad", category: "Apps", shortcut: "Ctrl+6", run: () => wm.focusWindow('notes') },
+          { title: "Settings & Distraction Locker Hub", category: "Apps", shortcut: "Ctrl+7", run: () => wm.focusWindow('settings') },
+          { title: "Audio: 40Hz Gamma Binaural Beats", category: "Audio", shortcut: "", run: () => setAmbientSound('binaural') },
+          { title: "Audio: Brown Noise Masking", category: "Audio", shortcut: "", run: () => setAmbientSound('brown') },
+          { title: "Audio: Gentle Rain & Ambient Drone", category: "Audio", shortcut: "", run: () => setAmbientSound('rain') },
+          { title: "Trigger Emergency Lockdown Shield", category: "Security", shortcut: "Ctrl+Shift+X", run: () => triggerLockdownAlert() }
+        ];
+        this.filtered = [...this.actions];
+        this.init();
+      }
+
+      init() {
+        this.input.addEventListener('input', () => this.search());
+        this.input.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown') { e.preventDefault(); this.move(1); }
+          else if (e.key === 'ArrowUp') { e.preventDefault(); this.move(-1); }
+          else if (e.key === 'Enter') { e.preventDefault(); this.execute(); }
+          else if (e.key === 'Escape') { e.preventDefault(); this.close(); }
+        });
+        this.backdrop.addEventListener('click', (e) => {
+          if (e.target === this.backdrop) this.close();
+        });
+      }
+
+      open() {
+        this.isOpen = true;
+        this.backdrop.classList.remove('hidden');
+        this.input.value = '';
+        this.filtered = [...this.actions];
+        this.selectedIndex = 0;
+        this.render();
+        setTimeout(() => this.input.focus(), 20);
+      }
+
+      close() {
+        this.isOpen = false;
+        this.backdrop.classList.add('hidden');
+        this.input.blur();
+      }
+
+      toggle() {
+        if (this.isOpen) this.close();
+        else this.open();
+      }
+
+      search() {
+        const q = this.input.value.toLowerCase().trim();
+        this.filtered = this.actions.filter(a =>
+          a.title.toLowerCase().includes(q) || a.category.toLowerCase().includes(q)
+        );
+        this.selectedIndex = 0;
+        this.render();
+      }
+
+      render() {
+        this.results.innerHTML = '';
+        if (this.filtered.length === 0) {
+          this.results.innerHTML = '<div style="padding: 16px; text-align: center; font-size: 13px; color: var(--text-muted);">No matching commands</div>';
+          return;
+        }
+        this.filtered.forEach((item, idx) => {
+          const div = document.createElement('div');
+          div.className = `palette-item ${idx === this.selectedIndex ? 'selected' : ''}`;
+          div.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="palette-category-badge">${item.category}</span>
+              <span>${item.title}</span>
+            </div>
+            ${item.shortcut ? `<span class="tabular-nums" style="font-size: 11px; opacity: 0.7;">${item.shortcut}</span>` : ''}
+          `;
+          div.addEventListener('click', () => {
+            this.selectedIndex = idx;
+            this.execute();
+          });
+          this.results.appendChild(div);
+        });
+      }
+
+      move(dir) {
+        if (this.filtered.length === 0) return;
+        this.selectedIndex = (this.selectedIndex + dir + this.filtered.length) % this.filtered.length;
+        this.render();
+        const sel = this.results.children[this.selectedIndex];
+        if (sel) sel.scrollIntoView({ block: 'nearest' });
+      }
+
+      execute() {
+        const action = this.filtered[this.selectedIndex];
+        if (action) {
+          this.close();
+          action.run();
+        }
+      }
+    }
+
+    const palette = new CommandPalette();
+    window.palette = palette;
+
+    // --- 4. GLOBAL SHORTCUT DISPATCHER ---
+    window.addEventListener('keydown', (e) => {
+      const activeEl = document.activeElement;
+      const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA');
+
+      // Command Palette: Ctrl+K / Cmd+K
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        palette.toggle();
+        return;
+      }
+
+      // Escape: Close Palette
+      if (e.key === 'Escape' && palette.isOpen) {
+        e.preventDefault();
+        palette.close();
+        return;
+      }
+
+      // App shortcuts: Ctrl+1..7
+      if ((e.ctrlKey || e.metaKey) && ['1','2','3','4','5','6','7'].includes(e.key)) {
+        e.preventDefault();
+        const apps = ['focus', 'quiz', 'flashcards', 'curriculum', 'terminal', 'notes', 'settings'];
+        const app = apps[parseInt(e.key) - 1];
+        if (app) wm.toggleApp(app);
+        return;
+      }
+
+      // Space: Toggle Timer (if not typing)
+      if (e.key === ' ' && !isInput && !palette.isOpen) {
+        e.preventDefault();
+        toggleFocusTimer();
+        return;
+      }
+
+      // Emergency: Ctrl+Shift+X
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'x') {
+        e.preventDefault();
+        triggerLockdownAlert();
+        return;
+      }
     });
 
-    function startDrag(e, winId) {
-      bringToFront(winId);
-      dragTarget = document.getElementById(winId);
-      const rect = dragTarget.getBoundingClientRect();
-      dragOffset.x = e.clientX - rect.left;
-      dragOffset.y = e.clientY - rect.top;
-      window.addEventListener('mousemove', onDrag);
-      window.addEventListener('mouseup', stopDrag);
-    }
-
-    function onDrag(e) {
-      if (!dragTarget) return;
-      const x = Math.max(0, Math.min(window.innerWidth - dragTarget.offsetWidth, e.clientX - dragOffset.x));
-      const y = Math.max(40, Math.min(window.innerHeight - 52 - dragTarget.offsetHeight, e.clientY - dragOffset.y));
-      dragTarget.style.left = x + 'px';
-      dragTarget.style.top = y + 'px';
-    }
-
-    function stopDrag() {
-      dragTarget = null;
-      window.removeEventListener('mousemove', onDrag);
-      window.removeEventListener('mouseup', stopDrag);
-    }
-
-    function openWindow(winId) {
-      const win = document.getElementById(winId);
-      if (win) {
-        win.classList.remove('minimized');
-        bringToFront(winId);
-      }
-    }
-
-    function minimizeWindow(winId) {
-      const win = document.getElementById(winId);
-      if (win) {
-        win.classList.add('minimized');
-        const tab = document.getElementById('tab-' + winId);
-        if (tab) tab.classList.remove('active-tab');
-      }
-    }
-
-    function closeWindow(winId) {
-      minimizeWindow(winId);
-    }
-
-    function toggleTab(winId) {
-      const win = document.getElementById(winId);
-      if (win.classList.contains('minimized')) {
-        openWindow(winId);
-      } else if (win.classList.contains('active-window')) {
-        minimizeWindow(winId);
-      } else {
-        bringToFront(winId);
-      }
-    }
-
-    function toggleStartMenu() {
-      const drawer = document.getElementById('start-drawer');
-      drawer.classList.toggle('open');
-    }
-
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-      }
-    }
-
-    // --- Study Interval Timer ---
-    let timerSeconds = 1499;
+    // --- 5. TIMER ENGINE (POMODORO & FLOWMODORO) ---
+    let timerMode = 'pomodoro'; // 'pomodoro' | 'flowmodoro'
+    let isTimerRunning = true;
+    let elapsedSeconds = 0;
+    let countdownSeconds = 25 * 60;
+    let earnedBreakSeconds = 0;
     let timerInterval = null;
-    let isRunning = true;
 
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60);
-      const s = sec % 60;
-      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    function setTimerMode(mode) {
+      timerMode = mode;
+      document.getElementById('btn-mode-pomodoro').classList.toggle('active', mode === 'pomodoro');
+      document.getElementById('btn-mode-flowmodoro').classList.toggle('active', mode === 'flowmodoro');
+      document.getElementById('timer-mode-tag').textContent = mode === 'pomodoro' ? 'Pomodoro Focus' : 'Flowmodoro Count-Up';
+      document.getElementById('earned-break-pill').style.display = mode === 'flowmodoro' ? 'inline-block' : 'none';
+      resetFocusTimer();
+    }
+
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
     }
 
     function updateTimerUI() {
-      document.getElementById('timer-text').textContent = formatTime(timerSeconds);
-      const circleCircumference = 440;
-      const progress = (1500 - timerSeconds) / 1500;
-      const offset = circleCircumference - (circleCircumference * progress);
-      document.getElementById('timer-progress-bar').style.strokeDashoffset = offset;
-    }
+      const hudDisplay = document.getElementById('hud-timer-display');
+      const timerDigits = document.getElementById('timer-digits');
+      const circle = document.getElementById('timer-progress-circle');
 
-    function toggleTimer() {
-      const btn = document.getElementById('timer-toggle-btn');
-      if (isRunning) {
-        clearInterval(timerInterval);
-        isRunning = false;
-        btn.textContent = 'Resume Focus';
+      if (timerMode === 'pomodoro') {
+        const timeStr = formatTime(countdownSeconds);
+        hudDisplay.textContent = timeStr;
+        timerDigits.textContent = timeStr;
+
+        const total = 25 * 60;
+        const offset = 565.48 * (1 - (countdownSeconds / total));
+        circle.style.strokeDashoffset = offset;
+        circle.style.stroke = 'var(--accent-primary)';
       } else {
-        timerInterval = setInterval(() => {
-          if (timerSeconds > 0) {
-            timerSeconds--;
-            updateTimerUI();
-          } else {
-            clearInterval(timerInterval);
-            completeFocusAndQuiz();
-          }
-        }, 1000);
-        isRunning = true;
+        // Flowmodoro
+        const timeStr = formatTime(elapsedSeconds);
+        hudDisplay.textContent = timeStr;
+        timerDigits.textContent = timeStr;
+
+        earnedBreakSeconds = Math.floor(elapsedSeconds / 5);
+        document.getElementById('earned-break-pill').textContent = `Earned Break: +${formatTime(earnedBreakSeconds)}`;
+
+        const offset = (elapsedSeconds % 3600) / 3600 * 565.48;
+        circle.style.strokeDashoffset = -offset;
+        circle.style.stroke = 'var(--status-success)';
+      }
+    }
+
+    function toggleFocusTimer() {
+      const btn = document.getElementById('timer-toggle-btn');
+      if (isTimerRunning) {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        btn.textContent = 'Resume Focus';
+        btn.classList.remove('primary');
+      } else {
+        isTimerRunning = true;
         btn.textContent = 'Pause Focus';
+        btn.classList.add('primary');
+        startTimerLoop();
       }
     }
 
-    timerInterval = setInterval(() => {
-      if (timerSeconds > 0 && isRunning) {
-        timerSeconds--;
+    function resetFocusTimer() {
+      clearInterval(timerInterval);
+      countdownSeconds = 25 * 60;
+      elapsedSeconds = 0;
+      earnedBreakSeconds = 0;
+      updateTimerUI();
+      if (isTimerRunning) startTimerLoop();
+    }
+
+    function startTimerLoop() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (timerMode === 'pomodoro') {
+          if (countdownSeconds > 0) {
+            countdownSeconds--;
+          } else {
+            // Overtime transition
+            wm.focusWindow('quiz');
+          }
+        } else {
+          elapsedSeconds++;
+        }
         updateTimerUI();
-      }
-    }, 1000);
+      }, 1000);
+    }
+    startTimerLoop();
 
-    function completeFocusAndQuiz() {
-      openWindow('win-quiz');
+    // --- 6. AMBIENT SOUND SELECTOR ---
+    function setAmbientSound(type) {
+      document.querySelectorAll('.btn-sound').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`snd-${type}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (type === 'none') window.syntraAudio.stopAllAmbient();
+      else if (type === 'binaural') window.syntraAudio.startBinauralBeats();
+      else if (type === 'brown') window.syntraAudio.startBrownNoise();
+      else if (type === 'rain') window.syntraAudio.startRainDrone();
     }
 
-    // --- Quiz Option Selection & Scoring ---
-    let selectedOptionIndex = 1;
+    // --- 7. QUIZ EVALUATION (80% THRESHOLD & AUDIO CHIMES) ---
+    let selectedQuizOpt = 1;
 
-    function selectOption(el, index) {
-      selectedOptionIndex = index;
-      document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    function selectQuizOption(el, idx) {
+      selectedQuizOpt = idx;
+      document.querySelectorAll('.quiz-option-item').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
     }
 
@@ -1320,54 +2015,83 @@
       let earned = 0;
       const total = 10;
 
-      // Question 1: Spinlock (index 1) is correct = 5 pts
-      if (selectedOptionIndex === 1) earned += 5;
-
-      // Question 2: 'priority inheritance' or 'inheritance' is correct = 5 pts
-      if (blankVal.includes('inheritance')) earned += 5;
+      if (selectedQuizOpt === 1) earned += 5; // Spinlock is correct
+      if (blankVal.includes('inheritance')) earned += 5; // Priority inheritance is correct
 
       const scorePercent = (earned / total) * 100;
       const passed = scorePercent >= 80;
-
       const resultBox = document.getElementById('quiz-result-box');
       resultBox.style.display = 'block';
 
       if (passed) {
-        resultBox.style.background = 'rgba(16, 185, 129, 0.15)';
-        resultBox.style.border = '1px solid var(--accent-emerald)';
-        resultBox.style.color = 'var(--accent-emerald)';
+        resultBox.style.background = 'rgba(52, 211, 153, 0.15)';
+        resultBox.style.border = '1px solid var(--status-success)';
+        resultBox.style.color = 'var(--status-success)';
         resultBox.innerHTML = `<strong>ASSESSMENT PASSED: ${scorePercent.toFixed(1)}%</strong> &mdash; Comprehension verified. Task 1 complete. Focus break unlocked.`;
-        playTactileClick(1500, 0.04);
+        window.syntraAudio.playQuizSuccess();
       } else {
-        resultBox.style.background = 'rgba(239, 68, 68, 0.15)';
-        resultBox.style.border = '1px solid var(--accent-rose)';
-        resultBox.style.color = 'var(--accent-rose)';
+        resultBox.style.background = 'rgba(248, 113, 113, 0.15)';
+        resultBox.style.border = '1px solid var(--status-danger)';
+        resultBox.style.color = 'var(--status-danger)';
         resultBox.innerHTML = `<strong>ASSESSMENT FAILED: ${scorePercent.toFixed(1)}% (Threshold: 80.0%)</strong> &mdash; Remediation required. Review synchronization notes before retry.`;
-        playTactileClick(600, 0.06);
+        window.syntraAudio.playQuizFail();
       }
     }
 
-    // --- Flashcard Logic ---
+    // --- 8. SPACED REPETITION FLASHCARDS (FSRS LOGIC) ---
     const flashcards = [
       { prompt: "What are the four Coffman conditions for deadlocks?", answer: "1. Mutual Exclusion<br>2. Hold and Wait<br>3. No Preemption<br>4. Circular Wait" },
       { prompt: "What is the difference between a Mutex and a Semaphore?", answer: "A mutex has ownership and can only be unlocked by the locking thread. A semaphore maintains an integer count and can be signaled by any thread." },
       { prompt: "What hardware component caches virtual-to-physical address translations?", answer: "The Translation Lookaside Buffer (TLB)." }
     ];
-    let currentFcIndex = 0;
+    let fcIndex = 0;
+    let isAnswerShown = false;
 
-    function flipFlashcard(box) {
-      box.classList.toggle('flipped');
+    function toggleCardAnswer() {
+      isAnswerShown = !isAnswerShown;
+      document.getElementById('fc-answer').style.display = isAnswerShown ? 'block' : 'none';
+      document.getElementById('fc-hint').textContent = isAnswerShown ? 'Rate retention below' : 'Click card or press Space to reveal answer';
     }
 
-    function nextFlashcard(rating) {
-      currentFcIndex = (currentFcIndex + 1) % flashcards.length;
-      const card = flashcards[currentFcIndex];
-      const box = document.querySelector('.flashcard-box');
-      box.classList.remove('flipped');
+    function rateCard(grade) {
+      fcIndex = (fcIndex + 1) % flashcards.length;
+      isAnswerShown = false;
+      document.getElementById('fc-prompt').innerHTML = flashcards[fcIndex].prompt;
+      document.getElementById('fc-answer').innerHTML = flashcards[fcIndex].answer;
+      document.getElementById('fc-answer').style.display = 'none';
+      document.getElementById('fc-hint').textContent = 'Click card or press Space to reveal answer';
+    }
+
+    // --- 9. CODE TERMINAL VERIFICATION ---
+    function runCodeVerification() {
+      const out = document.getElementById('term-output');
+      out.textContent = '> Compiling with Roslyn / LLVM...';
       setTimeout(() => {
-        document.getElementById('fc-prompt').innerHTML = card.prompt;
-        document.getElementById('fc-answer').innerHTML = card.answer;
-      }, 150);
+        out.textContent = '> Build Succeeded: 0 errors, 0 warnings. Lock hierarchy verified against Coffman Circular Wait.';
+      }, 400);
+    }
+
+    // --- 10. THEME SWITCHER (DARK AMETHYST / LIGHT PEARL) ---
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      document.getElementById('theme-icon').textContent = next === 'dark' ? 'LIGHT' : 'DARK';
+    }
+
+    // --- 11. EMERGENCY INTENT GATE ALERT ---
+    function triggerLockdownAlert() {
+      const banner = document.createElement('div');
+      banner.style.cssText = `
+        position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+        background: var(--status-danger); color: white; padding: 10px 20px;
+        border-radius: 8px; font-weight: 700; font-size: 13px; z-index: 99999;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      `;
+      banner.textContent = 'FOCUS SHIELD ACTIVE: 15-SECOND INTENT PAUSE VERIFIED';
+      document.body.appendChild(banner);
+      setTimeout(() => banner.remove(), 2500);
     }
   </script>
 </body>
