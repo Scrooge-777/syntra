@@ -8,6 +8,7 @@ namespace Syntra.Windows.Hooks;
 /// Low-level user-mode keyboard hook running on a dedicated message loop thread.
 /// Swallows system navigation shortcuts and detects the emergency escape chord (Ctrl+Shift+F12).
 /// Invariant: Hook callback completes in under 1ms with zero allocations to avoid LowLevelHooksTimeout.
+/// Hardened with defensive pointer validation and crash-safe callback execution.
 /// </summary>
 public class LowLevelKeyboardHook : IDisposable
 {
@@ -47,15 +48,24 @@ public class LowLevelKeyboardHook : IDisposable
 
     private void HookThreadLoop()
     {
-        _hookThreadId = User32.GetCurrentThreadId();
+        try
+        {
+            _hookThreadId = User32.GetCurrentThreadId();
 
-        using var curProcess = Process.GetCurrentProcess();
-        using var curModule = curProcess.MainModule;
-        var hMod = User32.GetModuleHandle(curModule?.ModuleName);
+            using var curProcess = Process.GetCurrentProcess();
+            using var curModule = curProcess.MainModule;
+            var hMod = User32.GetModuleHandle(curModule?.ModuleName);
 
-        _hookId = User32.SetWindowsHookEx(User32.WH_KEYBOARD_LL, _hookProc, hMod, 0);
-
-        _startedSignal.Set();
+            _hookId = User32.SetWindowsHookEx(User32.WH_KEYBOARD_LL, _hookProc, hMod, 0);
+        }
+        catch
+        {
+            _hookId = IntPtr.Zero;
+        }
+        finally
+        {
+            _startedSignal.Set();
+        }
 
         if (_hookId == IntPtr.Zero)
         {
@@ -63,73 +73,85 @@ public class LowLevelKeyboardHook : IDisposable
         }
 
         // Standard Win32 Message Loop required for low-level hooks
-        while (User32.GetMessage(out var msg, IntPtr.Zero, 0, 0) > 0)
+        try
         {
-            User32.TranslateMessage(ref msg);
-            User32.DispatchMessage(ref msg);
+            while (User32.GetMessage(out var msg, IntPtr.Zero, 0, 0) > 0)
+            {
+                User32.TranslateMessage(ref msg);
+                User32.DispatchMessage(ref msg);
+            }
         }
-
-        if (_hookId != IntPtr.Zero)
+        finally
         {
-            User32.UnhookWindowsHookEx(_hookId);
-            _hookId = IntPtr.Zero;
+            if (_hookId != IntPtr.Zero)
+            {
+                User32.UnhookWindowsHookEx(_hookId);
+                _hookId = IntPtr.Zero;
+            }
         }
     }
 
     private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
     {
-        if (nCode >= 0)
+        if (nCode >= 0 && lParam != IntPtr.Zero)
         {
-            var msg = wParam.ToInt32();
-            var kb = Marshal.PtrToStructure<User32.KBDLLHOOKSTRUCT>(lParam);
-
-            var isKeyDown = msg is User32.WM_KEYDOWN or User32.WM_SYSKEYDOWN;
-            var isAltDown = (kb.flags & User32.LLKHF_ALTDOWN) != 0;
-
-            // Check Emergency Escape Chord: Ctrl + Shift + F12
-            if (isKeyDown && kb.vkCode == User32.VK_F12)
+            try
             {
-                var isCtrl = (User32.GetAsyncKeyState(User32.VK_CONTROL) & 0x8000) != 0;
-                var isShift = (User32.GetAsyncKeyState(User32.VK_SHIFT) & 0x8000) != 0;
+                var msg = wParam.ToInt32();
+                var kb = Marshal.PtrToStructure<User32.KBDLLHOOKSTRUCT>(lParam);
 
-                if (isCtrl && isShift)
+                var isKeyDown = msg is User32.WM_KEYDOWN or User32.WM_SYSKEYDOWN;
+                var isAltDown = (kb.flags & User32.LLKHF_ALTDOWN) != 0;
+
+                // Check Emergency Escape Chord: Ctrl + Shift + F12
+                if (isKeyDown && kb.vkCode == User32.VK_F12)
                 {
-                    Task.Run(() => EmergencyExitChordDetected?.Invoke());
+                    var isCtrl = (User32.GetAsyncKeyState(User32.VK_CONTROL) & 0x8000) != 0;
+                    var isShift = (User32.GetAsyncKeyState(User32.VK_SHIFT) & 0x8000) != 0;
+
+                    if (isCtrl && isShift)
+                    {
+                        Task.Run(() => EmergencyExitChordDetected?.Invoke());
+                        return (IntPtr)1; // Swallow
+                    }
+                }
+
+                // 1. Windows Key (VK_LWIN, VK_RWIN)
+                if (kb.vkCode is User32.VK_LWIN or User32.VK_RWIN)
+                {
+                    if (isKeyDown) Task.Run(() => InterceptionTriggered?.Invoke("WindowsKey"));
                     return (IntPtr)1; // Swallow
                 }
-            }
 
-            // 1. Windows Key (VK_LWIN, VK_RWIN)
-            if (kb.vkCode is User32.VK_LWIN or User32.VK_RWIN)
-            {
-                if (isKeyDown) Task.Run(() => InterceptionTriggered?.Invoke("WindowsKey"));
-                return (IntPtr)1; // Swallow
-            }
-
-            // 2. Alt + Tab, Alt + Esc
-            if (isAltDown && kb.vkCode is User32.VK_TAB or User32.VK_ESCAPE)
-            {
-                if (isKeyDown) Task.Run(() => InterceptionTriggered?.Invoke("AltTab_Or_AltEsc"));
-                return (IntPtr)1; // Swallow
-            }
-
-            // 3. Alt + F4
-            if (isAltDown && kb.vkCode == User32.VK_F4)
-            {
-                if (isKeyDown) Task.Run(() => InterceptionTriggered?.Invoke("AltF4"));
-                return (IntPtr)1; // Swallow
-            }
-
-            // 4. Ctrl + Shift + Esc (Task Manager)
-            if (isKeyDown && kb.vkCode == User32.VK_ESCAPE)
-            {
-                var isCtrl = (User32.GetAsyncKeyState(User32.VK_CONTROL) & 0x8000) != 0;
-                var isShift = (User32.GetAsyncKeyState(User32.VK_SHIFT) & 0x8000) != 0;
-                if (isCtrl && isShift)
+                // 2. Alt + Tab, Alt + Esc
+                if (isAltDown && kb.vkCode is User32.VK_TAB or User32.VK_ESCAPE)
                 {
-                    Task.Run(() => InterceptionTriggered?.Invoke("CtrlShiftEsc_TaskMgr"));
+                    if (isKeyDown) Task.Run(() => InterceptionTriggered?.Invoke("AltTab_Or_AltEsc"));
                     return (IntPtr)1; // Swallow
                 }
+
+                // 3. Alt + F4
+                if (isAltDown && kb.vkCode == User32.VK_F4)
+                {
+                    if (isKeyDown) Task.Run(() => InterceptionTriggered?.Invoke("AltF4"));
+                    return (IntPtr)1; // Swallow
+                }
+
+                // 4. Ctrl + Shift + Esc (Task Manager)
+                if (isKeyDown && kb.vkCode == User32.VK_ESCAPE)
+                {
+                    var isCtrl = (User32.GetAsyncKeyState(User32.VK_CONTROL) & 0x8000) != 0;
+                    var isShift = (User32.GetAsyncKeyState(User32.VK_SHIFT) & 0x8000) != 0;
+                    if (isCtrl && isShift)
+                    {
+                        Task.Run(() => InterceptionTriggered?.Invoke("CtrlShiftEsc_TaskMgr"));
+                        return (IntPtr)1; // Swallow
+                    }
+                }
+            }
+            catch
+            {
+                // Defensive fallback: pass through to next hook if marshalling fails
             }
         }
 

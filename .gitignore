@@ -15,6 +15,7 @@ Generated Files/
 GeneratedFiles/
 dist/
 *.exe
+*.pdb
 e_sqlite3.dll
 
 # ------------------------------------------------------------------------------

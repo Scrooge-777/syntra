@@ -15,7 +15,6 @@ public class AssessmentScorerTests
         var taskId = Guid.NewGuid();
         var assessment = new Assessment(Guid.NewGuid(), taskId, minimumPassRatio: 0.80);
 
-        // 5 questions, each weight 1.0 -> 4 correct = 80.0%
         var q1 = new AssessmentQuestion(Guid.NewGuid(), "Q1", QuestionType.FillInTheBlank, "A", "R1", weight: 1.0);
         var q2 = new AssessmentQuestion(Guid.NewGuid(), "Q2", QuestionType.FillInTheBlank, "B", "R2", weight: 1.0);
         var q3 = new AssessmentQuestion(Guid.NewGuid(), "Q3", QuestionType.FillInTheBlank, "C", "R3", weight: 1.0);
@@ -51,7 +50,6 @@ public class AssessmentScorerTests
         var taskId = Guid.NewGuid();
         var assessment = new Assessment(Guid.NewGuid(), taskId, minimumPassRatio: 0.80);
 
-        // 4 questions, each weight 1.0 -> 3 correct = 75.0%
         var q1 = new AssessmentQuestion(Guid.NewGuid(), "Q1", QuestionType.FillInTheBlank, "A", "R1", weight: 1.0);
         var q2 = new AssessmentQuestion(Guid.NewGuid(), "Q2", QuestionType.FillInTheBlank, "B", "R2", weight: 1.0);
         var q3 = new AssessmentQuestion(Guid.NewGuid(), "Q3", QuestionType.FillInTheBlank, "C", "R3", weight: 1.0);
@@ -92,12 +90,10 @@ public class AssessmentScorerTests
 
         var assessment = new Assessment(Guid.NewGuid(), Guid.NewGuid(), 0.80, questions: new[] { q });
 
-        // Test matching via text
         var textResult = _scorer.Score(assessment, new Dictionary<Guid, string> { [q.Id] = "Repository Pattern" });
         Assert.Equal(2.0, textResult.EarnedPoints);
         Assert.True(textResult.Passed);
 
-        // Test matching via 0-based index string ("1")
         var indexResult = _scorer.Score(assessment, new Dictionary<Guid, string> { [q.Id] = "1" });
         Assert.Equal(2.0, indexResult.EarnedPoints);
         Assert.True(indexResult.Passed);
@@ -116,7 +112,6 @@ public class AssessmentScorerTests
 
         var assessment = new Assessment(Guid.NewGuid(), Guid.NewGuid(), 0.80, questions: new[] { q });
 
-        // Submitted with extra whitespace and lower casing
         var result = _scorer.Score(assessment, new Dictionary<Guid, string> { [q.Id] = "  wh_keyboard_ll  " });
         Assert.Equal(1.0, result.EarnedPoints);
         Assert.True(result.Passed);
@@ -144,6 +139,47 @@ public class AssessmentScorerTests
     }
 
     [Fact]
+    public void FreeText_CompoundKeyPhrases_ShouldBeProperlyRecognized()
+    {
+        var q = new AssessmentQuestion(
+            Guid.NewGuid(),
+            "What are the deadlock prevention criteria?",
+            QuestionType.FreeTextExplanation,
+            "Eliminate mutual exclusion, hold and wait, no preemption, or circular wait.",
+            "Must mention key deadlock conditions.",
+            weight: 10.0,
+            keywords: new[] { "mutual exclusion", "circular wait", "preemption" });
+
+        var assessment = new Assessment(Guid.NewGuid(), Guid.NewGuid(), 0.80, questions: new[] { q });
+
+        var answer = "We can break deadlocks by eliminating mutual exclusion and preventing circular wait conditions.";
+        var result = _scorer.Score(assessment, new Dictionary<Guid, string> { [q.Id] = answer });
+
+        // 2 of 3 matched = 66.6% coverage -> 70% points awarded (7.0 pts)
+        Assert.Equal(7.0, result.EarnedPoints);
+    }
+
+    [Fact]
+    public void Score_WithNullAnswersDictionary_ShouldDefaultGracefully()
+    {
+        var q = new AssessmentQuestion(
+            Guid.NewGuid(),
+            "Identify kernel space.",
+            QuestionType.FillInTheBlank,
+            "Ring 0",
+            "Ring 0 execution level.",
+            weight: 5.0);
+
+        var assessment = new Assessment(Guid.NewGuid(), Guid.NewGuid(), 0.80, questions: new[] { q });
+
+        var result = _scorer.Score(assessment, null);
+
+        Assert.Equal(0.0, result.EarnedPoints);
+        Assert.Equal(5.0, result.TotalPossiblePoints);
+        Assert.False(result.Passed);
+    }
+
+    [Fact]
     public void WeightedScoring_ShouldCalculateAccurateProportions()
     {
         var qEasy = new AssessmentQuestion(Guid.NewGuid(), "Easy", QuestionType.FillInTheBlank, "A", "R1", weight: 1.0);
@@ -151,7 +187,6 @@ public class AssessmentScorerTests
 
         var assessment = new Assessment(Guid.NewGuid(), Guid.NewGuid(), 0.80, questions: new[] { qEasy, qHard });
 
-        // Getting only the hard question right = 9 / 10 = 90% (Passes)
         var hardCorrectAnswers = new Dictionary<Guid, string>
         {
             [qEasy.Id] = "Wrong",
@@ -161,7 +196,6 @@ public class AssessmentScorerTests
         Assert.Equal(90.0, hardResult.ScorePercentage);
         Assert.True(hardResult.Passed);
 
-        // Getting only the easy question right = 1 / 10 = 10% (Fails)
         var easyCorrectAnswers = new Dictionary<Guid, string>
         {
             [qEasy.Id] = "A",

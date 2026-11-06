@@ -9,20 +9,22 @@ namespace Syntra.Core.Scoring;
 /// Domain scoring authority enforcing comprehension standards.
 /// Evaluates question types (MCQ, Fill-in-the-blank, Free Text, Code) and calculates
 /// weighted scores against the minimum passing threshold (default 80%).
+/// Hardened with defensive boundary checks, token sanitization, and multi-word phrase matching.
 /// </summary>
 public class AssessmentScorer
 {
     private static readonly Regex TokenSanitizerRegex = new(@"[^\w\s]", RegexOptions.Compiled);
+    private static readonly Regex WhitespaceRegex = new(@"\s+", RegexOptions.Compiled);
 
     /// <summary>
     /// Scores submitted answers against an assessment and produces an official ScoringResult.
     /// </summary>
-    public ScoringResult Score(Assessment assessment, IDictionary<Guid, string> submittedAnswers)
+    public ScoringResult Score(Assessment assessment, IDictionary<Guid, string>? submittedAnswers)
     {
         ArgumentNullException.ThrowIfNull(assessment);
-        ArgumentNullException.ThrowIfNull(submittedAnswers);
+        var answers = submittedAnswers ?? new Dictionary<Guid, string>();
 
-        if (assessment.Questions.Count == 0)
+        if (assessment.Questions == null || assessment.Questions.Count == 0)
         {
             throw new DomainException("Cannot score an assessment with zero questions.");
         }
@@ -33,20 +35,23 @@ public class AssessmentScorer
 
         foreach (var question in assessment.Questions)
         {
-            var maxPoints = question.Weight;
+            // Defensive: ensure positive weight
+            var maxPoints = question.Weight > 0 ? question.Weight : 1.0;
             totalPossible += maxPoints;
 
-            submittedAnswers.TryGetValue(question.Id, out var rawAnswer);
+            answers.TryGetValue(question.Id, out var rawAnswer);
             var answer = rawAnswer?.Trim() ?? string.Empty;
 
-            var evaluation = EvaluateQuestion(question, answer);
+            var evaluation = EvaluateQuestion(question, answer, maxPoints);
             results.Add(evaluation);
             totalEarned += evaluation.EarnedPoints;
         }
 
         var scorePercentage = totalPossible > 0 ? (totalEarned / totalPossible) * 100.0 : 0.0;
-        // Invariant: Exact threshold comparison without loose upward rounding
-        var requiredPercentage = assessment.MinimumPassRatio * 100.0;
+        
+        // Defensive clamping: ensure minimum pass ratio is within [0.01, 1.0]
+        var clampedRatio = Math.Clamp(assessment.MinimumPassRatio, 0.01, 1.0);
+        var requiredPercentage = clampedRatio * 100.0;
         var passed = scorePercentage >= requiredPercentage;
 
         var summary = passed
@@ -54,92 +59,117 @@ public class AssessmentScorer
             : $"Assessment FAILED with {scorePercentage:F1}% (Required: {requiredPercentage:F1}%). Further remediation required.";
 
         return new ScoringResult(
-            EarnedPoints: totalEarned,
-            TotalPossiblePoints: totalPossible,
+            EarnedPoints: Math.Round(totalEarned, 2),
+            TotalPossiblePoints: Math.Round(totalPossible, 2),
             ScorePercentage: Math.Round(scorePercentage, 2),
             Passed: passed,
-            MinimumPassRatio: assessment.MinimumPassRatio,
+            MinimumPassRatio: clampedRatio,
             QuestionResults: results.AsReadOnly(),
             SummaryFeedback: summary);
     }
 
-    private static QuestionEvaluationResult EvaluateQuestion(AssessmentQuestion question, string answer)
+    private static QuestionEvaluationResult EvaluateQuestion(AssessmentQuestion question, string answer, double effectiveWeight)
     {
         return question.QuestionType switch
         {
-            QuestionType.MultipleChoice => EvaluateMultipleChoice(question, answer),
-            QuestionType.FillInTheBlank => EvaluateFillInTheBlank(question, answer),
-            QuestionType.FreeTextExplanation => EvaluateFreeText(question, answer),
-            QuestionType.CodeSnippet => EvaluateCodeSnippet(question, answer),
+            QuestionType.MultipleChoice => EvaluateMultipleChoice(question, answer, effectiveWeight),
+            QuestionType.FillInTheBlank => EvaluateFillInTheBlank(question, answer, effectiveWeight),
+            QuestionType.FreeTextExplanation => EvaluateFreeText(question, answer, effectiveWeight),
+            QuestionType.CodeSnippet => EvaluateCodeSnippet(question, answer, effectiveWeight),
             _ => throw new DomainException($"Unsupported question type: {question.QuestionType}")
         };
     }
 
-    private static QuestionEvaluationResult EvaluateMultipleChoice(AssessmentQuestion question, string answer)
+    private static QuestionEvaluationResult EvaluateMultipleChoice(AssessmentQuestion question, string answer, double weight)
     {
         if (string.IsNullOrWhiteSpace(answer))
         {
-            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, question.Weight, false, "No answer provided.");
+            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, weight, false, "No answer provided.");
         }
 
         // Compare exact option text or index
-        var isMatch = string.Equals(question.ExpectedAnswer.Trim(), answer.Trim(), StringComparison.OrdinalIgnoreCase);
+        var isMatch = string.Equals(question.ExpectedAnswer?.Trim(), answer.Trim(), StringComparison.OrdinalIgnoreCase);
 
         // Also allow comparing if answer is option index (e.g. "0", "1", "A", "B")
-        if (!isMatch && int.TryParse(answer, out var index) && index >= 0 && index < question.Options.Count)
+        if (!isMatch && question.Options != null && int.TryParse(answer, out var index) && index >= 0 && index < question.Options.Count)
         {
-            isMatch = string.Equals(question.ExpectedAnswer.Trim(), question.Options[index].Trim(), StringComparison.OrdinalIgnoreCase);
+            isMatch = string.Equals(question.ExpectedAnswer?.Trim(), question.Options[index]?.Trim(), StringComparison.OrdinalIgnoreCase);
         }
 
-        var earned = isMatch ? question.Weight : 0.0;
+        var earned = isMatch ? weight : 0.0;
         var feedback = isMatch
             ? "Correct."
             : $"Incorrect. Expected: '{question.ExpectedAnswer}'. {question.RubricExplanation}";
 
-        return new QuestionEvaluationResult(question.Id, question.QuestionType, earned, question.Weight, isMatch, feedback);
+        return new QuestionEvaluationResult(question.Id, question.QuestionType, earned, weight, isMatch, feedback);
     }
 
-    private static QuestionEvaluationResult EvaluateFillInTheBlank(AssessmentQuestion question, string answer)
+    private static QuestionEvaluationResult EvaluateFillInTheBlank(AssessmentQuestion question, string answer, double weight)
     {
         if (string.IsNullOrWhiteSpace(answer))
         {
-            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, question.Weight, false, "No answer provided.");
+            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, weight, false, "No answer provided.");
         }
 
         var normalizedSubmission = NormalizeToken(answer);
-        var normalizedExpected = NormalizeToken(question.ExpectedAnswer);
+        var normalizedExpected = NormalizeToken(question.ExpectedAnswer ?? string.Empty);
 
         var isMatch = string.Equals(normalizedSubmission, normalizedExpected, StringComparison.OrdinalIgnoreCase);
-        var earned = isMatch ? question.Weight : 0.0;
+        var earned = isMatch ? weight : 0.0;
         var feedback = isMatch
             ? "Correct."
             : $"Incorrect. Expected keyword: '{question.ExpectedAnswer}'. {question.RubricExplanation}";
 
-        return new QuestionEvaluationResult(question.Id, question.QuestionType, earned, question.Weight, isMatch, feedback);
+        return new QuestionEvaluationResult(question.Id, question.QuestionType, earned, weight, isMatch, feedback);
     }
 
-    private static QuestionEvaluationResult EvaluateFreeText(AssessmentQuestion question, string answer)
+    private static QuestionEvaluationResult EvaluateFreeText(AssessmentQuestion question, string answer, double weight)
     {
         if (string.IsNullOrWhiteSpace(answer))
         {
-            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, question.Weight, false, "No explanation provided.");
+            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, weight, false, "No explanation provided.");
         }
 
-        // Domain heuristic: Keyword density evaluation against question keywords
-        var normalizedWords = TokenSanitizerRegex.Replace(answer.ToLowerInvariant(), " ")
+        var answerLower = answer.ToLowerInvariant();
+        var normalizedWords = TokenSanitizerRegex.Replace(answerLower, " ")
             .Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .ToHashSet();
 
-        if (question.Keywords.Count == 0)
+        var validKeywords = question.Keywords?
+            .Where(k => !string.IsNullOrWhiteSpace(k))
+            .Select(k => k.Trim().ToLowerInvariant())
+            .Distinct()
+            .ToList() ?? new List<string>();
+
+        if (validKeywords.Count == 0)
         {
             // Fallback: minimal length check if no keywords provided
-            var minLengthPassed = answer.Length >= 20;
-            var points = minLengthPassed ? question.Weight : 0.0;
-            return new QuestionEvaluationResult(question.Id, question.QuestionType, points, question.Weight, minLengthPassed, question.RubricExplanation);
+            var minLengthPassed = answer.Trim().Length >= 20;
+            var points = minLengthPassed ? weight : 0.0;
+            return new QuestionEvaluationResult(question.Id, question.QuestionType, points, weight, minLengthPassed, question.RubricExplanation);
         }
 
-        var matchedKeywords = question.Keywords.Count(k => normalizedWords.Contains(k));
-        var coverageRatio = (double)matchedKeywords / question.Keywords.Count;
+        // Hardened: Supports both individual tokens and compound multi-word key phrases
+        var matchedCount = 0;
+        foreach (var kw in validKeywords)
+        {
+            if (kw.Contains(' '))
+            {
+                if (answerLower.Contains(kw))
+                {
+                    matchedCount++;
+                }
+            }
+            else
+            {
+                if (normalizedWords.Contains(kw) || answerLower.Contains(kw))
+                {
+                    matchedCount++;
+                }
+            }
+        }
+
+        var coverageRatio = (double)matchedCount / validKeywords.Count;
 
         // Proportional grading with minimum threshold
         double earnedPoints;
@@ -147,17 +177,17 @@ public class AssessmentScorer
 
         if (coverageRatio >= 0.75)
         {
-            earnedPoints = question.Weight;
+            earnedPoints = weight;
             isCorrect = true;
         }
         else if (coverageRatio >= 0.50)
         {
-            earnedPoints = question.Weight * 0.70;
+            earnedPoints = weight * 0.70;
             isCorrect = false;
         }
         else if (coverageRatio >= 0.25)
         {
-            earnedPoints = question.Weight * 0.35;
+            earnedPoints = weight * 0.35;
             isCorrect = false;
         }
         else
@@ -166,41 +196,45 @@ public class AssessmentScorer
             isCorrect = false;
         }
 
-        var feedback = $"Keyword coverage: {matchedKeywords}/{question.Keywords.Count} concepts identified. {question.RubricExplanation}";
-        return new QuestionEvaluationResult(question.Id, question.QuestionType, Math.Round(earnedPoints, 2), question.Weight, isCorrect, feedback);
+        var feedback = $"Keyword coverage: {matchedCount}/{validKeywords.Count} concepts identified. {question.RubricExplanation}";
+        return new QuestionEvaluationResult(question.Id, question.QuestionType, Math.Round(earnedPoints, 2), weight, isCorrect, feedback);
     }
 
-    private static QuestionEvaluationResult EvaluateCodeSnippet(AssessmentQuestion question, string answer)
+    private static QuestionEvaluationResult EvaluateCodeSnippet(AssessmentQuestion question, string answer, double weight)
     {
         if (string.IsNullOrWhiteSpace(answer))
         {
-            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, question.Weight, false, "No code provided.");
+            return new QuestionEvaluationResult(question.Id, question.QuestionType, 0, weight, false, "No code provided.");
         }
 
         var normalizedAnswer = NormalizeWhitespace(answer);
-        var normalizedExpected = NormalizeWhitespace(question.ExpectedAnswer);
+        var normalizedExpected = NormalizeWhitespace(question.ExpectedAnswer ?? string.Empty);
 
         var isExact = string.Equals(normalizedAnswer, normalizedExpected, StringComparison.OrdinalIgnoreCase);
         if (isExact)
         {
-            return new QuestionEvaluationResult(question.Id, question.QuestionType, question.Weight, question.Weight, true, "Code match verified.");
+            return new QuestionEvaluationResult(question.Id, question.QuestionType, weight, weight, true, "Code match verified.");
         }
 
-        // Semantic keyword check for code constructs
         var answerLower = answer.ToLowerInvariant();
-        var matched = question.Keywords.Count(k => answerLower.Contains(k));
-        var ratio = question.Keywords.Count > 0 ? (double)matched / question.Keywords.Count : 0.0;
+        var validKeywords = question.Keywords?
+            .Where(k => !string.IsNullOrWhiteSpace(k))
+            .Select(k => k.Trim().ToLowerInvariant())
+            .ToList() ?? new List<string>();
 
-        var earned = ratio >= 0.80 ? question.Weight : question.Weight * ratio;
+        var matched = validKeywords.Count(k => answerLower.Contains(k));
+        var ratio = validKeywords.Count > 0 ? (double)matched / validKeywords.Count : 0.0;
+
+        var earned = ratio >= 0.80 ? weight : weight * ratio;
         var pass = ratio >= 0.80;
 
         return new QuestionEvaluationResult(
             question.Id,
             question.QuestionType,
             Math.Round(earned, 2),
-            question.Weight,
+            weight,
             pass,
-            $"Code constructs verified: {matched}/{question.Keywords.Count}. {question.RubricExplanation}");
+            $"Code constructs verified: {matched}/{validKeywords.Count}. {question.RubricExplanation}");
     }
 
     private static string NormalizeToken(string input)
@@ -210,6 +244,6 @@ public class AssessmentScorer
 
     private static string NormalizeWhitespace(string input)
     {
-        return Regex.Replace(input.Trim(), @"\s+", " ");
+        return WhitespaceRegex.Replace(input.Trim(), " ");
     }
 }
