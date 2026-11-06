@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SYNTRA Study OS</title>
+  <style>
+    :root {
+      --bg-base: #090b10;
+      --bg-surface: rgba(18, 22, 34, 0.78);
+      --bg-surface-elevated: rgba(28, 34, 52, 0.88);
+      --bg-card: rgba(22, 28, 44, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --accent-primary: #6366f1;
+      --accent-primary-hover: #4f46e5;
+      --accent-glow: rgba(99, 102, 241, 0.35);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI Variable", "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      --font-mono: "Cascadia Code", "Fira Code", Consolas, Menlo, monospace;
+      --transition-spring: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(6, 182, 212, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05) 0%, transparent 60%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+      font-family: var(--font-stack);
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Spotlight Sheen */
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+      transition: var(--transition-spring);
+    }
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Tactile Press State */
+    .pressable {
+      cursor: pointer;
+      will-change: transform;
+      transition: transform 0.12s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease;
+    }
+    .pressable:active {
+      transform: scale(0.96) !important;
+    }
+
+    /* Top Shell Status Bar */
+    header.os-topbar {
+      height: 38px;
+      background: rgba(10, 14, 24, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 12px;
+      z-index: 10000;
+      letter-spacing: 0.02em;
+    }
+    .topbar-left, .topbar-center, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .os-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.08em;
+      font-size: 11px;
+    }
+    .os-badge-pill {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-cyan));
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-primary);
+    }
+    .evaluation-tag {
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--accent-amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .session-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+    .session-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    /* Desktop Surface */
+    main.os-desktop {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    /* Desktop Icons Grid */
+    .desktop-icons {
+      display: grid;
+      grid-template-columns: repeat(1, 96px);
+      gap: 16px;
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 10;
+    }
+    .desktop-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+      transition: background 0.15s ease;
+      cursor: pointer;
+    }
+    .desktop-icon:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .desktop-icon:active {
+      transform: scale(0.95);
+    }
+    .desktop-icon-img {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      color: var(--accent-cyan);
+    }
+    .desktop-icon span {
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      white-space: nowrap;
+    }
+
+    /* Windows System */
+    .os-window {
+      position: absolute;
+      background: var(--bg-surface);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      min-width: 380px;
+      min-height: 260px;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.95) translateY(12px);
+      transition: opacity 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .os-window.active-window {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      border-color: rgba(99, 102, 241, 0.45);
+      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.8), 0 0 30px rgba(99, 102, 241, 0.15);
+    }
+    .os-window.minimized {
+      display: none;
+    }
+
+    .window-header {
+      height: 44px;
+      background: rgba(15, 20, 32, 0.65);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      cursor: grab;
+    }
+    .window-header:active {
+      cursor: grabbing;
+    }
+    .window-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .window-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .win-btn {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.12s ease, opacity 0.15s ease;
+    }
+    .win-btn:hover {
+      transform: scale(1.15);
+    }
+    .win-btn-close { background: #ef4444; }
+    .win-btn-min { background: #f59e0b; }
+    .win-btn-max { background: #10b981; }
+
+    .window-body {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Window: Focus Studio */
+    .timer-display-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .timer-circle-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+    }
+    .timer-svg {
+      transform: rotate(-90deg);
+      width: 180px;
+      height: 180px;
+    }
+    .timer-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.06);
+      stroke-width: 10;
+    }
+    .timer-bar {
+      fill: none;
+      stroke: var(--accent-primary);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 471;
+      stroke-dashoffset: 80;
+      transition: stroke-dashoffset 0.5s ease;
+    }
+    .timer-text-wrap {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .timer-digits {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+    .timer-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+    .btn {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 13px;
+      border: 1px solid transparent;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-primary-hover));
+      color: #fff;
+      box-shadow: 0 6px 18px var(--accent-glow);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+    }
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: var(--accent-rose);
+    }
+
+    /* Window: Active Quiz (Comprehension Gatekeeper) */
+    .quiz-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .quiz-question-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .quiz-option {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition-spring);
+    }
+    .quiz-option:hover {
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+    .quiz-option.selected {
+      background: rgba(99, 102, 241, 0.25);
+      border-color: var(--accent-primary);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .threshold-banner {
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+    .threshold-bar-wrap {
+      width: 140px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .threshold-bar-fill {
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+      border-radius: 999px;
+    }
+
+    /* Window: AI Curriculum Architect */
+    .task-tree {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .task-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.15s ease;
+    }
+    .task-item.active-task-item {
+      border-color: var(--accent-primary);
+      background: rgba(99, 102, 241, 0.08);
+    }
+    .task-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .task-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .task-status-tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .tag-completed {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .tag-active {
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--accent-primary);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    .tag-pending {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim);
+    }
+
+    /* Window: Study Notes Reader */
+    .notes-content {
+      background: rgba(11, 15, 25, 0.9);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      height: 100%;
+      overflow-y: auto;
+    }
+    .notes-content h3 {
+      font-size: 16px;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .notes-content code {
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+    }
+
+    /* Bottom Taskbar / Dock */
+    footer.os-dock {
+      height: 56px;
+      background: rgba(12, 16, 28, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 10000;
+    }
+    .dock-start {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .start-menu-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .start-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-strong);
+    }
+    .dock-apps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dock-app-tab {
+      height: 38px;
+      padding: 0 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-spring);
+    }
+    .dock-app-tab.active-tab {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .dock-app-tab.active-tab::after {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      margin-left: 2px;
+    }
+
+    .dock-tray {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .tray-clock {
+      font-family: var(--font-mono);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Start Menu Drawer */
+    .start-drawer {
+      position: absolute;
+      bottom: 64px;
+      left: 16px;
+      width: 340px;
+      background: var(--bg-surface-elevated);
+      backdrop-filter: blur(32px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 20000;
+    }
+    .start-drawer.open {
+      display: flex;
+    }
+    .drawer-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 10px;
+    }
+    .drawer-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .drawer-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .drawer-item-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    /* Evaluation Notice Toast */
+    .toast-notice {
+      position: absolute;
+      top: 54px;
+      right: 24px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 100000;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="os-topbar">
+    <div class="topbar-left">
+      <div class="os-badge">
+        <div class="os-badge-pill"></div>
+        <span>SYNTRA OS</span>
+      </div>
+      <span class="evaluation-tag">EVALUATION MODE &mdash; LOCK OFF</span>
+    </div>
+
+    <div class="topbar-center">
+      <div class="session-indicator">
+        <div class="session-dot"></div>
+        <span>Active Subject: Computer Architecture &amp; OS</span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <button class="pressable btn-secondary" style="padding: 4px 10px; font-size: 11px; border-radius: 6px;" onclick="toggleFullscreen()">
+        Toggle Fullscreen (F11)
+      </button>
+      <div class="tray-clock" id="topbar-clock">12:00:00 PM</div>
+    </div>
+  </header>
+
+  <!-- Desktop Surface -->
+  <main class="os-desktop" id="desktop">
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="desktop-icon pressable" onclick="openWindow('win-timer')">
+        <div class="desktop-icon-img">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <span>Focus Studio</span>
+      </div>
+
+      <div class="desktop-icon pressable" onclick="openWindow('win-curriculum')">
+        <div class="desktop-icon-img">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <span>Curriculum</span>
+      </div>
+
+      <div class="desktop-icon pressable" onclick="openWindow('win-quiz')">
+        <div class="desktop-icon-img">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <span>Active Quiz</span>
+      </div>
+
+      <div class="desktop-icon pressable" onclick="openWindow('win-notes')">
+        <div class="desktop-icon-img">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span>Study Notes</span>
+      </div>
+    </div>
+
+    <!-- Window 1: Focus Studio -->
+    <div class="os-window active-window spotlight-card" id="win-timer" style="top: 40px; left: 160px; width: 440px; z-index: 100;">
+      <div class="window-header" onmousedown="startDrag(event, 'win-timer')">
+        <div class="window-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Focus Studio &mdash; Active Interval
+        </div>
+        <div class="window-controls">
+          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-timer')"></button>
+          <button class="win-btn win-btn-close" onclick="closeWindow('win-timer')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="timer-display-card">
+          <div class="timer-circle-wrap">
+            <svg class="timer-svg" viewBox="0 0 180 180">
+              <circle class="timer-bg" cx="90" cy="90" r="75"/>
+              <circle class="timer-bar" id="timer-progress-bar" cx="90" cy="90" r="75"/>
+            </svg>
+            <div class="timer-text-wrap">
+              <div class="timer-digits" id="timer-text">24:59</div>
+              <div class="timer-label">Focus Sprint</div>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="font-size: 15px; font-weight: 600;">Task 1: Kernel Synchronization Primitives</h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Objectives: Mutexes vs Spinlocks, Priority Inversion</p>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary pressable" id="timer-toggle-btn" onclick="toggleTimer()">
+            Pause Focus
+          </button>
+          <button class="btn btn-secondary pressable" onclick="completeFocusAndQuiz()">
+            Trigger Assessment
+          </button>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 11px; color: var(--text-dim); display: flex; align-items: center; justify-content: space-between;">
+          <span>In-Session Lock:</span>
+          <span style="color: var(--accent-emerald); font-weight: 600;">Disengaged for Evaluation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Window 2: Active Comprehension Quiz -->
+    <div class="os-window spotlight-card" id="win-quiz" style="top: 60px; left: 630px; width: 540px; z-index: 101;">
+      <div class="window-header" onmousedown="startDrag(event, 'win-quiz')">
+        <div class="window-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Active Comprehension Gatekeeper
+        </div>
+        <div class="window-controls">
+          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-quiz')"></button>
+          <button class="win-btn win-btn-close" onclick="closeWindow('win-quiz')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="threshold-banner">
+          <div>
+            <div style="font-weight: 600; color: var(--text-main);">Required Pass Threshold: 80.0%</div>
+            <div style="color: var(--text-muted); font-size: 11px;">Timer alone never completes tasks</div>
+          </div>
+          <div class="threshold-bar-wrap">
+            <div class="threshold-bar-fill" id="quiz-threshold-fill"></div>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-question-title">1. Which synchronization primitive busy-waits on CPU cores rather than putting the calling thread to sleep?</div>
+          <div class="quiz-options">
+            <div class="quiz-option pressable" onclick="selectOption(this, 0)">A) Mutex (Mutual Exclusion Lock)</div>
+            <div class="quiz-option pressable selected" onclick="selectOption(this, 1)">B) Spinlock</div>
+            <div class="quiz-option pressable" onclick="selectOption(this, 2)">C) Counting Semaphore</div>
+            <div class="quiz-option pressable" onclick="selectOption(this, 3)">D) Condition Variable</div>
+          </div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-question-title">2. Complete the keyword: The kernel mechanism that temporarily elevates a low-priority thread's priority to prevent starvation is called priority ________.</div>
+          <input type="text" id="quiz-blank-input" value="inheritance" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px 14px; color: var(--text-main); font-family: var(--font-mono); font-size: 13px; outline: none;">
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary pressable" onclick="submitQuizEvaluation()">
+            Submit Assessment for Grading
+          </button>
+        </div>
+
+        <div id="quiz-result-box" style="display: none; padding: 14px; border-radius: var(--radius-md); font-size: 12px; font-weight: 500;"></div>
+      </div>
+    </div>
+
+    <!-- Window 3: AI Curriculum Architect -->
+    <div class="os-window spotlight-card" id="win-curriculum" style="top: 240px; left: 200px; width: 500px; z-index: 90;">
+      <div class="window-header" onmousedown="startDrag(event, 'win-curriculum')">
+        <div class="window-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          AI Curriculum Architect
+        </div>
+        <div class="window-controls">
+          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-curriculum')"></button>
+          <button class="win-btn win-btn-close" onclick="closeWindow('win-curriculum')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="task-tree">
+          <div class="task-item active-task-item">
+            <div class="task-info">
+              <h4>Task 1: Kernel Synchronization Primitives</h4>
+              <p>25 min &bull; Mutexes, Semaphores, Spinlocks</p>
+            </div>
+            <span class="task-status-tag tag-active">In Progress</span>
+          </div>
+
+          <div class="task-item">
+            <div class="task-info">
+              <h4>Task 2: Deadlocks &amp; Banker's Algorithm</h4>
+              <p>25 min &bull; Coffman Conditions, Resource Allocation Graphs</p>
+            </div>
+            <span class="task-status-tag tag-pending">Pending</span>
+          </div>
+
+          <div class="task-item">
+            <div class="task-info">
+              <h4>Task 3: Virtual Memory &amp; Page Replacement</h4>
+              <p>30 min &bull; TLB, Page Faults, LRU vs Clock Algorithm</p>
+            </div>
+            <span class="task-status-tag tag-pending">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Window 4: Study Notes Reference -->
+    <div class="os-window spotlight-card" id="win-notes" style="top: 140px; left: 720px; width: 480px; z-index: 80;">
+      <div class="window-header" onmousedown="startDrag(event, 'win-notes')">
+        <div class="window-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Study Notes Reference
+        </div>
+        <div class="window-controls">
+          <button class="win-btn win-btn-min" onclick="minimizeWindow('win-notes')"></button>
+          <button class="win-btn win-btn-close" onclick="closeWindow('win-notes')"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="notes-content">
+          <h3>Synchronization Primitives Overview</h3>
+          <p>A <code>Spinlock</code> repeatedly tests a lock condition until it becomes available. Because the thread remains active, it does not incur the latency of a context switch.</p>
+          <br>
+          <p><strong>Rule of Thumb:</strong> Use spinlocks when lock hold times are expected to be shorter than context switch latency.</p>
+          <br>
+          <p>A <code>Mutex</code> places the blocked thread on a sleep wait queue, relinquishing CPU time to other ready threads.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Start Menu Drawer -->
+  <div class="start-drawer" id="start-drawer">
+    <div class="drawer-header">SYNTRA Control Center</div>
+    <div class="drawer-item pressable" onclick="openWindow('win-timer'); toggleStartMenu();">
+      <div class="drawer-item-icon">1</div>
+      <div>
+        <div style="font-weight: 600;">Focus Studio</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Active interval &amp; countdown</div>
+      </div>
+    </div>
+    <div class="drawer-item pressable" onclick="openWindow('win-curriculum'); toggleStartMenu();">
+      <div class="drawer-item-icon">2</div>
+      <div>
+        <div style="font-weight: 600;">Curriculum Tree</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Syllabus objectives &amp; plan</div>
+      </div>
+    </div>
+    <div class="drawer-item pressable" onclick="openWindow('win-quiz'); toggleStartMenu();">
+      <div class="drawer-item-icon">3</div>
+      <div>
+        <div style="font-weight: 600;">Active Quiz Gatekeeper</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Comprehension testing modal</div>
+      </div>
+    </div>
+    <div class="drawer-item pressable" onclick="openWindow('win-notes'); toggleStartMenu();">
+      <div class="drawer-item-icon">4</div>
+      <div>
+        <div style="font-weight: 600;">Study Notes</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Reference material aperture</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Dock / Taskbar -->
+  <footer class="os-dock">
+    <div class="dock-start">
+      <button class="start-menu-btn pressable" onclick="toggleStartMenu()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Launcher</span>
+      </button>
+
+      <div class="dock-apps">
+        <div class="dock-app-tab active-tab pressable" id="tab-win-timer" onclick="toggleTab('win-timer')">
+          <span>Focus Studio</span>
+        </div>
+        <div class="dock-app-tab pressable" id="tab-win-quiz" onclick="toggleTab('win-quiz')">
+          <span>Active Quiz</span>
+        </div>
+        <div class="dock-app-tab pressable" id="tab-win-curriculum" onclick="toggleTab('win-curriculum')">
+          <span>Curriculum</span>
+        </div>
+        <div class="dock-app-tab pressable" id="tab-win-notes" onclick="toggleTab('win-notes')">
+          <span>Notes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dock-tray">
+      <span>Volume: 100%</span>
+      <span>Battery: 98%</span>
+      <span class="tray-clock" id="dock-clock">12:00:00 PM</span>
+    </div>
+  </footer>
+
+  <script>
+    // --- Web Audio Tactile Micro-Feedback ---
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function playTactileClick(freq = 1200, duration = 0.012) {
+      try {
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // AudioContext not permitted before interaction
+      }
+    }
+
+    document.querySelectorAll('.pressable').forEach(el => {
+      el.addEventListener('click', () => playTactileClick(1200, 0.01));
+    });
+
+    // --- 3D Spatial Perspective & Cursor Spotlight ---
+    document.querySelectorAll('.spotlight-card').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        el.style.setProperty('--mouse-x', `${x}px`);
+        el.style.setProperty('--mouse-y', `${y}px`);
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      });
+    });
+
+    // --- Clock System ---
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString();
+      document.getElementById('topbar-clock').textContent = timeStr;
+      document.getElementById('dock-clock').textContent = timeStr;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // --- Window Manager (Drag, Z-Index, Min/Max/Close) ---
+    let topZ = 200;
+    let dragTarget = null;
+    let dragOffset = { x: 0, y: 0 };
+
+    function bringToFront(winId) {
+      topZ += 1;
+      const win = document.getElementById(winId);
+      if (win) {
+        win.style.zIndex = topZ;
+        document.querySelectorAll('.os-window').forEach(w => w.classList.remove('active-window'));
+        win.classList.add('active-window');
+
+        // Update taskbar active tab styling
+        document.querySelectorAll('.dock-app-tab').forEach(t => t.classList.remove('active-tab'));
+        const tab = document.getElementById('tab-' + winId);
+        if (tab) tab.classList.add('active-tab');
+      }
+    }
+
+    document.querySelectorAll('.os-window').forEach(win => {
+      win.addEventListener('mousedown', () => bringToFront(win.id));
+    });
+
+    function startDrag(e, winId) {
+      bringToFront(winId);
+      dragTarget = document.getElementById(winId);
+      const rect = dragTarget.getBoundingClientRect();
+      dragOffset.x = e.clientX - rect.left;
+      dragOffset.y = e.clientY - rect.top;
+      window.addEventListener('mousemove', onDrag);
+      window.addEventListener('mouseup', stopDrag);
+    }
+
+    function onDrag(e) {
+      if (!dragTarget) return;
+      const x = Math.max(0, Math.min(window.innerWidth - dragTarget.offsetWidth, e.clientX - dragOffset.x));
+      const y = Math.max(38, Math.min(window.innerHeight - 56 - dragTarget.offsetHeight, e.clientY - dragOffset.y));
+      dragTarget.style.left = x + 'px';
+      dragTarget.style.top = y + 'px';
+    }
+
+    function stopDrag() {
+      dragTarget = null;
+      window.removeEventListener('mousemove', onDrag);
+      window.removeEventListener('mouseup', stopDrag);
+    }
+
+    function openWindow(winId) {
+      const win = document.getElementById(winId);
+      if (win) {
+        win.classList.remove('minimized');
+        bringToFront(winId);
+      }
+    }
+
+    function minimizeWindow(winId) {
+      const win = document.getElementById(winId);
+      if (win) {
+        win.classList.add('minimized');
+        const tab = document.getElementById('tab-' + winId);
+        if (tab) tab.classList.remove('active-tab');
+      }
+    }
+
+    function closeWindow(winId) {
+      minimizeWindow(winId);
+    }
+
+    function toggleTab(winId) {
+      const win = document.getElementById(winId);
+      if (win.classList.contains('minimized')) {
+        openWindow(winId);
+      } else if (win.classList.contains('active-window')) {
+        minimizeWindow(winId);
+      } else {
+        bringToFront(winId);
+      }
+    }
+
+    function toggleStartMenu() {
+      const drawer = document.getElementById('start-drawer');
+      drawer.classList.toggle('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // --- Study Interval Timer ---
+    let timerSeconds = 1499;
+    let timerInterval = null;
+    let isRunning = true;
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function updateTimerUI() {
+      document.getElementById('timer-text').textContent = formatTime(timerSeconds);
+      const circleCircumference = 471;
+      const progress = (1500 - timerSeconds) / 1500;
+      const offset = circleCircumference - (circleCircumference * progress);
+      document.getElementById('timer-progress-bar').style.strokeDashoffset = offset;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('timer-toggle-btn');
+      if (isRunning) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        btn.textContent = 'Resume Focus';
+      } else {
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerUI();
+          } else {
+            clearInterval(timerInterval);
+            completeFocusAndQuiz();
+          }
+        }, 1000);
+        isRunning = true;
+        btn.textContent = 'Pause Focus';
+      }
+    }
+
+    timerInterval = setInterval(() => {
+      if (timerSeconds > 0 && isRunning) {
+        timerSeconds--;
+        updateTimerUI();
+      }
+    }, 1000);
+
+    function completeFocusAndQuiz() {
+      openWindow('win-quiz');
+    }
+
+    // --- Quiz Option Selection & Grading ---
+    let selectedOptionIndex = 1; // Default to 'Spinlock'
+
+    function selectOption(el, index) {
+      selectedOptionIndex = index;
+      document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function submitQuizEvaluation() {
+      const blankVal = document.getElementById('quiz-blank-input').value.trim().toLowerCase();
+      let earned = 0;
+      const total = 10;
+
+      // Question 1: Spinlock (index 1) is correct = 5 pts
+      if (selectedOptionIndex === 1) earned += 5;
+
+      // Question 2: 'inheritance' is correct = 5 pts
+      if (blankVal === 'inheritance') earned += 5;
+
+      const scorePercent = (earned / total) * 100;
+      const passed = scorePercent >= 80;
+
+      const resultBox = document.getElementById('quiz-result-box');
+      resultBox.style.display = 'block';
+
+      if (passed) {
+        resultBox.style.background = 'rgba(16, 185, 129, 0.15)';
+        resultBox.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+        resultBox.style.color = '#10b981';
+        resultBox.innerHTML = `<strong>ASSESSMENT PASSED: ${scorePercent.toFixed(1)}%</strong> &mdash; Comprehension verified. Task 1 is officially completed and study break unlocked.`;
+        playTactileClick(1600, 0.05);
+      } else {
+        resultBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        resultBox.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+        resultBox.style.color = '#ef4444';
+        resultBox.innerHTML = `<strong>ASSESSMENT FAILED: ${scorePercent.toFixed(1)}% (Threshold: 80.0%)</strong> &mdash; Review the study notes on synchronization primitives before re-attempting.`;
+        playTactileClick(600, 0.08);
+      }
+    }
+  </script>
+</body>
+</html>

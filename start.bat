@@ -1,22 +1,16 @@
 @echo off
-title SYNTRA Focus & Study Environment
+title SYNTRA Study Environment
 cd /d "%~dp0"
 
 echo =======================================================
-echo   Launching SYNTRA Study Environment...
+echo   Launching SYNTRA Study OS...
+echo   Mode: Evaluation Mode (Lockdown Disengaged)
 echo =======================================================
-echo.
 
-if exist "Syntra.exe" (
-    Syntra.exe
-) else if exist "dist\Syntra.App.exe" (
-    dist\Syntra.App.exe
+if exist "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" (
+    start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --app="file:///%~dp0ui/index.html" --window-size=1600,1000
 ) else (
-    dotnet run --project src\Syntra.App\Syntra.App.csproj
+    start "" "%~dp0ui\index.html"
 )
 
-echo.
-echo =======================================================
-echo   Session finished or paused. Press any key to exit.
-echo =======================================================
-pause >nul
+exit

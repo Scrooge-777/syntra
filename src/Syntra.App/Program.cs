@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Syntra.AI.Services;
@@ -16,6 +17,7 @@ public class Program
         Console.WriteLine("  SYNTRA: AI-Powered Windows Study Environment    ");
         Console.WriteLine("  Focus. Learn. Prove it.                         ");
         Console.WriteLine("==================================================");
+        Console.WriteLine("Mode: Evaluation Mode (Lockdown Disengaged)");
 
         var services = new ServiceCollection();
         ConfigureServices(services);
@@ -32,51 +34,54 @@ public class Program
 
         var orchestrator = serviceProvider.GetRequiredService<StudySessionOrchestrator>();
 
-        Console.WriteLine("Initializing study environment...");
         var profile = await orchestrator.InitializeProfileAsync(
             userName: "SREEHARAN",
             dailyGoalMinutes: 120,
             emergencyPassphrase: "I promise to return to deep work after this emergency");
 
-        Console.WriteLine($"Profile loaded: {profile.UserName} (Daily Goal: {profile.DailyGoalMinutes}m, Minimum Pass Threshold: {profile.MinimumPassRatio * 100:F0}%)");
-
-        Console.WriteLine("\nGenerating study curriculum via AI Service...");
         var plan = await orchestrator.CreateCurriculumPlanAsync(
             topicOrSyllabus: "Operating Systems: Concurrency, Deadlocks, and Memory Paging",
             totalMinutes: 50,
             taskIntervalMinutes: 25);
 
-        Console.WriteLine($"Curriculum created: '{plan.Title}' with {plan.Tasks.Count} sequential tasks.");
-        foreach (var task in plan.Tasks)
+        // Launch Study OS in dedicated desktop app window
+        var uiPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "ui", "index.html");
+        if (!File.Exists(uiPath))
         {
-            Console.WriteLine($" - Task: {task.Title} ({task.AllottedMinutes}m) [Objectives: {string.Join(", ", task.LearningObjectives)}]");
+            uiPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ui", "index.html");
+        }
+        if (!File.Exists(uiPath))
+        {
+            uiPath = @"S:\Works\Projects\syntra\ui\index.html";
         }
 
-        Console.WriteLine("\nStarting focus interval (Windows lockdown engaged)...");
-        await orchestrator.StartFocusSessionAsync();
-        Console.WriteLine($"State: {orchestrator.StateMachine.CurrentState}");
-
-        Console.WriteLine("\nSimulating elapsed focus interval...");
-        await orchestrator.CompleteFocusIntervalAsync(1500); // 25 minutes
-        Console.WriteLine($"State: {orchestrator.StateMachine.CurrentState} (Timer alone does not complete task!)");
-
-        var currentTask = orchestrator.CurrentTask!;
-        Console.WriteLine($"\nActive Comprehension Assessment Generated ({currentTask.Assessment!.Questions.Count} questions):");
-
-        var submittedAnswers = new Dictionary<Guid, string>();
-        foreach (var q in currentTask.Assessment.Questions)
+        var edgePath = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+        if (File.Exists(edgePath))
         {
-            Console.WriteLine($"[{q.QuestionType}] {q.Prompt}");
-            submittedAnswers[q.Id] = q.ExpectedAnswer; // Passing simulation
+            Console.WriteLine("\nLaunching SYNTRA Study OS GUI in dedicated application window...");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = edgePath,
+                Arguments = $"--app=\"file:///{uiPath.Replace('\\', '/')}\" --window-size=1600,1000",
+                UseShellExecute = true
+            });
+        }
+        else
+        {
+            Console.WriteLine($"\nOpening SYNTRA Study OS in default browser: {uiPath}");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = uiPath,
+                UseShellExecute = true
+            });
         }
 
-        Console.WriteLine("\nSubmitting answers for evaluation...");
-        var result = await orchestrator.SubmitAssessmentAsync(submittedAnswers);
-        Console.WriteLine($"Evaluation Result: {result.SummaryFeedback}");
-        Console.WriteLine($"Lockdown Released: {!orchestrator.StateMachine.CanFire(Core.Enums.SessionTrigger.StartSession)}");
-        Console.WriteLine($"Final State: {orchestrator.StateMachine.CurrentState}");
-
-        Console.WriteLine("\nSYNTRA execution pipeline successfully demonstrated.");
+        Console.WriteLine("\nSYNTRA Study OS GUI is running.");
+        Console.WriteLine("You can interact with the Focus Studio, Curriculum, Notes, and Active Quiz windows.");
+        Console.WriteLine("Press [Q] or [Enter] in this terminal to conclude the host session.");
+        
+        // Keep host alive so it does NOT close automatically
+        Console.ReadLine();
     }
 
     private static void ConfigureServices(IServiceCollection services)
