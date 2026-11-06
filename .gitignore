@@ -13,6 +13,9 @@
 [Ll]ogs/
 Generated Files/
 GeneratedFiles/
+dist/
+*.exe
+e_sqlite3.dll
 
 # ------------------------------------------------------------------------------
 # Windows App SDK / WinUI 3 / MSIX Packaging
