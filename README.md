@@ -6,8 +6,17 @@ An AI-driven Windows desktop study environment that builds adaptive study schedu
 
 ---
 
-### Project Status: Planning & Architecture (Milestone 0)
-SYNTRA is currently in active planning and architectural specification. **There is no executable build or binary release yet.** Source code and test implementation will begin once architectural and security specs are fully reviewed.
+### Project Status: Early implementation (Milestones 1-5)
+The core domain, SQLite persistence, Win32 keyboard-hook layer and a console host with a browser-based Study OS UI are implemented and covered by unit tests (`dotnet test Syntra.sln`). The WinUI 3 desktop shell, PDF ingestion and live cloud-AI providers described below are **planned, not implemented yet**. There is no binary release.
+
+**Run it (Windows, .NET 8 SDK):**
+
+```bash
+dotnet test Syntra.sln
+dotnet run --project src/Syntra.App
+```
+
+Set `SYNTRA_USER` and `SYNTRA_EMERGENCY_PASSPHRASE` to choose your profile name and emergency-exit passphrase; otherwise a random one is generated per run.
 
 ---
 
@@ -28,7 +37,7 @@ SYNTRA fixes both:
 
 ```mermaid
 graph TD
-    UI[WinUI 3 Desktop App / MVVM] --> Core[Syntra.Core: Domain & State Machine]
+    UI[Desktop UI: browser-based today, WinUI 3 planned] --> Core[Syntra.Core: Domain & State Machine]
     UI --> Windows[Syntra.Windows: Restriction Engine]
     Core --> AI[Syntra.AI: Cloud AI Abstraction]
     Core --> Data[Syntra.Data: SQLite WAL Persistence]
@@ -36,10 +45,10 @@ graph TD
 ```
 
 - **`Syntra.Core`**: Pure .NET 8 domain layer with zero UI or OS dependencies. Holds the session state machine, scoring rules, and completion logic. Fully unit-tested in isolation.
-- **`Syntra.Windows`**: Win32 integration adapter (`SetWinEventHook`, `WH_KEYBOARD_LL`, `RegisterApplicationRestart`, `WS_EX_TOPMOST`). Manages overlays and blocks distraction shortcuts.
-- **`Syntra.AI`**: Built on `Microsoft.Extensions.AI` (`IChatClient`). Connects to OpenAI, Anthropic, Gemini, or Azure with strict JSON schemas and delimiter-fenced prompt injection defenses.
+- **`Syntra.Windows`**: Win32 integration adapter (implemented: `WH_KEYBOARD_LL`; planned: `SetWinEventHook`, `RegisterApplicationRestart`, `WS_EX_TOPMOST`). Manages overlays and blocks distraction shortcuts.
+- **`Syntra.AI`**: Cloud AI abstraction. Design target: `Microsoft.Extensions.AI` (`IChatClient`) with OpenAI, Anthropic, Gemini or Azure providers, strict JSON schemas and delimiter-fenced prompt-injection defenses (see `docs/ai.md`); provider integrations are planned.
 - **`Syntra.Data`**: Local SQLite database running in Write-Ahead Logging (`WAL`) mode for crash-proof local state.
-- **`Syntra.App`**: Windows 11 desktop UI built with WinUI 3 and Windows App SDK.
+- **`Syntra.App`**: Desktop host. Today it launches the HTML Study OS UI in an Edge app window; the WinUI 3 / Windows App SDK shell is planned.
 
 ---
 
@@ -50,7 +59,7 @@ SYNTRA runs as a standard user desktop application without requiring administrat
 - **No Enterprise Kiosk Features:** Windows Assigned Access and Shell Launcher are not available on Windows 11 Home (they require Pro or Enterprise editions). SYNTRA relies on user-mode window overlays and keyboard hooks.
 - **No Kernel Rootkits or Drivers:** SYNTRA does not install kernel drivers, tamper with BIOS/UEFI, or intercept `Ctrl + Alt + Delete` (which is reserved by Windows Winlogon).
 - **Restart & Crash Recovery:** If the app is killed or Windows reboots, SQLite WAL records ensure the session resumes on login without granting unearned completion.
-- **Emergency Exit:** An emergency exit hatch (`Ctrl + Shift + F12`) allows immediate unlock via a 30-word confirmation challenge or a 3-minute cool-down, ensuring you never lock yourself out of your machine.
+- **Emergency Exit:** An emergency exit hatch (`Ctrl + Shift + F12`) allows immediate unlock via a pre-set emergency passphrase or a 3-minute cool-down, ensuring you never lock yourself out of your machine.
 
 ---
 
@@ -60,10 +69,10 @@ SYNTRA runs as a standard user desktop application without requiring administrat
 |---|---|
 | **OS Target** | Windows 11 Home (64-bit x64 / ARM64), 22H2 or newer |
 | **Runtime** | .NET 8 LTS |
-| **UI Platform** | WinUI 3 (Windows App SDK 1.5+) |
+| **UI Platform** | HTML UI in an Edge app window (WinUI 3 planned) |
 | **Local Storage** | SQLite 3 (WAL mode, parameterized SQL) |
-| **AI Abstraction** | `Microsoft.Extensions.AI` (`IChatClient`) |
-| **PDF Ingestion** | `UglyToad.PdfPig` (Pure C#, Apache 2.0) |
+| **AI Abstraction** | Planned (`Microsoft.Extensions.AI`, `IChatClient`) |
+| **PDF Ingestion** | Planned (`UglyToad.PdfPig`, Apache 2.0) |
 | **Memory Target** | < 120 MB RAM during active study |
 | **Hook Latency** | < 1.0 ms callback execution |
 

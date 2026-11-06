@@ -35,9 +35,10 @@ public class Program
         var orchestrator = serviceProvider.GetRequiredService<StudySessionOrchestrator>();
 
         var profile = await orchestrator.InitializeProfileAsync(
-            userName: "SREEHARAN",
+            userName: Environment.GetEnvironmentVariable("SYNTRA_USER") ?? Environment.UserName,
             dailyGoalMinutes: 120,
-            emergencyPassphrase: "I promise to return to deep work after this emergency");
+            emergencyPassphrase: Environment.GetEnvironmentVariable("SYNTRA_EMERGENCY_PASSPHRASE")
+                                 ?? Guid.NewGuid().ToString("N"));
 
         var plan = await orchestrator.CreateCurriculumPlanAsync(
             topicOrSyllabus: "Operating Systems: Concurrency, Deadlocks, and Memory Paging",
@@ -52,7 +53,8 @@ public class Program
         }
         if (!File.Exists(uiPath))
         {
-            uiPath = @"S:\Works\Projects\syntra\ui\index.html";
+            Console.Error.WriteLine($"Could not find ui/index.html (looked at {uiPath}). Run from the repository root.");
+            return;
         }
 
         var edgePath = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
