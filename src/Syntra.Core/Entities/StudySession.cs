@@ -11,17 +11,21 @@ public class StudySession
 {
     private readonly List<Guid> _completedTaskIds = new();
 
-    public Guid Id { get; }
-    public Guid ProfileId { get; }
-    public Guid PlanId { get; }
+    public Guid Id { get; private set; }
+    public Guid ProfileId { get; private set; }
+    public Guid PlanId { get; private set; }
     public Guid? ActiveTaskId { get; private set; }
     public SessionState State { get; private set; }
-    public DateTimeOffset StartedAtUtc { get; }
+    public DateTimeOffset StartedAtUtc { get; private set; }
     public DateTimeOffset? EndedAtUtc { get; private set; }
     public int TotalActiveFocusSeconds { get; private set; }
     public int DistractionInterventionsCount { get; private set; }
 
     public IReadOnlyList<Guid> CompletedTaskIds => _completedTaskIds.AsReadOnly();
+
+    protected StudySession()
+    {
+    }
 
     public StudySession(
         Guid id,

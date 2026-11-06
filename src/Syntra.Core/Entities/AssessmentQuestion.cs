@@ -8,14 +8,18 @@ namespace Syntra.Core.Entities;
 /// </summary>
 public class AssessmentQuestion
 {
-    public Guid Id { get; }
-    public string Prompt { get; }
-    public QuestionType QuestionType { get; }
-    public IReadOnlyList<string> Options { get; }
-    public string ExpectedAnswer { get; }
-    public string RubricExplanation { get; }
-    public double Weight { get; }
-    public IReadOnlyList<string> Keywords { get; }
+    public Guid Id { get; private set; }
+    public string Prompt { get; private set; } = string.Empty;
+    public QuestionType QuestionType { get; private set; }
+    public IReadOnlyList<string> Options { get; private set; } = new List<string>().AsReadOnly();
+    public string ExpectedAnswer { get; private set; } = string.Empty;
+    public string RubricExplanation { get; private set; } = string.Empty;
+    public double Weight { get; private set; } = 1.0;
+    public IReadOnlyList<string> Keywords { get; private set; } = new List<string>().AsReadOnly();
+
+    protected AssessmentQuestion()
+    {
+    }
 
     public AssessmentQuestion(
         Guid id,

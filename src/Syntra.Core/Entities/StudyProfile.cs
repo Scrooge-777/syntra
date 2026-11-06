@@ -9,15 +9,19 @@ namespace Syntra.Core.Entities;
 /// </summary>
 public class StudyProfile
 {
-    public Guid Id { get; }
-    public string UserName { get; private set; }
+    public Guid Id { get; private set; }
+    public string UserName { get; private set; } = string.Empty;
     public int DailyGoalMinutes { get; private set; }
-    public string EmergencyPassphraseHash { get; private set; }
+    public string EmergencyPassphraseHash { get; private set; } = string.Empty;
     public double MinimumPassRatio { get; private set; }
     public int MaxAssessmentAttempts { get; private set; }
     public bool AutoLockdownEnabled { get; private set; }
-    public DateTimeOffset CreatedAtUtc { get; }
+    public DateTimeOffset CreatedAtUtc { get; private set; }
     public DateTimeOffset UpdatedAtUtc { get; private set; }
+
+    protected StudyProfile()
+    {
+    }
 
     public StudyProfile(
         Guid id,

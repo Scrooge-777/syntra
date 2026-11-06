@@ -12,9 +12,9 @@ public class StudyTask
 {
     private readonly List<string> _learningObjectives = new();
 
-    public Guid Id { get; }
-    public Guid PlanId { get; }
-    public string Title { get; private set; }
+    public Guid Id { get; private set; }
+    public Guid PlanId { get; private set; }
+    public string Title { get; private set; } = string.Empty;
     public int AllottedMinutes { get; private set; }
     public int ElapsedSeconds { get; private set; }
     public StudyTaskStatus Status { get; private set; }
@@ -24,6 +24,10 @@ public class StudyTask
     public Assessment? Assessment { get; private set; }
 
     public IReadOnlyList<string> LearningObjectives => _learningObjectives.AsReadOnly();
+
+    protected StudyTask()
+    {
+    }
 
     public StudyTask(
         Guid id,

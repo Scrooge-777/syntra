@@ -5,15 +5,19 @@ namespace Syntra.Core.Entities;
 /// </summary>
 public class AssessmentAttempt
 {
-    public Guid Id { get; }
-    public Guid AssessmentId { get; }
-    public DateTimeOffset AttemptedAtUtc { get; }
-    public IReadOnlyDictionary<Guid, string> SubmittedAnswers { get; }
-    public double EarnedPoints { get; }
-    public double TotalPossiblePoints { get; }
-    public double ScorePercentage { get; }
-    public bool Passed { get; }
-    public string Feedback { get; }
+    public Guid Id { get; private set; }
+    public Guid AssessmentId { get; private set; }
+    public DateTimeOffset AttemptedAtUtc { get; private set; }
+    public IReadOnlyDictionary<Guid, string> SubmittedAnswers { get; private set; } = new Dictionary<Guid, string>();
+    public double EarnedPoints { get; private set; }
+    public double TotalPossiblePoints { get; private set; }
+    public double ScorePercentage { get; private set; }
+    public bool Passed { get; private set; }
+    public string Feedback { get; private set; } = string.Empty;
+
+    protected AssessmentAttempt()
+    {
+    }
 
     public AssessmentAttempt(
         Guid id,

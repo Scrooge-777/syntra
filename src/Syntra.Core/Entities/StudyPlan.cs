@@ -1,5 +1,4 @@
 using Syntra.Core.Common;
-using Syntra.Core.Enums;
 
 namespace Syntra.Core.Entities;
 
@@ -10,16 +9,20 @@ public class StudyPlan
 {
     private readonly List<StudyTask> _tasks = new();
 
-    public Guid Id { get; }
-    public Guid ProfileId { get; }
-    public string Title { get; private set; }
-    public string Description { get; private set; }
-    public string Subject { get; private set; }
+    public Guid Id { get; private set; }
+    public Guid ProfileId { get; private set; }
+    public string Title { get; private set; } = string.Empty;
+    public string Description { get; private set; } = string.Empty;
+    public string Subject { get; private set; } = string.Empty;
     public bool IsActive { get; private set; }
-    public DateTimeOffset CreatedAtUtc { get; }
+    public DateTimeOffset CreatedAtUtc { get; private set; }
 
     public IReadOnlyList<StudyTask> Tasks => _tasks.AsReadOnly();
     public int TotalEstimatedMinutes => _tasks.Sum(t => t.AllottedMinutes);
+
+    protected StudyPlan()
+    {
+    }
 
     public StudyPlan(
         Guid id,
@@ -61,12 +64,12 @@ public class StudyPlan
 
     public StudyTask? GetNextPendingTask()
     {
-        return _tasks.FirstOrDefault(t => t.Status is StudyTaskStatus.Pending or StudyTaskStatus.AssessmentRequired);
+        return _tasks.FirstOrDefault(t => t.Status is Enums.StudyTaskStatus.Pending or Enums.StudyTaskStatus.AssessmentRequired);
     }
 
     public bool AreAllTasksCompleted()
     {
-        return _tasks.Count > 0 && _tasks.All(t => t.Status == StudyTaskStatus.Completed);
+        return _tasks.Count > 0 && _tasks.All(t => t.Status == Enums.StudyTaskStatus.Completed);
     }
 
     public void SetActive(bool active)

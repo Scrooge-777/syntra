@@ -10,13 +10,17 @@ public class Assessment
     private readonly List<AssessmentQuestion> _questions = new();
     private readonly List<AssessmentAttempt> _attempts = new();
 
-    public Guid Id { get; }
-    public Guid TaskId { get; }
-    public double MinimumPassRatio { get; }
-    public DateTimeOffset GeneratedAtUtc { get; }
+    public Guid Id { get; private set; }
+    public Guid TaskId { get; private set; }
+    public double MinimumPassRatio { get; private set; }
+    public DateTimeOffset GeneratedAtUtc { get; private set; }
 
     public IReadOnlyList<AssessmentQuestion> Questions => _questions.AsReadOnly();
     public IReadOnlyList<AssessmentAttempt> Attempts => _attempts.AsReadOnly();
+
+    protected Assessment()
+    {
+    }
 
     public Assessment(
         Guid id,
